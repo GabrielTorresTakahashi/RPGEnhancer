@@ -1,4 +1,5 @@
 import 'package:enhancer/screens/home.dart';
+import 'package:enhancer/settings/colorSettings.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,17 +20,7 @@ class Enhancer extends StatelessWidget {
     return MaterialApp(
       home: const HomeScreen(),
 
-      theme: ThemeData(
-
-        backgroundColor: background,
-
-
-
-
-        appBarTheme: AppBarTheme(
-          backgroundColor: primary
-        ),
-      ),
+      theme: colorSettings,
     );
   }
 }
