@@ -34,9 +34,6 @@ class HomeScreen extends StatelessWidget {
           HomeButton(
             const LootGenerator(), "Tesouros"
           ),
-          HomeButton(
-            
-          )
         ],
       ),
     );
@@ -109,6 +106,7 @@ class AppTitle extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class HomeButton extends StatelessWidget {
   HomeButton(this.path, this.buttonTitle, {Key? key}) : super(key: key);
   Widget? path;
@@ -123,13 +121,10 @@ class HomeButton extends StatelessWidget {
       child: ElevatedButton(
         //CHILD #3
         onPressed: (() {
-          if (path!=null){
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => path!));
-            }
-            
-          );
+
         }),
         style:
             ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),

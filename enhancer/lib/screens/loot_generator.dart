@@ -1,3 +1,4 @@
+import 'package:enhancer/screens/home.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -15,102 +16,60 @@ class LootGenerator extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: const [LevelButton(), TreasureType()],
+            children: [DropdownTypeButton(const ['-Nível-','0-4','5-10']), DropdownTypeButton(const ['-Quantia-','Individual','Pilha'])],
           ),
           const LootCategories(),
-          const GenerateLoot(),
+          HomeButton(HomeScreen(), 'Generate')
         ],
       ),
     );
   }
 }
 
-class LevelButton extends StatefulWidget {
-  const LevelButton({Key? key}) : super(key: key);
+class DropdownTypeButton extends StatefulWidget {
+  DropdownTypeButton(this.items,{Key? key}) : super(key: key);
+
+    late List<String> items;
+
 
   @override
-  State<LevelButton> createState() => _LevelButtonState();
+  State<DropdownTypeButton> createState() => _DropdownTypeButtonState();
 }
 
-class _LevelButtonState extends State<LevelButton> {
-  String dropdownValue = '-Nível-';
+class _DropdownTypeButtonState extends State<DropdownTypeButton> {
+  late String dropdownValue = widget.items[0];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.only(top: 30),
+      padding: const EdgeInsets.only(left: 10,right: 10),
       decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.white),
           color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(5)),
-      child: DropdownButton(
-        borderRadius: BorderRadius.circular(10),
-        dropdownColor: Theme.of(context).primaryColor,
-        style: dropdownText,
-        value: dropdownValue,
-        items: <String>['-Nível-', '0-4', '5-10', '11-17', '17+']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Container(
-              width: 180,
-              alignment: Alignment.topLeft,
-              constraints: const BoxConstraints(minHeight: 48.0),
-              child: Text(value),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            dropdownValue = newValue!;
-          });
-        },
-      ),
-    );
-  }
-}
-
-class TreasureType extends StatefulWidget {
-  const TreasureType({Key? key}) : super(key: key);
-
-  @override
-  State<TreasureType> createState() => _TreasureTypeState();
-}
-
-class _TreasureTypeState extends State<TreasureType> {
-  String dropdownValue = '-Tipo-';
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(5),
-      decoration: BoxDecoration(
-          border: Border.all(width: 1, color: Colors.white),
-          color: Theme.of(context).primaryColor,
-          borderRadius: BorderRadius.circular(5)),
-      child: DropdownButton(
-        borderRadius: BorderRadius.circular(10),
-        dropdownColor: Theme.of(context).primaryColor,
-        style: dropdownText,
-        value: dropdownValue,
-        items: <String>['-Tipo-', 'Individual', 'Pilha']
-            .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Container(
-              width: 180,
-              alignment: Alignment.topLeft,
-              constraints: const BoxConstraints(minHeight: 48.0),
-              child: Text(value),
-            ),
-          );
-        }).toList(),
-        onChanged: (String? newValue) {
-          setState(() {
-            dropdownValue = newValue!;
-          });
-        },
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
+          borderRadius: BorderRadius.circular(10),
+          dropdownColor: Theme.of(context).primaryColor,
+          style: dropdownText,
+          value: dropdownValue,
+          items: widget.items
+              .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                alignment: Alignment.centerLeft,
+                constraints: const BoxConstraints(minHeight: 48.0),
+                child: Text(value),
+              ),
+            );
+          }).toList(),
+          onChanged: (String? newValue) {
+            setState(() {
+              dropdownValue = newValue!;
+            });
+          },
+        ),
       ),
     );
   }
@@ -169,13 +128,13 @@ class LootCategories extends StatelessWidget {
     return Table(
       children: const [
         TableRow(children: [
-          LootCheckbox("corency"),
-          LootCheckbox("scrols"),
+          LootCheckbox("Dinheiro"),
+          LootCheckbox("Pergaminhos"),
         ]),
         TableRow(
           children: [
-            LootCheckbox("nomral itnes"),
-            LootCheckbox("macig mites"),
+            LootCheckbox("Itens Normais"),
+            LootCheckbox("Itens Mágicos"),
           ],
         ),
       ],
@@ -184,21 +143,19 @@ class LootCategories extends StatelessWidget {
 }
 
 //GENERATE LOOT+STATE = BOTÃO + CONTAINER DE LOOT
-class GenerateLoot extends StatefulWidget {
-  const GenerateLoot({Key? key}) : super(key: key);
+// class GenerateLoot extends StatefulWidget {
+//   const GenerateLoot({Key? key}) : super(key: key);
 
-  @override
-  State<GenerateLoot> createState() => _GenerateLootState();
-}
+//   @override
+//   State<GenerateLoot> createState() => _GenerateLootState();
+// }
 
-class _GenerateLootState extends State<GenerateLoot> {
-  late String currency;
-  late String magicItem;
+// class _GenerateLootState extends State<GenerateLoot> {
+//   late String currency;
+//   late String magicItem;
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [Text(currency)],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Elev
+//   }
+// }

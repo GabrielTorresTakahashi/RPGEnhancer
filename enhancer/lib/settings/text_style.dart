@@ -10,7 +10,7 @@ TextStyle menuText = const TextStyle()
     .copyWith(fontSize: 18, color: Colors.white, fontFamily: 'Montserrat');
 
 TextStyle dropdownText = const TextStyle()
-    .copyWith(color: Colors.white, fontSize: 32, fontFamily: 'Montserrat');
+    .copyWith(color: Colors.white, fontSize: 24, fontFamily: 'Montserrat');
 
 TextStyle checkboxText = const TextStyle()
-    .copyWith(color: Colors.white, fontSize: 16, fontFamily: 'Montserrat');
+    .copyWith(color: Colors.white, fontSize: 18, fontFamily: 'Montserrat');
