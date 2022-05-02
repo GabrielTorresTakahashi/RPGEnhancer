@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor, //scaffold color
 
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text("Home")),
       drawer: const MenuHamburguer(),
 
       body: Column(
@@ -55,7 +55,10 @@ class MenuHamburguer extends StatelessWidget {
           ),
           ListTile(
             leading: const FlutterLogo(),
-            title: Text('Idioma', style: menuText,),
+            title: Text(
+              'Idioma',
+              style: menuText,
+            ),
             onTap: () {
               Navigator.pop(context);
             },
@@ -69,7 +72,10 @@ class MenuHamburguer extends StatelessWidget {
           ),
           ListTile(
             leading: const FlutterLogo(),
-            title: Text('Sobre', style: menuText,),
+            title: Text(
+              'Sobre',
+              style: menuText,
+            ),
             onTap: () {
               Navigator.pop(context);
             },
