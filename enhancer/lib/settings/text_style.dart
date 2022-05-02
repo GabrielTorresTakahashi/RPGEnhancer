@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-TextStyle buttonText =
-    const TextStyle().copyWith(fontSize: 36, fontFamily: 'Montserrat');
+TextStyle homeButtonText = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 36, fontFamily: 'Montserrat');
 
 TextStyle titleText = const TextStyle()
     .copyWith(color: Colors.white, fontSize: 36, fontFamily: 'Montserrat');
@@ -11,3 +11,6 @@ TextStyle menuText = const TextStyle()
 
 TextStyle dropdownText = const TextStyle()
     .copyWith(color: Colors.white, fontSize: 32, fontFamily: 'Montserrat');
+
+TextStyle checkboxText = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 16, fontFamily: 'Montserrat');

@@ -11,14 +11,17 @@ class LootGenerator extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Tesouros'),
       ),
-      body: Column(children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [LevelButton(), TreasureType()],
-        ),
-        const CurrencyCheckbox(),
-      ]),
+      body: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: const [LevelButton(), TreasureType()],
+          ),
+          const LootCategories(),
+          const GenerateLoot(),
+        ],
+      ),
     );
   }
 }
@@ -113,14 +116,16 @@ class _TreasureTypeState extends State<TreasureType> {
   }
 }
 
-class CurrencyCheckbox extends StatefulWidget {
-  const CurrencyCheckbox({Key? key}) : super(key: key);
+class LootCheckbox extends StatefulWidget {
+  const LootCheckbox(this.text, {Key? key}) : super(key: key);
+
+  final String text;
 
   @override
-  State<CurrencyCheckbox> createState() => _CurrencyCheckboxState();
+  State<LootCheckbox> createState() => _LootCheckboxState();
 }
 
-class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
+class _LootCheckboxState extends State<LootCheckbox> {
   bool isChecked = false;
 
   @override
@@ -129,15 +134,71 @@ class _CurrencyCheckboxState extends State<CurrencyCheckbox> {
       return Theme.of(context).primaryColor;
     }
 
-    return Checkbox(
-      checkColor: Colors.white,
-      fillColor: MaterialStateProperty.resolveWith(getColor),
-      value: isChecked,
-      onChanged: (bool? value) {
-        setState(() {
-          isChecked = value!;
-        });
-      },
+    // ignore: avoid_unnecessary_containers
+    return Container(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Checkbox(
+            checkColor: Colors.white,
+            fillColor: MaterialStateProperty.resolveWith(getColor),
+            value: isChecked,
+            onChanged: (bool? value) {
+              setState(
+                () {
+                  isChecked = value!;
+                },
+              );
+            },
+          ),
+          Text(
+            widget.text,
+            style: checkboxText,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class LootCategories extends StatelessWidget {
+  const LootCategories({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Table(
+      children: const [
+        TableRow(children: [
+          LootCheckbox("corency"),
+          LootCheckbox("scrols"),
+        ]),
+        TableRow(
+          children: [
+            LootCheckbox("nomral itnes"),
+            LootCheckbox("macig mites"),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+//GENERATE LOOT+STATE = BOTÃO + CONTAINER DE LOOT
+class GenerateLoot extends StatefulWidget {
+  const GenerateLoot({Key? key}) : super(key: key);
+
+  @override
+  State<GenerateLoot> createState() => _GenerateLootState();
+}
+
+class _GenerateLootState extends State<GenerateLoot> {
+  late String currency;
+  late String magicItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [Text(currency)],
     );
   }
 }

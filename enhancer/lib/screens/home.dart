@@ -9,6 +9,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerScrimColor: Colors.purple,
+      drawerEnableOpenDragGesture: true,
       backgroundColor: Theme.of(context).backgroundColor, //scaffold color
 
       appBar: AppBar(title: const Text("Home")),
@@ -29,8 +31,12 @@ class HomeScreen extends StatelessWidget {
             ),
           ), //END OF CHILD #1
           const AppTitle(),
-          const LootButton(),
-          const NameButton()
+          HomeButton(
+            const LootGenerator(), "Tesouros"
+          ),
+          HomeButton(
+            
+          )
         ],
       ),
     );
@@ -103,8 +109,10 @@ class AppTitle extends StatelessWidget {
   }
 }
 
-class LootButton extends StatelessWidget {
-  const LootButton({Key? key}) : super(key: key);
+class HomeButton extends StatelessWidget {
+  HomeButton(this.path, this.buttonTitle, {Key? key}) : super(key: key);
+  Widget? path;
+  String buttonTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +123,12 @@ class LootButton extends StatelessWidget {
       child: ElevatedButton(
         //CHILD #3
         onPressed: (() {
+          if (path!=null){
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const LootGenerator()),
+            MaterialPageRoute(builder: (context) => path!));
+            }
+            
           );
         }),
         style:
@@ -125,34 +136,8 @@ class LootButton extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
-            "Tesouros",
-            style: buttonText,
-          ),
-        ),
-      ),
-    ); //END OF CHILD #3;
-  }
-}
-
-class NameButton extends StatelessWidget {
-  const NameButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 350,
-      height: 80,
-      margin: const EdgeInsets.only(top: 10, bottom: 10),
-      child: ElevatedButton(
-        //CHILD #3
-        onPressed: (() {}),
-        style:
-            ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            "Nomes",
-            style: buttonText,
+            buttonTitle,
+            style: homeButtonText,
           ),
         ),
       ),
