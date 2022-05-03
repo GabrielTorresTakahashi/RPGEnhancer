@@ -18,22 +18,12 @@ class HomeScreen extends StatelessWidget {
 
       body: Column(
         children: [
-          Center(
-            //CHILD #1
-            child: Container(
-              margin: const EdgeInsets.only(top: 20),
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ), //END OF CHILD #1
+          const Center(
+              child: FlutterLogo(
+            size: 100,
+          )),
           const AppTitle(),
-          HomeButton(
-            const LootGenerator(), "Tesouros"
-          ),
+          NavigationButton(const LootGenerator(), "Tesouros"),
         ],
       ),
     );
@@ -107,8 +97,8 @@ class AppTitle extends StatelessWidget {
 }
 
 // ignore: must_be_immutable
-class HomeButton extends StatelessWidget {
-  HomeButton(this.path, this.buttonTitle, {Key? key}) : super(key: key);
+class NavigationButton extends StatelessWidget {
+  NavigationButton(this.path, this.buttonTitle, {Key? key}) : super(key: key);
   Widget? path;
   String buttonTitle;
 
@@ -122,9 +112,7 @@ class HomeButton extends StatelessWidget {
         //CHILD #3
         onPressed: (() {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => path!));
-
+              context, MaterialPageRoute(builder: (context) => path!));
         }),
         style:
             ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
