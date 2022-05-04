@@ -18,18 +18,9 @@ class LootGenerator extends StatelessWidget {
   }
 }
 
-class GeneratedLoot extends StatelessWidget {
-  const GeneratedLoot({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 //Junção do LevelAmount e do TypeCheckbox, montando o layout de seleção de tipo
 // ignore: must_be_immutable
-class LootTypeSelector extends StatelessWidget {
+class LootTypeSelector extends StatelessWidget with ChangeNotifier {
   bool currency = false;
   bool scrolls = false;
   bool magicItems = false;
@@ -38,6 +29,36 @@ class LootTypeSelector extends StatelessWidget {
   String ammount = '';
 
   LootTypeSelector({Key? key}) : super(key: key);
+
+  getCurrency() {
+    currency;
+    notifyListeners();
+  }
+
+  getScrolls() {
+    scrolls;
+    notifyListeners();
+  }
+
+  getMagicItems() {
+    magicItems;
+    notifyListeners();
+  }
+
+  getNormalItems() {
+    normalItems;
+    notifyListeners();
+  }
+
+  getLevel() {
+    level;
+    notifyListeners();
+  }
+
+  getAmmount() {
+    ammount;
+    notifyListeners();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +113,15 @@ class LootTypeSelector extends StatelessWidget {
         GeneratedLoot(),
       ],
     );
+  }
+}
+
+class GeneratedLoot extends StatelessWidget {
+  const GeneratedLoot({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
