@@ -11,7 +11,7 @@ class LootGenerator extends StatelessWidget {
         appBar: AppBar(backgroundColor: Theme.of(context).primaryColor),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: const [
             LootTypeSelector(),
           ],
         ));
@@ -20,91 +20,50 @@ class LootGenerator extends StatelessWidget {
 
 //Junção do LevelAmount e do TypeCheckbox, montando o layout de seleção de tipo
 // ignore: must_be_immutable
-class LootTypeSelector extends StatelessWidget with ChangeNotifier {
-  bool currency = false;
-  bool scrolls = false;
-  bool magicItems = false;
-  bool normalItems = false;
-  String level = '';
-  String ammount = '';
-
-  LootTypeSelector({Key? key}) : super(key: key);
-
-  getCurrency() {
-    currency;
-    notifyListeners();
-  }
-
-  getScrolls() {
-    scrolls;
-    notifyListeners();
-  }
-
-  getMagicItems() {
-    magicItems;
-    notifyListeners();
-  }
-
-  getNormalItems() {
-    normalItems;
-    notifyListeners();
-  }
-
-  getLevel() {
-    level;
-    notifyListeners();
-  }
-
-  getAmmount() {
-    ammount;
-    notifyListeners();
-  }
+class LootTypeSelector extends StatelessWidget {
+  const LootTypeSelector({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
+          //duas checkboxes
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: const [
             DropdownSelector(
-              options: const ['-Nível-', '1-4', '5-10', '11-17', '17+'],
-              controls: level,
+              options: ['-Nível-', '1-4', '5-10', '11-17', '17+'],
             ),
             DropdownSelector(
-              options: const ['-Quantia-', 'Individual', 'Pilha'],
-              controls: ammount,
+              options: ['-Quantia-', 'Individual', 'Pilha'],
             )
           ],
         ),
         Row(
+          //duas checkboxes
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 TextCheckbox(
                   text: 'Currency',
-                  controls: currency,
                 ),
                 TextCheckbox(
                   text: 'Scrolls',
-                  controls: scrolls,
                 ),
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: const [
                 TextCheckbox(
-                  text: 'Magic Items',
-                  controls: magicItems,
+                  text: 'Itemes',
                 ),
                 TextCheckbox(
-                  text: 'Normal Items',
-                  controls: normalItems,
+                  text: 'Items',
                 ),
               ],
             ),
@@ -116,24 +75,43 @@ class LootTypeSelector extends StatelessWidget with ChangeNotifier {
   }
 }
 
-class GeneratedLoot extends StatelessWidget {
-  const GeneratedLoot({Key? key}) : super(key: key);
+//Quadrado dos loot gerados
+// ignore: must_be_immutable
+class GeneratedLoot extends StatefulWidget {
+  List<bool>? parameters = [];
+
+  // late bool currency = parameters![0];
+  // late bool currency = parameters![0];
+
+  GeneratedLoot({Key? key, this.parameters}) : super(key: key);
 
   @override
+  State<GeneratedLoot> createState() => _GeneratedLootState();
+}
+
+class _GeneratedLootState extends State<GeneratedLoot> {
+  @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      children: const [
+        ListTile(leading: null, title: null),
+        ListTile(leading: null, title: null),
+        ListTile(leading: null, title: null),
+        ListTile(leading: null, title: null),
+      ],
+    );
   }
 }
 
 //Dropdown que recebe um vetor de string com as opções.
 //Usado para selecionar o nível e quantia do tesouro
-// ignore: must_be_immutable
 class DropdownSelector extends StatefulWidget {
   final List<String> options;
-  String controls;
 
-  DropdownSelector({Key? key, required this.options, required this.controls})
-      : super(key: key);
+  const DropdownSelector({
+    Key? key,
+    required this.options,
+  }) : super(key: key);
 
   @override
   State<DropdownSelector> createState() => _DropdownSelectorState();
@@ -141,6 +119,7 @@ class DropdownSelector extends StatefulWidget {
 
 class _DropdownSelectorState extends State<DropdownSelector> {
   late String currentValue = widget.options[0];
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -154,8 +133,7 @@ class _DropdownSelectorState extends State<DropdownSelector> {
           onChanged: (String? newValue) {
             setState(() {
               currentValue = newValue!;
-              widget.controls = currentValue;
-              debugPrint('Selected ' + widget.controls);
+              debugPrint('Selected ' + currentValue);
             });
           },
           items: widget.options.map<DropdownMenuItem<String>>((String value) {
@@ -179,9 +157,7 @@ class _DropdownSelectorState extends State<DropdownSelector> {
 // ignore: must_be_immutable
 class TextCheckbox extends StatefulWidget {
   final String text;
-  bool controls;
-  TextCheckbox({Key? key, required this.text, required this.controls})
-      : super(key: key);
+  const TextCheckbox({Key? key, required this.text}) : super(key: key);
 
   @override
   State<TextCheckbox> createState() => _TextCheckboxState();
@@ -203,8 +179,7 @@ class _TextCheckboxState extends State<TextCheckbox> {
           onChanged: (bool? value) {
             setState(() {
               isChecked = value!;
-              widget.controls = isChecked;
-              debugPrint(widget.text + ' ' + widget.controls.toString());
+              debugPrint(value.toString());
             });
           },
         ),
