@@ -1,7 +1,7 @@
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
-import 'loot_generator.dart';
+import 'loot.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             size: 100,
           )),
           const AppTitle(),
-          NavigationButton(const LootGenerator(), "Tesouros"),
+          NavigationButton(const LootScreen(), "Tesouros"),
         ],
       ),
     );
