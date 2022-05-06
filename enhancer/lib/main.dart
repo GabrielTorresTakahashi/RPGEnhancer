@@ -1,3 +1,4 @@
+import 'package:enhancer/screens/home.dart';
 import 'package:enhancer/screens/loot.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class Enhancer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const LootScreen(),
+      home: const HomeScreen(),
       theme: colorSettings,
     );
   }

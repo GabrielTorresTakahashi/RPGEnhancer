@@ -63,20 +63,59 @@ class _CurrencyPileState extends State<CurrencyPile> {
   Random random = Random();
   String loot = '';
   int ammount = 0;
-  List<String> gem10Name= ['Azurita', 'Agata Malhada', 'Quartzo azul', 'Ágata ocular', 'Hematita', 'Lápis lazúli', 'Malaquita', 'Ágata musgo', 'Obsidiana', 'Rodocrosita', 'Olho de tigre', 'Turquesa'];
-  List<String> object25Name= [];
-  List<String> gem50Name= [];
-  List<int> rarity = [10,25,50];
+  List<String> gem10Name = [
+    'Azurita',
+    'Agata Malhada',
+    'Quartzo azul',
+    'Ágata ocular',
+    'Hematita',
+    'Lápis lazúli',
+    'Malaquita',
+    'Ágata musgo',
+    'Obsidiana',
+    'Rodocrosita',
+    'Olho de tigre',
+    'Turquesa'
+  ];
+  List<String> artObject25Name = [
+    'Jarro de prata',
+    'Estatueta esculpida em osso',
+    'Bracelete de ouro pequeno',
+    'Vestimenta de tecido dourado',
+    'Máscara de veludo negra costurada com fios de prata',
+    'Cálice de cobre com filigrana prateada',
+    'Par de dados de osso com gravuras',
+    'Pequeno espelho numa moldura de madeira pintada',
+    'Lenço de seda bordado',
+    'Broche de ouro com um retrato pintado dentro',
+  ];
+  List<String> gem50Name = [
+    'Pedra de sangue ',
+    'Cornalina ',
+    'Calcedônia',
+    'Crisoprásio',
+    'Citrina ',
+    'Jaspe',
+    'Pedra lunar',
+    'Ônix',
+    'Quartzo',
+    'Sardônica',
+    'Quartzo rosa estrela',
+    'Zircônio '
+  ];
+  List<int> rarity = [10, 25, 50];
+  late String name;
 
   @override
   Widget build(BuildContext context) {
-  String lootObject = 'Gemas ';
-  int dice = 6;
-  int selectedRarity = rarity[random.nextInt(rarity.length)];
-  if(selectedRarity == 25){
-    dice = 4;
-    lootObject = 'Objetos de Arte ';
-  }
+    String lootObject = 'Gemas';
+    int dice = 6;
+    int selectedRarity = rarity[random.nextInt(rarity.length)];
+    if (selectedRarity == 25) {
+      dice = 4;
+      lootObject = 'Objetos de Arte ';
+    }
+    name = gem10Name[3];
 
     return ListTile(
       leading: const FlutterLogo(),
@@ -84,11 +123,13 @@ class _CurrencyPileState extends State<CurrencyPile> {
         loot,
         style: lootText,
       ),
+      subtitle: Text(
+        loot,
+        style: lootText,
+      ),
       onTap: () => setState(() {
-        ammount = (random.nextInt(dice+1));
-        loot = "$ammount $lootObject de $selectedRarity PO";
-        
-        
+        ammount = (random.nextInt(dice) + 1);
+        loot = "$ammount $name de $selectedRarity PO";
       }),
     );
   }
