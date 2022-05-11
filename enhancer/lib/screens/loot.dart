@@ -9,128 +9,150 @@ class LootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(),
-      body: const CurrencyPile(level: 0),
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(),
+        body: TreasureLevel());
+  }
+}
+
+class TreasureLevel extends StatefulWidget {
+  const TreasureLevel({Key? key}) : super(key: key);
+
+  @override
+  State<TreasureLevel> createState() => _TreasureLevelState();
+}
+
+class _TreasureLevelState extends State<TreasureLevel> {
+  String currentValue = '1';
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButton(
+      underline: null,
+      hint: Text("HINT"),
+      value: currentValue,
+      dropdownColor: Theme.of(context).primaryColor,
+      ///////////////////////////////////////
+      items: <String>['1', 'B'].map((value) {
+        return DropdownMenuItem(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      ////////////////////////////
+      onChanged: (String? value) {
+        setState(() {
+          currentValue = value!;
+        });
+      },
     );
   }
 }
 
-class CurrencyIndividual extends StatefulWidget {
-  final int level;
-  const CurrencyIndividual({Key? key, required this.level}) : super(key: key);
+class Currency extends StatefulWidget {
+  final String type;
+  const Currency({Key? key, required this.type}) : super(key: key);
 
   @override
-  State<CurrencyIndividual> createState() => _CurrencyIndividualState();
+  State<Currency> createState() => _CurrencyState();
 }
 
-class _CurrencyIndividualState extends State<CurrencyIndividual> {
-  String loot = '';
+class _CurrencyState extends State<Currency> {
+  //Retorna um ListTile. Bom pra colocar em ListView
   Random random = Random();
-  List rarity = ["PL", "PO", "PP", "PC"];
-  String ammount = '';
 
   @override
   Widget build(BuildContext context) {
-    int rarityMultiplier = random.nextInt(rarity.length);
-    String selectedRarity = rarity[rarityMultiplier];
-    if (rarityMultiplier == 0) {
-      rarityMultiplier--;
+    List<String> gem10Name = [
+      'Azurita',
+      'Agata Malhada',
+      'Quartzo azul',
+      'Ágata ocular',
+      'Hematita',
+      'Lápis lazúli',
+      'Malaquita',
+      'Ágata musgo',
+      'Obsidiana',
+      'Rodocrosita',
+      'Olho de tigre',
+      'Turquesa'
+    ];
+    List<String> artObject25Name = [
+      'Jarro de prata',
+      'Estatueta esculpida em osso',
+      'Bracelete de ouro pequeno',
+      'Vestimenta de tecido dourado',
+      'Máscara de veludo negra costurada com fios de prata',
+      'Cálice de cobre com filigrana prateada',
+      'Par de dados de osso com gravuras',
+      'Pequeno espelho numa moldura de madeira pintada',
+      'Lenço de seda bordado',
+      'Broche de ouro com um retrato pintado dentro',
+    ];
+    List<String> gem50Name = [
+      'Pedra de sangue ',
+      'Cornalina ',
+      'Calcedônia',
+      'Crisoprásio',
+      'Citrina ',
+      'Jaspe',
+      'Pedra lunar',
+      'Ônix',
+      'Quartzo',
+      'Sardônica',
+      'Quartzo rosa estrela',
+      'Zircônio '
+    ];
+    late String name;
+    if (widget.type == 'Pile') {
+      List<int> rarity = [10, 25, 50];
+      int dice = 6;
+      int selectedRarity = rarity[random.nextInt(rarity.length)];
+      debugPrint(selectedRarity.toString());
+      if (selectedRarity == 25) {
+        dice = 4;
+        name = artObject25Name[random.nextInt(10)];
+      } else if (selectedRarity == 10) {
+        name = gem10Name[random.nextInt(12)];
+      } else {
+        name = gem50Name[random.nextInt(12)];
+      }
+      debugPrint(name);
+      int ammount = (random.nextInt(dice) + 1);
+
+      return ListTile(
+        leading: const FlutterLogo(),
+        title: Text(
+          "$ammount x $name",
+          style: lootText,
+        ),
+        subtitle: Text(
+          "$selectedRarity PO cada",
+          style: lootText,
+        ),
+        onTap: () => setState(() {}),
+      );
+    } else {
+      List<String> rarity = ["PL", "PO", "PP", "PC", "PE"];
+      int diceMultiplier = random.nextInt(rarity.length) + 2;
+      String selectedRarity = rarity[diceMultiplier - 2];
+      if (selectedRarity == 'PL') {
+        //se for PL, somente 1 dado
+        diceMultiplier = 1;
+      }
+      if (selectedRarity == 'PE') {
+        //se for PE, são 3 dados
+        diceMultiplier = 3;
+      }
+      String ammount = ((5 + 1) * diceMultiplier).toString();
+
+      return ListTile(
+        leading: const FlutterLogo(),
+        title: Text(
+          '$ammount $selectedRarity',
+          style: lootText,
+        ),
+        onTap: () => setState(() {}),
+      );
     }
-    return ListTile(
-      leading: const FlutterLogo(),
-      title: Text(
-        loot,
-        style: lootText,
-      ),
-      onTap: () => setState(() {
-        ammount = ((random.nextInt(5) + 1) * (rarityMultiplier + 2)).toString();
-        loot = '$ammount $selectedRarity';
-      }),
-    );
-  }
-}
-
-class CurrencyPile extends StatefulWidget {
-  final int level;
-  const CurrencyPile({Key? key, required this.level}) : super(key: key);
-
-  @override
-  State<CurrencyPile> createState() => _CurrencyPileState();
-}
-
-class _CurrencyPileState extends State<CurrencyPile> {
-  Random random = Random();
-  String loot = '';
-  int ammount = 0;
-  List<String> gem10Name = [
-    'Azurita',
-    'Agata Malhada',
-    'Quartzo azul',
-    'Ágata ocular',
-    'Hematita',
-    'Lápis lazúli',
-    'Malaquita',
-    'Ágata musgo',
-    'Obsidiana',
-    'Rodocrosita',
-    'Olho de tigre',
-    'Turquesa'
-  ];
-  List<String> artObject25Name = [
-    'Jarro de prata',
-    'Estatueta esculpida em osso',
-    'Bracelete de ouro pequeno',
-    'Vestimenta de tecido dourado',
-    'Máscara de veludo negra costurada com fios de prata',
-    'Cálice de cobre com filigrana prateada',
-    'Par de dados de osso com gravuras',
-    'Pequeno espelho numa moldura de madeira pintada',
-    'Lenço de seda bordado',
-    'Broche de ouro com um retrato pintado dentro',
-  ];
-  List<String> gem50Name = [
-    'Pedra de sangue ',
-    'Cornalina ',
-    'Calcedônia',
-    'Crisoprásio',
-    'Citrina ',
-    'Jaspe',
-    'Pedra lunar',
-    'Ônix',
-    'Quartzo',
-    'Sardônica',
-    'Quartzo rosa estrela',
-    'Zircônio '
-  ];
-  List<int> rarity = [10, 25, 50];
-  late String name;
-
-  @override
-  Widget build(BuildContext context) {
-    String lootObject = 'Gemas';
-    int dice = 6;
-    int selectedRarity = rarity[random.nextInt(rarity.length)];
-    if (selectedRarity == 25) {
-      dice = 4;
-      lootObject = 'Objetos de Arte ';
-    }
-    name = gem10Name[3];
-
-    return ListTile(
-      leading: const FlutterLogo(),
-      title: Text(
-        loot,
-        style: lootText,
-      ),
-      subtitle: Text(
-        loot,
-        style: lootText,
-      ),
-      onTap: () => setState(() {
-        ammount = (random.nextInt(dice) + 1);
-        loot = "$ammount $name de $selectedRarity PO";
-      }),
-    );
   }
 }

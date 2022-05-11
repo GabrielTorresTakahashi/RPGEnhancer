@@ -13,7 +13,7 @@ class Enhancer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const HomeScreen(),
+      home: const LootScreen(),
       theme: colorSettings,
     );
   }
