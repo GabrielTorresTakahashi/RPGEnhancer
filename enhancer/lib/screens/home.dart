@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawerScrimColor: Colors.purple,
       drawerEnableOpenDragGesture: true,
-      backgroundColor: Theme.of(context).backgroundColor, //scaffold color
+      backgroundColor: Theme.of(context).colorScheme.background, //scaffold color
 
       appBar: AppBar(title: const Text("Home")),
       drawer: const MenuHamburguer(),
@@ -36,13 +36,13 @@ class MenuHamburguer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: const Text(''),
           ),
@@ -115,7 +115,7 @@ class NavigationButton extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => path!));
         }),
         style:
-            ElevatedButton.styleFrom(primary: Theme.of(context).primaryColor),
+            ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.primary),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(

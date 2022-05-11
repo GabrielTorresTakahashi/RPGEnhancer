@@ -9,9 +9,10 @@ class LootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(),
-        body: TreasureLevel());
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(),
+      body: TreasureLevel(),
+    );
   }
 }
 
@@ -23,34 +24,53 @@ class TreasureLevel extends StatefulWidget {
 }
 
 class _TreasureLevelState extends State<TreasureLevel> {
-  String currentValue = '1';
+  String? currentValue = '-Tipo-';
+  String? tipo;
+
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-      underline: null,
-      hint: Text("HINT"),
-      value: currentValue,
-      dropdownColor: Theme.of(context).primaryColor,
-      ///////////////////////////////////////
-      items: <String>['1', 'B'].map((value) {
-        return DropdownMenuItem(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      ////////////////////////////
-      onChanged: (String? value) {
-        setState(() {
-          currentValue = value!;
-        });
-      },
+    refresh() {
+      setState(() {});
+    }
+
+    return ListView(
+      children: [
+        Container(
+          height: 70,
+          width: double.maxFinite,
+          color: Theme.of(context).colorScheme.primary,
+          child: DropdownButton(
+            alignment: Alignment.center,
+            isExpanded: true,
+            icon: Container(),
+            dropdownColor: Theme.of(context).colorScheme.secondary,
+            underline: Container(),
+            style: dropdownText,
+            value: currentValue,
+            items: <String>['-Tipo-','Individual', 'Pilha'].map((value) {
+              return DropdownMenuItem(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? valor) {
+              setState(() {
+                currentValue = valor!;
+                tipo = valor;
+                refresh();
+              });
+            },
+          ),
+        ),
+        Currency(type: tipo),
+      ],
     );
   }
 }
 
 class Currency extends StatefulWidget {
-  final String type;
-  const Currency({Key? key, required this.type}) : super(key: key);
+  final String? type;
+  const Currency({Key? key, this.type}) : super(key: key);
 
   @override
   State<Currency> createState() => _CurrencyState();
@@ -103,7 +123,7 @@ class _CurrencyState extends State<Currency> {
       'Zircônio '
     ];
     late String name;
-    if (widget.type == 'Pile') {
+    if (widget.type == 'Pilha') {
       List<int> rarity = [10, 25, 50];
       int dice = 6;
       int selectedRarity = rarity[random.nextInt(rarity.length)];
@@ -131,7 +151,8 @@ class _CurrencyState extends State<Currency> {
         ),
         onTap: () => setState(() {}),
       );
-    } else {
+    }
+    if (widget.type == 'Individual') {
       List<String> rarity = ["PL", "PO", "PP", "PC", "PE"];
       int diceMultiplier = random.nextInt(rarity.length) + 2;
       String selectedRarity = rarity[diceMultiplier - 2];
@@ -154,5 +175,8 @@ class _CurrencyState extends State<Currency> {
         onTap: () => setState(() {}),
       );
     }
+    return ListTile(
+      title: Text("Select Loot Type", style: dropdownText,),
+    );
   }
 }
