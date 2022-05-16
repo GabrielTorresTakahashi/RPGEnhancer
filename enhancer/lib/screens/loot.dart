@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:enhancer/models/currency.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class LootScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Tesouros"),
       ),
-      body: const TreasureLevel(),
+      body: TreasureLevel(),
     );
   }
 }
@@ -27,36 +28,38 @@ class TreasureLevel extends StatefulWidget {
 
 class _TreasureLevelState extends State<TreasureLevel> {
   String? currentValue = '-Nível-';
-  String? nivel;
+  String nivel = '-Nível-';
+  bool currency = false;
+
+  refresh() {
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    refresh() {
-      setState(() {});
-    }
-
     return ListView(
       children: [
         Container(
           margin:
-              const EdgeInsets.only(left: 15, right: 15, top: 50, bottom: 40),
+              const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 40),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
           width: double.maxFinite,
           color: Theme.of(context).colorScheme.primary,
           alignment: Alignment.center,
           child: DropdownButton(
-            iconSize: 50,
+            iconSize: 60,
             iconEnabledColor: Theme.of(context).colorScheme.onPrimary,
             isExpanded: true,
-            dropdownColor: Theme.of(context).colorScheme.secondary,
+            dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
             style: dropdownText,
             value: currentValue,
             items:
-                <String>['-Nível-', '0-4', '5-10', '11-17', '17+'].map((value) {
+                <String>['-Nível-', '0-4', '5-10', '11-16', '17+'].map((value) {
               return DropdownMenuItem(
                 value: value,
+                alignment: Alignment.center,
                 child: Text(value),
               );
             }).toList(),
@@ -64,130 +67,56 @@ class _TreasureLevelState extends State<TreasureLevel> {
               setState(() {
                 currentValue = valor!;
                 nivel = valor;
-                refresh();
               });
             },
           ),
         ),
-        const Currency(type: 'Pilha'),
-        const Currency(type: 'Individual')
+        TextCheckbox(
+          text: 'Moedas',
+          attribute: currency,
+        ),
+        Currency(type: 'Pilha', level: nivel),
+        ElevatedButton(onPressed: () => refresh(), child: const Icon(Icons.refresh))
       ],
     );
   }
 }
 
-class Currency extends StatefulWidget {
-  final String? type;
-  const Currency({Key? key, this.type}) : super(key: key);
+class TextCheckbox extends StatefulWidget {
+  final String text;
+  final bool attribute;
+  const TextCheckbox({Key? key, required this.text, required this.attribute})
+      : super(key: key);
 
   @override
-  State<Currency> createState() => _CurrencyState();
+  State<TextCheckbox> createState() => _TextCheckboxState();
 }
 
-class _CurrencyState extends State<Currency> {
-  //Retorna um ListTile. Bom pra colocar em ListView
-  Random random = Random();
+class _TextCheckboxState extends State<TextCheckbox> {
+  bool isChecked = false;
+
+  Color getColor(Set<MaterialState> states) {
+    return Theme.of(context).colorScheme.primary;
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<String> gem10Name = [
-      'Azurita',
-      'Agata Malhada',
-      'Quartzo azul',
-      'Ágata ocular',
-      'Hematita',
-      'Lápis lazúli',
-      'Malaquita',
-      'Ágata musgo',
-      'Obsidiana',
-      'Rodocrosita',
-      'Olho de tigre',
-      'Turquesa'
-    ];
-    List<String> artObject25Name = [
-      'Jarro de prata',
-      'Estatueta esculpida em osso',
-      'Bracelete de ouro pequeno',
-      'Vestimenta de tecido dourado',
-      'Máscara de veludo negra costurada com fios de prata',
-      'Cálice de cobre com filigrana prateada',
-      'Par de dados de osso com gravuras',
-      'Pequeno espelho numa moldura de madeira pintada',
-      'Lenço de seda bordado',
-      'Broche de ouro com um retrato pintado dentro',
-    ];
-    List<String> gem50Name = [
-      'Pedra de sangue ',
-      'Cornalina ',
-      'Calcedônia',
-      'Crisoprásio',
-      'Citrina ',
-      'Jaspe',
-      'Pedra lunar',
-      'Ônix',
-      'Quartzo',
-      'Sardônica',
-      'Quartzo rosa estrela',
-      'Zircônio '
-    ];
-    late String name;
-    //PILHA
-    if (widget.type == 'Pilha') {
-      List<int> rarity = [10, 25, 50];
-      int dice = 6;
-      int selectedRarity = rarity[random.nextInt(rarity.length)];
-      debugPrint(selectedRarity.toString());
-      if (selectedRarity == 25) {
-        dice = 4;
-        name = artObject25Name[random.nextInt(10)];
-      } else if (selectedRarity == 10) {
-        name = gem10Name[random.nextInt(12)];
-      } else {
-        name = gem50Name[random.nextInt(12)];
-      }
-      debugPrint(name);
-      int ammount = (random.nextInt(dice) + 1);
-
-      return ListTile(
-        leading: const FlutterLogo(),
-        title: Text(
-          "$ammount x $name",
-          style: lootText,
+    return Row(
+      children: [
+        Checkbox(
+          fillColor: MaterialStateProperty.resolveWith(getColor),
+          value: isChecked,
+          onChanged: (bool? value) {
+            setState(() {
+              isChecked = value!;
+            });
+          },
         ),
-        subtitle: Text(
-          "$selectedRarity PO cada",
-          style: lootText,
+        Text(
+          widget.text,
+          style: checkboxText,
         ),
-        onTap: () => setState(() {}),
-      );
-    }
-    //INDIVIDUAL
-    else {
-      List<String> rarity = ["PL", "PO", "PP", "PC", "PE"];
-      int diceMultiplier = random.nextInt(rarity.length) + 2;
-      String selectedRarity = rarity[diceMultiplier - 2];
-      if (selectedRarity == 'PL') {
-        //se for PL, somente 1 dado
-        diceMultiplier = 1;
-      }
-      if (selectedRarity == 'PE') {
-        //se for PE, são 3 dados
-        diceMultiplier = 3;
-      }
-      int ammount = ((random.nextInt(6) + 1) * diceMultiplier);
-
-      return ListTile(
-        leading: const FlutterLogo(),
-        title: Text(
-          '$ammount $selectedRarity',
-          style: lootText,
-        ),
-        subtitle: Text(
-          'Ou algumas PO',
-          style: lootText,
-        ),
-        onTap: () => setState(() {}),
-      );
-    }
+      ],
+    );
   }
 }
