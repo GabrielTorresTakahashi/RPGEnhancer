@@ -130,7 +130,8 @@ class Currency extends StatelessWidget {
               'Broche de ouro com um retrato pintado dentro',
             ];
             lootObj = artObj25[random.nextInt(artObj25.length)];
-            totalObjects = (random.nextInt(7)+2).toString()+' x $lootObj de 25 PO';
+            totalObjects =
+                (random.nextInt(7) + 2).toString() + ' x $lootObj de 25 PO';
 
             break;
           case 'ArtObj250':
@@ -170,24 +171,66 @@ class Currency extends StatelessWidget {
             ' PO, ' +
             ((random.nextInt(26) + 5) * 100).toString() +
             ' PL';
+
+        switch (lootObj) {
+          case 'N':
+            totalObjects = totalCoins;
+            totalCoins = '';
+            break;
+          case 'ArtObj250':
+            break;
+          case 'ArtObj750':
+            break;
+          case 'Gem500':
+            break;
+          case 'Gem1000':
+            break;
+        }
       }
       //PILHA LEVEL 17+
-      if (level == '17+') {}
+      if (level == '17+') {
+        List<String> objects = [
+          'N',
+          'ArtObj2500', // 1d10
+          'ArtObj7500', // 1d4
+          'Gem1000', // 3d6
+          'Gem5000', // 1d8
+        ];
+        String lootObj = objects[random.nextInt(objects.length)];
+        totalCoins = ((random.nextInt(61) + 12) * 1000).toString() +
+            ' PO, ' +
+            ((random.nextInt(41) + 8) * 100).toString() +
+            ' PL';
+        switch (lootObj) {
+          case 'N':
+            totalObjects = totalCoins;
+            totalCoins = '';
+            break;
+          case 'ArtObj2500':
+            break;
+          case 'ArtObj7500':
+            break;
+          case 'Gem1000':
+            break;
+          case 'Gem5000':
+            break;
+        }
 
-      //PILHA DE TESOURO
+        //PILHA DE TESOURO
 
-      return ListTile(
-        leading: const FlutterLogo(),
-        title: Text(
-          totalObjects,
-          style: lootText,
-        ),
-        subtitle: Text(
-          totalCoins,
-          style: lootText2,
-        ),
-        onTap: null,
-      );
+        return ListTile(
+          leading: const FlutterLogo(),
+          title: Text(
+            totalObjects,
+            style: lootText,
+          ),
+          subtitle: Text(
+            totalCoins,
+            style: lootText2,
+          ),
+          onTap: null,
+        );
+      }
     }
     //INDIVIDUAL
     else {

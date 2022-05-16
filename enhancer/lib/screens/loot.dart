@@ -76,6 +76,7 @@ class _TreasureLevelState extends State<TreasureLevel> {
           attribute: currency,
         ),
         Currency(type: 'Pilha', level: nivel),
+        Currency(type: 'Individual', level: nivel),
         ElevatedButton(onPressed: () => refresh(), child: const Icon(Icons.refresh))
       ],
     );
