@@ -1,3 +1,4 @@
+import 'package:enhancer/screens/magic.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,8 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawerScrimColor: Colors.purple,
       drawerEnableOpenDragGesture: true,
-      backgroundColor: Theme.of(context).colorScheme.background, //scaffold color
+      backgroundColor:
+          Theme.of(context).colorScheme.background, //scaffold color
 
       appBar: AppBar(title: const Text("Home")),
       drawer: const MenuHamburguer(),
@@ -24,6 +26,7 @@ class HomeScreen extends StatelessWidget {
           )),
           const AppTitle(),
           NavigationButton(const LootScreen(), "Tesouros"),
+          NavigationButton(const MagicScreen(), "Itens Mágicos")
         ],
       ),
     );
@@ -114,8 +117,8 @@ class NavigationButton extends StatelessWidget {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => path!));
         }),
-        style:
-            ElevatedButton.styleFrom(primary: Theme.of(context).colorScheme.primary),
+        style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).colorScheme.primary),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
