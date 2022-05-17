@@ -16,8 +16,8 @@ class Currency extends StatelessWidget {
   Widget build(BuildContext context) {
     //PILHA
     if (type == 'Pilha') {
-      String totalObjects = '';
-      String totalCoins = '';
+      String totalObjects = 'Selecione um Nível de Tesouro';
+      String totalCoins = 'Pilha de Tesouro';
 
       //PILHA LEVEL 0-4
       if (level == '0-4') {
@@ -135,6 +135,21 @@ class Currency extends StatelessWidget {
 
             break;
           case 'ArtObj250':
+            final List<String> artObj250 = [
+              'Anel de ouro cravejado com pedras de sangue',
+              'Estatueta esculpida em marfim',
+              'Bracelete de ouro largo',
+              'Gargantilha de prata com um pingente de pedra preciosa',
+              'Coroa de bronze',
+              'Robe de seda com adornos de ouro',
+              'Grande tapeçaria elegante',
+              'Caneca de bronze com jades incrustadas',
+              'Caixa de miniaturas de animais em turquesa',
+              'Gaiola de pássaro de ouro com filigrana de electro',
+            ];
+            lootObj = artObj250[random.nextInt(artObj250.length)];
+            totalObjects =
+                (random.nextInt(7) + 2).toString() + ' x $lootObj de 250 PO';
             break;
           case 'Gem50':
             final List<String> gem50 = [
@@ -151,9 +166,26 @@ class Currency extends StatelessWidget {
               'Quartzo rosa estrela',
               'Zircônio '
             ];
-
+            lootObj = gem50[random.nextInt(gem50.length)];
+            totalObjects =
+                (random.nextInt(16) + 3).toString() + ' x $lootObj de 50 PO';
             break;
           case 'Gem100':
+            final List<String> gem100 = [
+              'Âmbar',
+              'Ametista ',
+              'Crisoberilo ',
+              'Coral ',
+              'Granada ',
+              'Jade ',
+              'Jato ',
+              'Pérola ',
+              'Espinela ',
+              'Turmalina ',
+            ];
+            lootObj = gem100[random.nextInt(gem100.length)];
+            totalObjects =
+                (random.nextInt(16) + 3).toString() + ' x $lootObj de 100 PO';
             break;
         }
       }
@@ -178,12 +210,67 @@ class Currency extends StatelessWidget {
             totalCoins = '';
             break;
           case 'ArtObj250':
+            List<String> artObj250 = [
+              'Anel de ouro cravejado com pedras de sangue',
+              'Estatueta esculpida em marfim',
+              'Bracelete de ouro largo',
+              'Gargantilha de prata com um pingente de pedra preciosa',
+              'Coroa de bronze',
+              'Robe de seda com adornos de ouro',
+              'Grande tapeçaria elegante',
+              'Caneca de bronze com jades incrustadas',
+              'Caixa de miniaturas de animais em turquesa',
+              'Gaiola de pássaro de ouro com filigrana de electro',
+            ];
+            String lootObj = artObj250[random.nextInt(artObj250.length)];
+            totalObjects =
+                (random.nextInt(7) + 2).toString() + ' x $lootObj de 250 PO';
             break;
           case 'ArtObj750':
+            List<String> artObj750 = [
+              'Cálice de prata cravejado com pedras da lua',
+              'Espada longa de lâmina prateada com conjunto de jatos no cabo',
+              'Harpa de madeira exótica com marfim incrustado e gemas de zircónio',
+              'Pequeno ídolo de ouro',
+              'Pente de ouro em formato de dragão cravejada com granadas vermelhas nos olhos',
+              'Rolha de garrafa gravada com folhas de ouro e cravejada com ametistas',
+              'Adaga de electro cerimonial com uma pérola negra no pomo',
+              'Broche de prata e ouro',
+              'Estatueta de obsidiana com detalhes e incrustações de ouro',
+              'Máscara de guerra de ouro pintada',
+            ];
+            String lootObj = artObj750[random.nextInt(artObj750.length)];
+            totalObjects =
+                (random.nextInt(7) + 2).toString() + ' x $lootObj de 750 PO';
             break;
           case 'Gem500':
+            List<String> gem500 = [
+              'Alexandrita',
+              'Água-marinha',
+              'Pérola negra',
+              'Espinela azul',
+              'Peridoto',
+              'Topázio',
+            ];
+            String lootObj = gem500[random.nextInt(gem500.length)];
+            totalObjects =
+                (random.nextInt(16) + 3).toString() + ' x $lootObj de 500 PO';
+
             break;
           case 'Gem1000':
+            List<String> gem1000 = [
+              'Opala negra',
+              'Safira azul',
+              'Esmeralda',
+              'Opala de fogo',
+              'Opala',
+              'Rubi estrela',
+              'Safira estrela',
+              'Safira amarela',
+            ];
+            String lootObj = gem1000[random.nextInt(gem1000.length)];
+            totalObjects =
+                (random.nextInt(16) + 3).toString() + ' x $lootObj de 1.000 PO';
             break;
         }
       }
@@ -207,37 +294,86 @@ class Currency extends StatelessWidget {
             totalCoins = '';
             break;
           case 'ArtObj2500':
+            List<String> artObj2500 = [
+              'Corrente de ouro elegante cravejada com uma opala de fogo',
+              'Antiga pintura obra-prima',
+              'Manto de seda e veludo bordado com diversas pedras da lua cravejadas',
+              'Bracelete de platina cravejado com uma safira',
+              'Luvas bordadas com lascas de joias',
+              'Peúga cheia de joias',
+              'Caixa de música de ouro',
+              'Argola de ouro cravejada com quatro águas marinhas ',
+              'Tapa-olho com um olho falso cravejado em uma safira azul e uma pedra da lua',
+              'Um colar de pequenas pérolas rosas',
+            ];
+            String lootObj = artObj2500[random.nextInt(artObj2500.length)];
+            totalObjects =
+                (random.nextInt(10) + 1).toString() + ' x $lootObj de 2.500 PO';
             break;
           case 'ArtObj7500':
+            List<String> artObj7500 = [
+              'Coroa de ouro cheia de joias',
+              'Anel de platina cheio de joias',
+              'Pequena estatueta de ouro cravejada com rubis',
+              'Taça de ouro cravejada com esmeraldas',
+              'Caixa de joias de ouro com filigrana de platina',
+              'Sarcófago infantil de ouro pintado',
+              'Jogo de tabuleiro de jade com peças de ouro maciço',
+              'Chifre de marfim adornado com filigrana de ouro',
+            ];
+            String lootObj = artObj7500[random.nextInt(artObj7500.length)];
+            totalObjects =
+                (random.nextInt(4) + 1).toString() + ' x $lootObj de 7.500 PO';
             break;
           case 'Gem1000':
+            List<String> gem1000 = [
+              'Opala negra',
+              'Safira azul',
+              'Esmeralda',
+              'Opala de fogo',
+              'Opala',
+              'Rubi estrela',
+              'Safira estrela',
+              'Safira amarela',
+            ];
+            String lootObj = gem1000[random.nextInt(gem1000.length)];
+            totalObjects =
+                (random.nextInt(16) + 3).toString() + ' x $lootObj de 1000 PO';
             break;
           case 'Gem5000':
+            List<String> gem5000 = [
+              'Safira negra',
+              'Diamante',
+              'Jacinto',
+              'Rubi',
+            ];
+            String lootObj = gem5000[random.nextInt(gem5000.length)];
+            totalObjects = (random.nextInt(8)+1).toString() + ' x $lootObj de 5.000 PO';
             break;
         }
-
-        //PILHA DE TESOURO
-
-        return ListTile(
-          leading: const FlutterLogo(),
-          title: Text(
-            totalObjects,
-            style: lootText,
-          ),
-          subtitle: Text(
-            totalCoins,
-            style: lootText2,
-          ),
-          onTap: null,
-        );
       }
-    }
-    //INDIVIDUAL
-    else {
+      //PILHA DE TESOURO
+      return ListTile(
+        leading: const Icon(Icons.attach_money, size: 45, color: Colors.amber),
+        title: Text(
+          totalObjects,
+          style: lootText,
+        ),
+        subtitle: Text(
+          totalCoins,
+          style: lootText2,
+        ),
+        onTap: null,
+      );
+    } else {
+      //INDIVIDUAL
       String totalCoins =
           'Selecione um Nivel de Tesouro'; //Exibido no Title da ListTile
+      String subtitle = 'Individual';
+
       ///INDIVIDUAL LEVEL 0-4
       if (level == '0-4') {
+        subtitle = '';
         //Esses sao os numeros rolados no D100 para determinar as moedas.
         final List<String> d100 = [
           '01-30',
@@ -248,8 +384,6 @@ class Currency extends StatelessWidget {
         ];
         final String rolled = d100[random.nextInt(d100.length)];
 
-        //Quantidade de moedas totais
-        totalCoins = '';
         //calcula parcialmente a quantidade de moedas para jogar no total
         int coins = 0;
         //valida a rolagem
@@ -279,6 +413,7 @@ class Currency extends StatelessWidget {
 
       ///INDIVIDUAL LEVEL 5-10
       if (level == '5-10') {
+        subtitle = '';
         final List<String> d100 = [
           '01-30',
           '31-60',
@@ -328,6 +463,7 @@ class Currency extends StatelessWidget {
 
       ///INDIVIDUAL LEVEL 11-16
       if (level == '11-16') {
+        subtitle = '';
         final List<String> d100 = ['01-20', '21-35', '36-75', '76-100'];
         final String rolled = d100[random.nextInt(d100.length)];
         totalCoins = '';
@@ -367,6 +503,7 @@ class Currency extends StatelessWidget {
 
       ///INDIVIDUAL LEVEL 17+
       if (level == '17+') {
+        subtitle = '';
         final List<String> d100 = ['1-15', '16-55', '56-100'];
         final String rolled = d100[random.nextInt(d100.length)];
         totalCoins = '';
@@ -398,13 +535,13 @@ class Currency extends StatelessWidget {
 
       ///TESOURO INDIVIDUAL
       return ListTile(
-        leading: const Icon(Icons.attach_money, size: 45, color: Colors.amber),
+        leading: const Icon(Icons.attach_money, size: 45, color: Colors.blue),
         title: Text(
           totalCoins,
           style: lootText,
         ),
         subtitle: Text(
-          'Individual',
+          subtitle,
           style: lootText2,
         ),
       );

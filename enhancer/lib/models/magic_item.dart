@@ -14,7 +14,10 @@ class MagicItem extends StatelessWidget {
     int d100 = random.nextInt(100) + 1;
 
     switch (rarity) {
-      case 'A':
+      case '-Raridade-':
+      item = 'Selecione um nível de raridade';
+      break;
+      case 'Raridade A':
         if (d100 == 100) {
           item = 'Globo de fluxo';
           break;
@@ -46,7 +49,7 @@ class MagicItem extends StatelessWidget {
         item = 'Poção de cura';
         break;
 
-      case 'B':
+      case 'Raridade B':
         List<String> table = [
           'Poção de cura maior',
           'Poção de sopro de fogo',
@@ -86,7 +89,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'C':
+      case 'Raridade C':
         List<String> table = [
           'Poção de cura maior',
           'Pergaminho de magia (4º Nível)',
@@ -119,7 +122,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'D':
+      case 'Raridade D':
         List<String> table = [
           'Poção de cura suprema',
           'Poção de invisibilidade',
@@ -140,7 +143,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'E':
+      case 'Raridade E':
         if (d100 >= 99) {
           item = 'Cola soberana';
           break;
@@ -167,7 +170,7 @@ class MagicItem extends StatelessWidget {
         }
         item = 'Pergaminho de magia (8º Nível)';
         break;
-      case 'F':
+      case 'Raridade F':
         List<String> table = [
           'Arma +1',
           'Escudo +1',
@@ -232,7 +235,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'G':
+      case 'Raridade G':
         List<String> table = [
           'Arma +2',
           'Grifo de bronze',
@@ -331,7 +334,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'H':
+      case 'Raridade H':
         List<String> table = [
           'Arma +3',
           'Amuleto dos planos',
@@ -405,7 +408,7 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
-      case 'I':
+      case 'Raridade I':
         List<String> table = [
           'Defensora',
           'Martelo dos trovões',
@@ -471,7 +474,7 @@ class MagicItem extends StatelessWidget {
         break;
     }
     return ListTile(
-      leading: const FlutterLogo(),
+      leading: const Icon(Icons.star_rate, size: 40, color: Colors.purple,),
       title: Text(
         item,
         style: lootText,
