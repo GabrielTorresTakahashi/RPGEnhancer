@@ -1,4 +1,5 @@
 import 'package:enhancer/screens/magic.dart';
+import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,8 @@ class HomeScreen extends StatelessWidget {
           )),
           const AppTitle(),
           NavigationButton(const LootScreen(), "Tesouros"),
-          NavigationButton(const MagicScreen(), "Itens Mágicos")
+          NavigationButton(const MagicScreen(), "Itens Mágicos"),
+          NavigationButton(const NameScreen(), "Nomes")
         ],
       ),
     );

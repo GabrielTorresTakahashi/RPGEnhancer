@@ -1,5 +1,5 @@
-import 'dart:math';
-
+import 'package:enhancer/models/name_generator.dart';
+import 'package:enhancer/models/refresh_button.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -9,126 +9,99 @@ class NameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(title: const Text("Nomes")),
-        body: NameGenerator(
-          race: 'Anão',
-          gender: 'M',
+        body: Column(
+          children: [
+            RaceSelector(),
+          ],
         ));
   }
 }
 
-class NameGenerator extends StatelessWidget {
-  final String race;
-  final String gender;
-  final Random random = Random();
-  late final List<String> names;
-  late final String fullName;
-  late final List<String> lastNames;
-
-  NameGenerator({Key? key, required this.race, required this.gender})
-      : super(key: key);
+class RaceSelector extends StatefulWidget {
+  const RaceSelector({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    switch (race) {
-      case 'Humano':
-        if (gender == 'F') {
-        } else {
-          names = ['Aseir', 'Bardeid', 'Haseid'];
-        }
-        lastNames = ['Bashta', 'Dumein', 'Jassan'];
-        break;
-      case 'Elfo':
-        names = ['Adran', 'Aelar', 'Aramil'];
-        lastNames = ['Folha-de-Prata', 'Jóia Florida', 'Flor Estrelar'];
-        break;
-      case 'Anão':
-        if (gender == 'F') {
-          names = [
-            'Amber',
-            'Artin',
-            'Audhild',
-            'Bardryn',
-            'Dagnal',
-            'Diesa',
-            'Eldeth',
-            'Falkrunn',
-            'Gunnloda',
-            'Gurdis',
-            'Helja',
-            'Hlin',
-            'Kathra',
-            'Kristyd',
-            'Ilde',
-            'Liftrasa',
-            'Madred',
-            'Riswynn',
-            'Senil',
-            'Torbera',
-            'Torgga',
-            'Vistra'
-          ];
-        } else {
-          names = [
-            'Adrik',
-            'Alberich',
-            'Baern',
-            'Barendd',
-            'Brottor',
-            'Bruenor',
-            'Dain',
-            'Darrak',
-            'Delg',
-            'Eberk',
-            'Einkil',
-            'Fargrim',
-            'Flint',
-            'Gardon',
-            'Harbek',
-            'Kildrak',
-            'Morgran',
-            'Orsik',
-            'Oskar',
-            'Rangrim',
-            'Rurik',
-            'Taklinn',
-            'Thoradin',
-            'Thorin',
-            'Tordek',
-            'Traubon',
-            'Travok',
-            'Ulfgar',
-            'Veit',
-            'Vondal'
-          ];
-        }
-        lastNames = [
-          'Balderk',
-          'Battlehammer',
-          'Brawnanvil',
-          'Dankil',
-          'Fireforge',
-          'Frostbeard',
-          'Gorunn',
-          'Hikderhej',
-          'Ironfist',
-          'Loderr',
-          'Lutgehr',
-          'Rumnaheim',
-          'Strakeln',
-          'Torunn',
-          'Ungart'
-        ];
-        break;
-      case 'Halfling':
-        names = ['Alton', 'Ander', 'Cadê'];
-        lastNames = ['Cata-Escovas', 'Bom-Barril', 'Garrafa-Verde'];
-        break;
-    }
-    fullName = names[random.nextInt(names.length)] +
-        " " +
-        lastNames[random.nextInt(lastNames.length)];
+  State<RaceSelector> createState() => _RaceSelectorState();
+}
 
-    return Text(fullName, style: lootText);
+class _RaceSelectorState extends State<RaceSelector> {
+  String raceValue = '-Raça-';
+  String genderValue = '-Gênero-';
+  late String race;
+  late String gender;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin:
+              const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 40),
+          padding: const EdgeInsets.only(left: 20, right: 10),
+          height: 70,
+          width: double.maxFinite,
+          color: Theme.of(context).colorScheme.primary,
+          alignment: Alignment.center,
+          child: DropdownButton(
+            iconSize: 60,
+            iconEnabledColor: Theme.of(context).colorScheme.onPrimary,
+            isExpanded: true,
+            dropdownColor: Theme.of(context).colorScheme.primary,
+            underline: Container(),
+            style: dropdownText,
+            value: raceValue,
+            items:
+                <String>['-Raça-','Anão','Humano','Halfling'].map((value) {
+              return DropdownMenuItem(
+                value: value,
+                alignment: Alignment.center,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? valor) {
+              setState(() {
+                raceValue = valor!;
+                race = valor;
+              });
+            },
+          ),
+        ),
+        Container(
+          margin:
+              const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 40),
+          padding: const EdgeInsets.only(left: 20, right: 10),
+          height: 70,
+          width: double.maxFinite,
+          color: Theme.of(context).colorScheme.primary,
+          alignment: Alignment.center,
+          child: DropdownButton(
+            iconSize: 60,
+            iconEnabledColor: Theme.of(context).colorScheme.onPrimary,
+            isExpanded: true,
+            dropdownColor: Theme.of(context).colorScheme.primary,
+            underline: Container(),
+            style: dropdownText,
+            value: raceValue,
+            items:
+                <String>['-Gênero-','Masculino','Feminino'].map((value) {
+              return DropdownMenuItem(
+                value: value,
+                alignment: Alignment.center,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? valor) {
+              setState(() {
+                genderValue = valor!;
+                gender = valor;
+              });
+            },
+          ),
+        ),
+        ListTile(title: NameGenerator(race: race, gender: gender)),
+        RefreshButton(setState: setState),
+      ],
+    );
   }
 }
