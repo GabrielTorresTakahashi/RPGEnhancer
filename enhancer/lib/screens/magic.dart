@@ -12,20 +12,20 @@ class MagicScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Itens Mágicos"),
       ),
-      body: const RaritySelector(),
+      body: const MagicItemGenerator(),
       backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }
 
-class RaritySelector extends StatefulWidget {
-  const RaritySelector({Key? key}) : super(key: key);
+class MagicItemGenerator extends StatefulWidget {
+  const MagicItemGenerator({Key? key}) : super(key: key);
 
   @override
-  State<RaritySelector> createState() => _RaritySelectorState();
+  State<MagicItemGenerator> createState() => _MagicItemGeneratorState();
 }
 
-class _RaritySelectorState extends State<RaritySelector> {
+class _MagicItemGeneratorState extends State<MagicItemGenerator> {
   String currentValue = '-Raridade-';
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,7 @@ class _RaritySelectorState extends State<RaritySelector> {
           ],
         ),
         Container(
-          margin: EdgeInsets.all(40),
+          margin: const EdgeInsets.all(40),
           height: 80,
           width: 150,
           child: ElevatedButton(

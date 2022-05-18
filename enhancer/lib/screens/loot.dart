@@ -77,7 +77,7 @@ class _TreasureLevelState extends State<TreasureLevel> {
           ],
         ),
         Container(
-          margin: EdgeInsets.all(40),
+          margin: const EdgeInsets.all(40),
           height: 80,
           width: 150,
           child: ElevatedButton(
