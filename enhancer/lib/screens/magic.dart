@@ -1,4 +1,5 @@
 import 'package:enhancer/models/magic_item.dart';
+import 'package:enhancer/models/refresh_button.dart';
 import 'package:flutter/material.dart';
 
 import '../settings/text_style.dart';
@@ -75,22 +76,14 @@ class _MagicItemGeneratorState extends State<MagicItemGenerator> {
                 },
               ),
             ),
+            MagicItem(rarity: currentValue, placeholder: true,),
+            MagicItem(rarity: currentValue),
+            MagicItem(rarity: currentValue),
+            MagicItem(rarity: currentValue),
             MagicItem(rarity: currentValue),
           ],
         ),
-        Container(
-          margin: const EdgeInsets.all(40),
-          height: 80,
-          width: 150,
-          child: ElevatedButton(
-              onPressed: () {
-                setState(() {});
-              },
-              child: const Icon(
-                Icons.refresh_outlined,
-                size: 45,
-              )),
-        ),
+        RefreshButton(setState: setState)
       ],
     );
   }

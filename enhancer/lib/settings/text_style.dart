@@ -17,5 +17,15 @@ TextStyle checkboxText = const TextStyle()
 
 TextStyle lootText = const TextStyle()
     .copyWith(color: Colors.white, fontSize: 18, fontFamily: 'Montserrat');
+
 TextStyle lootText2 = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 20, fontFamily: 'Montserrat');
+
+TextStyle lootText3 = const TextStyle()
     .copyWith(color: Colors.amber, fontSize: 16, fontFamily: 'Montserrat');
+
+TextStyle itemText = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 20, fontFamily: 'Montserrat');
+
+TextStyle nameText = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 20, fontFamily: 'Montserrat');

@@ -361,7 +361,7 @@ class Currency extends StatelessWidget {
         ),
         subtitle: Text(
           totalCoins,
-          style: lootText2,
+          style: lootText3,
         ),
         onTap: null,
       );
@@ -470,7 +470,6 @@ class Currency extends StatelessWidget {
         int coins = 0;
         switch (rolled) {
           case '01-20':
-            debugPrint(rolled);
             coins = (random.nextInt(24 - 3) + 4) * 100;
             totalCoins = totalCoins + coins.toString() + ' PP, ';
 
@@ -538,11 +537,11 @@ class Currency extends StatelessWidget {
         leading: const Icon(Icons.attach_money, size: 45, color: Colors.blue),
         title: Text(
           totalCoins,
-          style: lootText,
+          style: lootText2,
         ),
         subtitle: Text(
           subtitle,
-          style: lootText2,
+          style: lootText3,
         ),
       );
     }

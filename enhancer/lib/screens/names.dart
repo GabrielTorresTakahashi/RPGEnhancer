@@ -11,11 +11,7 @@ class NameScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(title: const Text("Nomes")),
-        body: Column(
-          children: [
-            RaceSelector(),
-          ],
-        ));
+        body: const RaceSelector());
   }
 }
 
@@ -27,17 +23,16 @@ class RaceSelector extends StatefulWidget {
 }
 
 class _RaceSelectorState extends State<RaceSelector> {
-  String raceValue = '-Raça-';
-  String genderValue = '-Gênero-';
-  late String race;
-  late String gender;
+  String race = '-Raça-';
+  String gender = '-Gênero-';
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Container(
-          margin:
-              const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 40),
+          //Raças
+          margin: const EdgeInsets.only(left: 25, right: 25, top: 50),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
           width: double.maxFinite,
@@ -50,9 +45,17 @@ class _RaceSelectorState extends State<RaceSelector> {
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
             style: dropdownText,
-            value: raceValue,
-            items:
-                <String>['-Raça-','Anão','Humano','Halfling'].map((value) {
+            value: race,
+            items: <String>[
+              '-Raça-',
+              'Anão',
+              'Elfo',
+              'Halfling',
+              'Humano',
+              'Draconato',
+              'Gnomo',
+              'Orc (Meio-Orc)',
+            ].map((value) {
               return DropdownMenuItem(
                 value: value,
                 alignment: Alignment.center,
@@ -61,15 +64,14 @@ class _RaceSelectorState extends State<RaceSelector> {
             }).toList(),
             onChanged: (String? valor) {
               setState(() {
-                raceValue = valor!;
-                race = valor;
+                race = valor!;
               });
             },
           ),
         ),
         Container(
-          margin:
-              const EdgeInsets.only(left: 25, right: 25, top: 50, bottom: 40),
+          //Gênero
+          margin: const EdgeInsets.only(left: 25, right: 25, top: 30),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
           width: double.maxFinite,
@@ -82,25 +84,29 @@ class _RaceSelectorState extends State<RaceSelector> {
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
             style: dropdownText,
-            value: raceValue,
-            items:
-                <String>['-Gênero-','Masculino','Feminino'].map((value) {
+            value: gender,
+            items: <String>['-Gênero-', 'Masculino', 'Feminino'].map((value2) {
               return DropdownMenuItem(
-                value: value,
+                value: value2,
                 alignment: Alignment.center,
-                child: Text(value),
+                child: Text(value2),
               );
             }).toList(),
             onChanged: (String? valor) {
               setState(() {
-                genderValue = valor!;
-                gender = valor;
+                gender = valor!;
               });
             },
           ),
         ),
-        ListTile(title: NameGenerator(race: race, gender: gender)),
-        RefreshButton(setState: setState),
+        NameGenerator(race: race, gender: gender, placeholder: true,),
+        NameGenerator(race: race, gender: gender),
+        NameGenerator(race: race, gender: gender),
+        NameGenerator(race: race, gender: gender),
+        NameGenerator(race: race, gender: gender),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: RefreshButton(setState: setState)),
       ],
     );
   }

@@ -7,7 +7,7 @@ class RefreshButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(40),
+      margin: const EdgeInsets.only(bottom: 40),
       height: 80,
       width: 150,
       child: ElevatedButton(
