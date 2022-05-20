@@ -1,5 +1,6 @@
 import 'package:enhancer/screens/magic.dart';
 import 'package:enhancer/screens/names.dart';
+import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -11,73 +12,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawerScrimColor: Colors.purple,
-      drawerEnableOpenDragGesture: true,
       backgroundColor:
           Theme.of(context).colorScheme.background, //scaffold color
 
       appBar: AppBar(title: const Text("Home")),
-      drawer: const MenuHamburguer(),
-
       body: Column(
-        children: [
-          const Center(
-              child: FlutterLogo(
-            size: 100,
-          )),
-          const AppTitle(),
-          NavigationButton(const LootScreen(), "Tesouros"),
-          NavigationButton(const MagicScreen(), "Itens Mágicos"),
-          NavigationButton(const NameScreen(), "Nomes")
-        ],
-      ),
-    );
-  }
-}
-
-class MenuHamburguer extends StatelessWidget {
-  const MenuHamburguer({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            child: const Text(''),
-          ),
-          ListTile(
-            leading: const FlutterLogo(),
-            title: Text(
-              'Idioma',
-              style: menuText,
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const FlutterLogo(),
-            title: Text('Ajuda', style: menuText),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const FlutterLogo(),
-            title: Text(
-              'Sobre',
-              style: menuText,
-            ),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          )
+        children: const [
+          AppTitle(),
+          MenuNavigationButton(LootScreen(), "Tesouros"),
+          MenuNavigationButton(MagicScreen(), "Itens Mágicos"),
+          MenuNavigationButton(NameScreen(), "Nomes")
         ],
       ),
     );
@@ -89,23 +33,24 @@ class AppTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      child: Text(
-          //CHILD #2
-          "RPGEnhancer\nv0.1",
-          textAlign: TextAlign.center,
-          style: titleText),
-      //END OF CHILD #2(
+    return Column(
+      children: [
+        const Icon(Icons.deck),
+        Container(
+          margin: const EdgeInsets.only(top: 20, bottom: 20),
+          child: Text("RPGEnhancer\nv0.1",
+              textAlign: TextAlign.center, style: titleText),
+        ),
+      ],
     );
   }
 }
 
-// ignore: must_be_immutable
-class NavigationButton extends StatelessWidget {
-  NavigationButton(this.path, this.buttonTitle, {Key? key}) : super(key: key);
-  Widget? path;
-  String buttonTitle;
+class MenuNavigationButton extends StatelessWidget {
+  final String buttonTitle;
+  final Widget? path;
+  const MenuNavigationButton(this.path, this.buttonTitle, {Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +59,11 @@ class NavigationButton extends StatelessWidget {
       height: 80,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
       child: ElevatedButton(
-        //CHILD #3
         onPressed: (() {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => path!));
         }),
-        style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).colorScheme.primary),
+        style: menuNavigationButton,
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Text(
@@ -129,6 +72,6 @@ class NavigationButton extends StatelessWidget {
           ),
         ),
       ),
-    ); //END OF CHILD #3;
+    );
   }
 }
