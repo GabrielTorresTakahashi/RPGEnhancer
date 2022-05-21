@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MagicItem extends StatelessWidget {
   static Random random = Random();
@@ -489,7 +490,7 @@ class MagicItem extends StatelessWidget {
     }
     return ListTile(
       leading: Icon(
-        Icons.star_rate,
+        FontAwesomeIcons.wandMagicSparkles,
         size: 40,
         color: rarityColor,
       ),

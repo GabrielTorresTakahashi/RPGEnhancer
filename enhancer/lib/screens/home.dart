@@ -15,7 +15,8 @@ class HomeScreen extends StatelessWidget {
       backgroundColor:
           Theme.of(context).colorScheme.background, //scaffold color
 
-      appBar: AppBar(title: const Text("Home")),
+      appBar: AppBar(
+        title: const Text("Home"), automaticallyImplyLeading: false,),
       body: Column(
         children: const [
           AppTitle(),
@@ -33,15 +34,17 @@ class AppTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Icon(Icons.deck),
-        Container(
-          margin: const EdgeInsets.only(top: 20, bottom: 20),
-          child: Text("RPGEnhancer\nv0.1",
-              textAlign: TextAlign.center, style: titleText),
-        ),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          Container(margin: const EdgeInsets.only(top: 10), child: Image.asset('assets/enhancer-logo2.png', scale: 4)),
+          Container(
+            margin: const EdgeInsets.only(top: 20, bottom: 20),
+            child: Text("RPGEnhancer\nv1.0",
+                textAlign: TextAlign.center, style: titleText),
+          ),
+        ],
+      ),
     );
   }
 }

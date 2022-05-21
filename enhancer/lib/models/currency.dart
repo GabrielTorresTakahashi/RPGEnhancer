@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Currency extends StatelessWidget {
   //Retorna um ListTile. Bom pra colocar em ListView
@@ -354,7 +355,7 @@ class Currency extends StatelessWidget {
       }
       //PILHA DE TESOURO
       return ListTile(
-        leading: const Icon(Icons.attach_money, size: 45, color: Colors.amber),
+        leading: const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.amber),
         title: Text(
           totalObjects,
           style: lootText,
@@ -534,7 +535,7 @@ class Currency extends StatelessWidget {
 
       ///TESOURO INDIVIDUAL
       return ListTile(
-        leading: const Icon(Icons.attach_money, size: 45, color: Colors.blue),
+        leading: const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.blue),
         title: Text(
           totalCoins,
           style: lootText2,

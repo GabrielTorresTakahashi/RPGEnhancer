@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../settings/text_style.dart';
 
@@ -659,7 +660,7 @@ class NameGenerator extends StatelessWidget {
           lastNames[random.nextInt(lastNames.length)];
     }
     return ListTile(
-        leading: Icon(Icons.person_pin,
+        leading: Icon(FontAwesomeIcons.person,
             size: 35, color: iconColor[random.nextInt(iconColor.length)]),
         title: Text(fullName, style: nameText));
   }
