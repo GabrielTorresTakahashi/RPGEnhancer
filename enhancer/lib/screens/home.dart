@@ -1,3 +1,4 @@
+import 'package:enhancer/screens/dice.dart';
 import 'package:enhancer/screens/magic.dart';
 import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/settings/color_settings.dart';
@@ -16,13 +17,14 @@ class HomeScreen extends StatelessWidget {
           Theme.of(context).colorScheme.background, //scaffold color
 
       appBar: AppBar(
-        title: const Text("Home"), automaticallyImplyLeading: false,),
+        title: Text("Home", style: appBarText,), automaticallyImplyLeading: false,),
       body: Column(
         children: const [
           AppTitle(),
           MenuNavigationButton(LootScreen(), "Tesouros"),
           MenuNavigationButton(MagicScreen(), "Itens Mágicos"),
-          MenuNavigationButton(NameScreen(), "Nomes")
+          MenuNavigationButton(NameScreen(), "Nomes"),
+          MenuNavigationButton(DiceScreen(), "Dados")
         ],
       ),
     );
@@ -58,8 +60,8 @@ class MenuNavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 350,
-      height: 80,
+      width: 330,
+      height: 65,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
       child: ElevatedButton(
         onPressed: (() {

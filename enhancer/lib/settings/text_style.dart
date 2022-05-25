@@ -29,3 +29,5 @@ TextStyle itemText = const TextStyle()
 
 TextStyle nameText = const TextStyle()
     .copyWith(color: Colors.white, fontSize: 20, fontFamily: 'Montserrat');
+TextStyle appBarText = const TextStyle()
+    .copyWith(color: Colors.white, fontSize: 20, fontFamily: 'Montserrat');
