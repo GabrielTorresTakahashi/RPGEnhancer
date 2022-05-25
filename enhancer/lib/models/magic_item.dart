@@ -2,22 +2,29 @@ import 'dart:math';
 
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MagicItem extends StatelessWidget {
   static Random random = Random();
   final String rarity;
-  const MagicItem({Key? key, required this.rarity}) : super(key: key);
+  final bool placeholder;
+  const MagicItem({Key? key, required this.rarity, this.placeholder = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    
     String item = ' ';
+    Color rarityColor = Colors.transparent;
     int d100 = random.nextInt(100) + 1;
 
     switch (rarity) {
       case '-Raridade-':
-      item = 'Selecione um nível de raridade';
-      break;
+        if (placeholder) {
+          item = 'Selecione um nível de raridade';
+        }
+        break;
       case 'Raridade A':
+        rarityColor = Colors.grey;
         if (d100 == 100) {
           item = 'Globo de fluxo';
           break;
@@ -50,6 +57,7 @@ class MagicItem extends StatelessWidget {
         break;
 
       case 'Raridade B':
+        rarityColor = Colors.white;
         List<String> table = [
           'Poção de cura maior',
           'Poção de sopro de fogo',
@@ -90,6 +98,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade C':
+        rarityColor = Colors.green;
         List<String> table = [
           'Poção de cura maior',
           'Pergaminho de magia (4º Nível)',
@@ -123,6 +132,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade D':
+        rarityColor = Colors.blue;
         List<String> table = [
           'Poção de cura suprema',
           'Poção de invisibilidade',
@@ -144,6 +154,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade E':
+        rarityColor = Colors.indigo;
         if (d100 >= 99) {
           item = 'Cola soberana';
           break;
@@ -171,6 +182,7 @@ class MagicItem extends StatelessWidget {
         item = 'Pergaminho de magia (8º Nível)';
         break;
       case 'Raridade F':
+        rarityColor = Colors.purple;
         List<String> table = [
           'Arma +1',
           'Escudo +1',
@@ -236,6 +248,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade G':
+        rarityColor = Colors.pink;
         List<String> table = [
           'Arma +2',
           'Grifo de bronze',
@@ -335,6 +348,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade H':
+        rarityColor = Colors.amber;
         List<String> table = [
           'Arma +3',
           'Amuleto dos planos',
@@ -409,6 +423,7 @@ class MagicItem extends StatelessWidget {
         item = table[random.nextInt(table.length)];
         break;
       case 'Raridade I':
+        rarityColor = Colors.lime;
         List<String> table = [
           'Defensora',
           'Martelo dos trovões',
@@ -474,10 +489,14 @@ class MagicItem extends StatelessWidget {
         break;
     }
     return ListTile(
-      leading: const Icon(Icons.star_rate, size: 40, color: Colors.purple,),
+      leading: Icon(
+        FontAwesomeIcons.wandMagicSparkles,
+        size: 40,
+        color: rarityColor,
+      ),
       title: Text(
         item,
-        style: lootText,
+        style: itemText,
       ),
     );
   }

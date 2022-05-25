@@ -29,3 +29,5 @@ ThemeData colorSettings = ThemeData().copyWith(
     backgroundColor: primary,
   ),
 );
+
+ButtonStyle menuNavigationButton = ElevatedButton.styleFrom(primary: primary);

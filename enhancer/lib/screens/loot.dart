@@ -1,4 +1,5 @@
 import 'package:enhancer/models/currency.dart';
+import 'package:enhancer/models/refresh_button.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -76,19 +77,7 @@ class _TreasureLevelState extends State<TreasureLevel> {
             Currency(type: 'Individual', level: nivel),
           ],
         ),
-        Container(
-          margin: const EdgeInsets.all(40),
-          height: 80,
-          width: 150,
-          child: ElevatedButton(
-              onPressed: () {
-                setState(() {});
-              },
-              child: const Icon(
-                Icons.refresh_outlined,
-                size: 45,
-              )),
-        ),
+        RefreshButton(setState: setState)
       ],
     );
   }
