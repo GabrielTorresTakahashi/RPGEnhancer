@@ -17,15 +17,27 @@ class HomeScreen extends StatelessWidget {
           Theme.of(context).colorScheme.background, //scaffold color
 
       appBar: AppBar(
-        title: Text("Home", style: appBarText,), automaticallyImplyLeading: false,),
-      body: Column(
-        children: const [
-          AppTitle(),
-          MenuNavigationButton(LootScreen(), "Tesouros"),
-          MenuNavigationButton(MagicScreen(), "Itens Mágicos"),
-          MenuNavigationButton(NameScreen(), "Nomes"),
-          MenuNavigationButton(DiceScreen(), "Dados")
-        ],
+        title: Text(
+          "Home",
+          style: appBarText,
+        ),
+        automaticallyImplyLeading: false,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            AppTitle(),
+            MenuNavigationButton(LootScreen(), "Tesouros"),
+            MenuNavigationButton(MagicScreen(), "Itens Mágicos"),
+            MenuNavigationButton(NameScreen(), "Nomes"),
+            MenuNavigationButton(DiceScreen(), "Dados"),
+            Text(
+              "Copyright 2022\nGabriel Torres Takahashi\n",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -39,7 +51,9 @@ class AppTitle extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Container(margin: const EdgeInsets.only(top: 10), child: Image.asset('assets/enhancer-logo2.png', scale: 4)),
+          Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: Image.asset('assets/enhancer-logo2.png', scale: 4)),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 20),
             child: Text("RPGEnhancer\nv1.0",
