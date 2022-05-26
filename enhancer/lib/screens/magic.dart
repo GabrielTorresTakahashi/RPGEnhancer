@@ -11,7 +11,7 @@ class MagicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Itens Mágicos"),
+        title: Text("Itens Mágicos", style: appBarText,),
       ),
       body: const MagicItemGenerator(),
       backgroundColor: Theme.of(context).colorScheme.background,

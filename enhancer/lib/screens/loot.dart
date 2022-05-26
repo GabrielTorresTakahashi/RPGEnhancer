@@ -11,7 +11,7 @@ class LootScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Tesouros"),
+        title: Text("Tesouros", style: appBarText,),
       ),
       body: const TreasureLevel(),
     );

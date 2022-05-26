@@ -10,7 +10,7 @@ class NameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(title: const Text("Nomes")),
+        appBar: AppBar(title: Text("Nomes", style: appBarText,)),
         body: const RaceSelector());
   }
 }
@@ -28,7 +28,7 @@ class _RaceSelectorState extends State<RaceSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         //Raças
         Container(
@@ -105,9 +105,8 @@ class _RaceSelectorState extends State<RaceSelector> {
         NameGenerator(race: race, gender: gender),
         NameGenerator(race: race, gender: gender),
         NameGenerator(race: race, gender: gender),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: RefreshButton(setState: setState)),
+        const Expanded(child: SizedBox()),
+        RefreshButton(setState: setState),
       ],
     );
   }

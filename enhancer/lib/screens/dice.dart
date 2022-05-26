@@ -18,7 +18,7 @@ class _DiceScreenState extends State<DiceScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Dados"),
+        title: Text("Dados", style: appBarText,),
       ),
       body: Column(
         children: [
