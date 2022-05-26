@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             MenuNavigationButton(NameScreen(), "Nomes"),
             MenuNavigationButton(DiceScreen(), "Dados"),
             Text(
-              "Copyright 2022\nGabriel Torres Takahashi\n",
+              "\nCopyright 2022\nGabriel Torres Takahashi\n",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
             )
@@ -74,7 +74,7 @@ class MenuNavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 330,
+      width: 300,
       height: 65,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
       child: ElevatedButton(

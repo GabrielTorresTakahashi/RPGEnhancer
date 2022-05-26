@@ -9,7 +9,7 @@ const Color error = Colors.lightGreen;
 const Color onError = Colors.white;
 const Color background = Color(0xFF303030);
 const Color onBackground = Colors.white;
-const Color surface = Colors.white;
+const Color surface = Color(0xFF74121D);
 const Color onSurface = Colors.white;
 
 ThemeData colorSettings = ThemeData().copyWith(
