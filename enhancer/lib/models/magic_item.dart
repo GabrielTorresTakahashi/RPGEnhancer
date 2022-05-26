@@ -16,13 +16,9 @@ class MagicItem extends StatelessWidget {
     String item = ' ';
     Color rarityColor = Colors.transparent;
     int d100 = random.nextInt(100) + 1;
+    bool exists = true;
 
     switch (rarity) {
-      case '-Raridade-':
-        if (placeholder) {
-          item = 'Selecione um nível de raridade';
-        }
-        break;
       case 'Raridade A':
         rarityColor = Colors.grey;
         if (d100 == 100) {
@@ -487,6 +483,13 @@ class MagicItem extends StatelessWidget {
         ];
         item = table[random.nextInt(table.length)];
         break;
+      default:
+      exists = false;
+      break;
+        
+    }
+    if(!exists){
+      return Container();
     }
     return ListTile(
       leading: Icon(

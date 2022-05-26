@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:enhancer/models/magic_item.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,9 +20,11 @@ class Currency extends StatelessWidget {
     if (type == 'Pilha') {
       String totalObjects = 'Selecione um Nível de Tesouro';
       String totalCoins = 'Pilha de Tesouro';
+      List<String> magicItem = [''];
 
       //PILHA LEVEL 0-4
       if (level == '0-4') {
+        magicItem = ['', 'A', 'B', 'C', 'F', 'G'];
         final List<String> objects = ['N', 'Gem10', 'Gem50', 'ArtObj25'];
         String lootObj = objects[random.nextInt(objects.length)];
         totalCoins = ((random.nextInt(31) + 6) * 100).toString() +
@@ -95,6 +98,7 @@ class Currency extends StatelessWidget {
       }
       //PILHA LEVEL 5-10
       if (level == '5-10') {
+        magicItem = ['', 'A', 'B', 'C', 'D', 'F', 'G', 'H'];
         List<String> objects = [
           'N',
           'ArtObj25',
@@ -192,6 +196,7 @@ class Currency extends StatelessWidget {
       }
       //PILHA LEVEL 11-16
       if (level == '11-16') {
+        magicItem = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
         List<String> objects = [
           'N',
           'ArtObj250',
@@ -277,6 +282,7 @@ class Currency extends StatelessWidget {
       }
       //PILHA LEVEL 17+
       if (level == '17+') {
+        magicItem = ['', 'C', 'D', 'E', 'G', 'H', 'I'];
         List<String> objects = [
           'N',
           'ArtObj2500', // 1d10
@@ -349,24 +355,40 @@ class Currency extends StatelessWidget {
               'Rubi',
             ];
             String lootObj = gem5000[random.nextInt(gem5000.length)];
-            totalObjects = (random.nextInt(8)+1).toString() + ' x $lootObj de 5.000 PO';
+            totalObjects =
+                (random.nextInt(8) + 1).toString() + ' x $lootObj de 5.000 PO';
             break;
         }
       }
       //PILHA DE TESOURO
-      return ListTile(
-        leading: const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.amber),
-        title: Text(
-          totalObjects,
-          style: lootText,
-        ),
-        subtitle: Text(
-          totalCoins,
-          style: lootText3,
-        ),
-        onTap: null,
+      return Column(
+        children: [
+          ListTile(
+            leading: const Icon(FontAwesomeIcons.coins,
+                size: 45, color: Colors.amber),
+            title: Text(
+              totalObjects,
+              style: lootText,
+            ),
+            subtitle: Text(
+              totalCoins,
+              style: lootText3,
+            ),
+            onTap: null,
+          ),
+          MagicItem(
+              rarity:
+                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+          MagicItem(
+              rarity:
+                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+          MagicItem(
+              rarity:
+                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+        ],
       );
-    } else {
+    }
+    if (type == 'Individual') {
       //INDIVIDUAL
       String totalCoins =
           'Selecione um Nivel de Tesouro'; //Exibido no Title da ListTile
@@ -535,7 +557,8 @@ class Currency extends StatelessWidget {
 
       ///TESOURO INDIVIDUAL
       return ListTile(
-        leading: const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.blue),
+        leading:
+            const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.amber),
         title: Text(
           totalCoins,
           style: lootText2,
@@ -545,6 +568,8 @@ class Currency extends StatelessWidget {
           style: lootText3,
         ),
       );
+    } else {
+      return Container();
     }
   }
 }

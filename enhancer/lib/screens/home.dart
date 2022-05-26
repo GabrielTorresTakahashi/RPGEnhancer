@@ -1,5 +1,4 @@
 import 'package:enhancer/screens/dice.dart';
-import 'package:enhancer/screens/magic.dart';
 import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
@@ -28,7 +27,6 @@ class HomeScreen extends StatelessWidget {
           children: const [
             AppTitle(),
             MenuNavigationButton(LootScreen(), "Tesouros"),
-            MenuNavigationButton(MagicScreen(), "Itens Mágicos"),
             MenuNavigationButton(NameScreen(), "Nomes"),
             MenuNavigationButton(DiceScreen(), "Dados"),
             Text(
@@ -53,7 +51,7 @@ class AppTitle extends StatelessWidget {
         children: [
           Container(
               margin: const EdgeInsets.only(top: 10),
-              child: Image.asset('assets/enhancer-logo2.png', scale: 4)),
+              child: Image.asset('assets/enhancer-logo2.png', scale: 4, color: Theme.of(context).colorScheme.primary,)),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 20),
             child: Text("RPGEnhancer\nv1.0",

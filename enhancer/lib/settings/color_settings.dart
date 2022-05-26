@@ -1,30 +1,26 @@
 import 'package:flutter/material.dart';
-
+//primaria Color(0xFF74121D)
+//fundo Color(0xFF303030)
 const Brightness brightness = Brightness.light;
-const Color primary = Color(0xFF74121D);
+const Color primary = Color(0xFF99121D);
 const Color onPrimary = Colors.white;
-const Color secondary = Color(0xFF74121D);
-const Color onSecondary = Colors.white;
 const Color error = Colors.lightGreen;
-const Color onError = Colors.white;
 const Color background = Color(0xFF303030);
-const Color onBackground = Colors.white;
-const Color surface = Color(0xFF74121D);
-const Color onSurface = Colors.white;
+
 
 ThemeData colorSettings = ThemeData().copyWith(
   colorScheme: const ColorScheme(
       brightness: brightness,
       primary: primary,
       onPrimary: onPrimary,
-      secondary: secondary,
-      onSecondary: onSecondary,
+      secondary: primary,
+      onSecondary: onPrimary,
       error: error,
-      onError: onError,
+      onError: onPrimary,
       background: background,
-      onBackground: onBackground,
-      surface: surface,
-      onSurface: onSurface),
+      onBackground: onPrimary,
+      surface: primary,
+      onSurface: onPrimary),
   appBarTheme: const AppBarTheme(
     backgroundColor: primary,
   ),

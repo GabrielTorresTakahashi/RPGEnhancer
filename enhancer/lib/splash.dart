@@ -26,8 +26,8 @@ class _SplashState extends State<Splash> {
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(
-          child: Image.asset('assets/enhancer-logo2.png', scale: 2.3)
-          ),
+          child: Image.asset('assets/enhancer-logo2.png', scale: 2.3, color: Theme.of(context).colorScheme.primary),
+        ),
         );
   }
 }
