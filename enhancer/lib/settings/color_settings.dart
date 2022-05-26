@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const Brightness brightness = Brightness.light;
 const Color primary = Color(0xFF74121D);
 const Color onPrimary = Colors.white;
-const Color secondary = Color(0xFF8A282D);
+const Color secondary = Color(0xFF74121D);
 const Color onSecondary = Colors.white;
 const Color error = Colors.lightGreen;
 const Color onError = Colors.white;

@@ -30,8 +30,8 @@ class _RaceSelectorState extends State<RaceSelector> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
+        //Raças
         Container(
-          //Raças
           margin: const EdgeInsets.only(left: 25, right: 25, top: 50),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
@@ -55,6 +55,7 @@ class _RaceSelectorState extends State<RaceSelector> {
               'Draconato',
               'Gnomo',
               'Orc (Meio-Orc)',
+              'Tiefling',
             ].map((value) {
               return DropdownMenuItem(
                 value: value,
@@ -69,8 +70,8 @@ class _RaceSelectorState extends State<RaceSelector> {
             },
           ),
         ),
+        //Gênero
         Container(
-          //Gênero
           margin: const EdgeInsets.only(left: 25, right: 25, top: 30),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
