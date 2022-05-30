@@ -16,7 +16,7 @@ TextStyle dropdownText = const TextStyle()
 TextStyle checkboxText = const TextStyle()
     .copyWith(color: colorSettings.colorScheme.onPrimary, fontSize: 18, fontFamily: 'Montserrat');
 
-TextStyle lootText = const TextStyle()
+TextStyle listTileText = const TextStyle()
     .copyWith(color: colorSettings.colorScheme.onPrimary, fontSize: 18, fontFamily: 'Montserrat');
 
 TextStyle lootText2 = const TextStyle()

@@ -1,8 +1,10 @@
 import 'package:enhancer/screens/dice.dart';
+import 'package:enhancer/screens/home2.dart';
 import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'loot.dart';
 
@@ -26,9 +28,10 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: const [
             AppTitle(),
-            MenuNavigationButton(LootScreen(), "Tesouros"),
-            MenuNavigationButton(NameScreen(), "Nomes"),
-            MenuNavigationButton(DiceScreen(), "Dados"),
+            MenuNavigationButton(icon: FontAwesomeIcons.coins ,path: LootScreen(), buttonTitle: "Tesouros"),
+            MenuNavigationButton(icon: FontAwesomeIcons.person ,path: NameScreen(), buttonTitle: "Nomes"),
+            MenuNavigationButton(icon: FontAwesomeIcons.diceD20 ,path: DiceScreen(), buttonTitle: "Dados"),
+            MenuNavigationButton(icon: FontAwesomeIcons.circleQuestion ,path: Home2Screen(), buttonTitle: "Diversos"),
             Text(
               "\nCopyright 2022\nGabriel Torres Takahashi\n",
               textAlign: TextAlign.center,
@@ -66,14 +69,15 @@ class AppTitle extends StatelessWidget {
 class MenuNavigationButton extends StatelessWidget {
   final String buttonTitle;
   final Widget? path;
-  const MenuNavigationButton(this.path, this.buttonTitle, {Key? key})
+  final IconData? icon;
+  const MenuNavigationButton({this.icon, this.path, this.buttonTitle = '',Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
-      height: 65,
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.085,
       margin: const EdgeInsets.only(top: 10, bottom: 10),
       child: ElevatedButton(
         onPressed: (() {
@@ -81,12 +85,15 @@ class MenuNavigationButton extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => path!));
         }),
         style: menuNavigationButton,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Text(
-            buttonTitle,
-            style: homeButtonText,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon),
+            Text(
+              buttonTitle,
+              style: homeButtonText,
+            ),
+          ],
         ),
       ),
     );

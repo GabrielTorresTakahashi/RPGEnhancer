@@ -27,7 +27,12 @@ class NameGenerator extends StatelessWidget {
       fullName = 'Selecione Raça e Gênero';
     }
     late List<String> nicknames = [' '];
-    if (gender != '-Gênero-' && race != '-Raça') {
+    if (gender == '-Gênero-') {
+      return ListTile(leading: const Icon(null),title: Text(fullName, style: nameText));
+    }
+    if (race == '-Raça-') {
+      return ListTile(leading: const Icon(null),title: Text(fullName, style: nameText));
+    } else {
       iconColor = Colors.primaries;
       switch (race) {
         case '-Raça-':
@@ -1086,10 +1091,10 @@ class NameGenerator extends StatelessWidget {
       fullName = names[random.nextInt(names.length)] +
           nicknames[random.nextInt(nicknames.length)] +
           lastNames[random.nextInt(lastNames.length)];
+      return ListTile(
+          leading: Icon(FontAwesomeIcons.person,
+              size: 35, color: iconColor[random.nextInt(iconColor.length)]),
+          title: Text(fullName, style: nameText));
     }
-    return ListTile(
-        leading: Icon(FontAwesomeIcons.person,
-            size: 35, color: iconColor[random.nextInt(iconColor.length)]),
-        title: Text(fullName, style: nameText));
   }
 }

@@ -18,7 +18,10 @@ class _DiceScreenState extends State<DiceScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text("Dados", style: appBarText,),
+        title: Text(
+          "Dados",
+          style: appBarText,
+        ),
       ),
       body: Column(
         children: [
@@ -38,6 +41,11 @@ class _DiceScreenState extends State<DiceScreen> {
             ammount: ammount,
           ),
           Dice(
+            sides: 10,
+            title: "D10",
+            ammount: ammount,
+          ),
+          Dice(
             sides: 12,
             title: "D12",
             ammount: ammount,
@@ -54,21 +62,22 @@ class _DiceScreenState extends State<DiceScreen> {
           ),
           const Expanded(child: SizedBox()),
           Text(
-            ammount.toString()+"d",
-            style: lootText.copyWith(fontSize: 32),
+            ammount.toString() + "d",
+            style: listTileText.copyWith(fontSize: 32),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
                 height: 50,
-                margin: const EdgeInsets.only(bottom: 50, top: 10, left: 10, right:10),
+                margin: const EdgeInsets.only(
+                    bottom: 50, top: 10, left: 10, right: 10),
                 child: ElevatedButton(
                     child: const Icon(
                       Icons.remove,
                       size: 25,
                     ),
-                    onLongPress: (){
+                    onLongPress: () {
                       setState(() {
                         ammount = 1;
                       });
@@ -83,23 +92,24 @@ class _DiceScreenState extends State<DiceScreen> {
               ),
               Container(
                 height: 50,
-                margin: const EdgeInsets.only(bottom: 50, top: 10, left: 10, right:10),
+                margin: const EdgeInsets.only(
+                    bottom: 50, top: 10, left: 10, right: 10),
                 child: ElevatedButton(
-                    child: const Icon(Icons.add, size: 25),
-                    onPressed: () {
-                      setState(() {
-                        ammount++;
-                      });
-                    },
-                    onLongPress: (){
-                      setState(() {
-                        ammount +=5;
-                      });
-                    },
-                    ),
+                  child: const Icon(Icons.add, size: 25),
+                  onPressed: () {
+                    setState(() {
+                      ammount++;
+                    });
+                  },
+                  onLongPress: () {
+                    setState(() {
+                      ammount += 10;
+                    });
+                  },
+                ),
               ),
-              ],
-          )
+            ],
+          ),
         ],
       ),
     );
@@ -124,7 +134,7 @@ class Dice extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: lootText,
+        style: listTileText,
       ),
       onTap: () {
         showDialog(

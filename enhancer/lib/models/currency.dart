@@ -368,7 +368,7 @@ class Currency extends StatelessWidget {
                 size: 45, color: Colors.amber),
             title: Text(
               totalObjects,
-              style: lootText,
+              style: listTileText,
             ),
             subtitle: Text(
               totalCoins,
@@ -569,7 +569,7 @@ class Currency extends StatelessWidget {
         ),
       );
     } else {
-      return Container();
+      return const ListTile();
     }
   }
 }

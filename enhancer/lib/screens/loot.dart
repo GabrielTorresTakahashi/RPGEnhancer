@@ -10,12 +10,7 @@ class LootScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        title: Text(
-          "Tesouros",
-          style: appBarText,
-        ),
-      ),
+      appBar: AppBar(titleTextStyle: appBarText, title: const Text("Tesouros")),
       body: const TreasureLevel(),
     );
   }
@@ -76,8 +71,7 @@ class _TreasureLevelState extends State<TreasureLevel> {
           ),
         ),
         Container(
-          margin:
-              const EdgeInsets.only(left: 25, right: 25),
+          margin: const EdgeInsets.only(left: 25, right: 25),
           padding: const EdgeInsets.only(left: 20, right: 10),
           height: 70,
           width: double.maxFinite,
@@ -91,8 +85,7 @@ class _TreasureLevelState extends State<TreasureLevel> {
             underline: Container(),
             style: dropdownText,
             value: currentValue2,
-            items:
-                <String>['-Tipo-', 'Individual', 'Pilha'].map((value) {
+            items: <String>['-Tipo-', 'Individual', 'Pilha'].map((value) {
               return DropdownMenuItem(
                 value: value,
                 alignment: Alignment.center,
