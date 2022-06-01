@@ -30,10 +30,6 @@ class _TreasureLevelState extends State<TreasureLevel> {
   String nivel = '-Nível-';
   bool currency = false;
 
-  refresh() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(

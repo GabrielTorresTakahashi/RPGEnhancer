@@ -18,9 +18,8 @@ class RefreshButton extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.11,
       width: MediaQuery.of(context).size.width * 0.4,
       child: ElevatedButton(
-          onPressed: () {
-            setState(() {});
-          },
+          onPressed: (() => setState((){})),
+          
           child: const Icon(
             Icons.refresh_outlined,
             size: 45,

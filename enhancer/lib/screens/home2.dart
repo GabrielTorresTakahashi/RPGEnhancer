@@ -1,8 +1,10 @@
 import 'package:enhancer/screens/home.dart';
 import 'package:enhancer/screens/weather.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../settings/text_style.dart';
+import 'critical.dart';
 
 class Home2Screen extends StatelessWidget {
   const Home2Screen({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class Home2 extends StatelessWidget {
       crossAxisCount: 2,
       children: const [
         MenuNavigationButton(icon: Icons.cloudy_snowing,path: WeatherScreen(), buttonTitle: 'Clima'),
+        MenuNavigationButton(icon: FontAwesomeIcons.heartPulse,path: CriticalScreen(), buttonTitle: 'Críticos'),
         
       ],
     );

@@ -25,41 +25,13 @@ class _DiceScreenState extends State<DiceScreen> {
       ),
       body: Column(
         children: [
-          Dice(
-            sides: 4,
-            title: "D4",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 6,
-            title: "D6",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 8,
-            title: "D8",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 10,
-            title: "D10",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 12,
-            title: "D12",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 20,
-            title: "D20",
-            ammount: ammount,
-          ),
-          Dice(
-            sides: 100,
-            title: "D100",
-            ammount: ammount,
-          ),
+          Dice(sides: 4, title: "D4", ammount: ammount),
+          Dice(sides: 6, title: "D6", ammount: ammount),
+          Dice(sides: 8, title: "D8", ammount: ammount),
+          Dice(sides: 10, title: "D10", ammount: ammount),
+          Dice(sides: 12, title: "D12", ammount: ammount),
+          Dice(sides: 20, title: "D20", ammount: ammount),
+          Dice(sides: 100, title: "D100", ammount: ammount),
           const Expanded(child: SizedBox()),
           Text(
             ammount.toString() + "d",
@@ -88,7 +60,7 @@ class _DiceScreenState extends State<DiceScreen> {
                           ammount--;
                         }
                       });
-                    }),
+                    })
               ),
               Container(
                 height: 50,
@@ -127,24 +99,15 @@ class Dice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: const Icon(
-        FontAwesomeIcons.diceD20,
-        color: Colors.white,
-        size: 40,
-      ),
-      title: Text(
-        title,
-        style: listTileText,
-      ),
+      leading:
+          const Icon(FontAwesomeIcons.diceD20, color: Colors.white, size: 40),
+      title: Text(title, style: listTileText),
       onTap: () {
         showDialog(
             context: context,
             barrierDismissible: true,
             builder: (_) {
-              return DiceRoll(
-                dice: sides,
-                diceAmmount: ammount,
-              );
+              return DiceRoll(dice: sides, diceAmmount: ammount);
             });
       },
     );
@@ -183,10 +146,7 @@ class DiceRoll extends StatelessWidget {
       //Valores individuais
       content: Center(
         heightFactor: 1,
-        child: Text(
-          rolledDie,
-          style: diceRollText.copyWith(fontSize: 20),
-        ),
+        child: Text(rolledDie, style: diceRollText.copyWith(fontSize: 20)),
       ),
     );
   }
