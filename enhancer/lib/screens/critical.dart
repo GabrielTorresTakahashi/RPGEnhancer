@@ -179,7 +179,7 @@ class Critical extends StatelessWidget {
         break;
       case 'Elétrico':
         effects = [
-          'A força da corrente elétrica fez o alvo'
+          'A força da corrente elétrica fez o alvo '
               'ficar atordoado até o início de seu '
               'próximo turno.',
           'A corrente elétrica acertou o sistema '
@@ -196,7 +196,7 @@ class Critical extends StatelessWidget {
           'O efeito mágico afetou as energias '
               'ao redor do alvo, despertando a magia '
               'selvagem. Mãos espectrais agarram o '
-              'alvo até o início de seu próximo turno. ',
+              'alvo até o início de seu próximo turno.',
           'O alvo está envolto por uma luz feérica '
               'que muda de cor, emitindo luz plena por 1,5m. '
               'O alvo não recebe vantagem por estar invisível '
@@ -280,7 +280,60 @@ class Critical extends StatelessWidget {
               'jamais ver. O alvo está amedrontado por você '
               'até o início de seu próximo turno.',
           'O alvo ficou confuso pelo ataque e '
-          'começou a rir compulsivamente'
+              'começou a rir compulsivamente. O alvo está '
+              'atordoado até o início de seu próximo turno'
+        ];
+        break;
+      case 'Radiante':
+        effects = [
+          'A energia do ataque envolveu o alvo '
+              'com uma luz brilhante. O alvo emite '
+              'luz num raio de 18 metros e meia-luz '
+              'por mais 18 metros por 1 minuto.',
+          'A aura brilhante do golpe emitiu uma luz '
+              'cegante que afetou o alvo. O alvo está cego '
+              'até o início de seu próximo turno.',
+          'O alvo está marcado com uma aura radiante '
+              'instável por 1 minuto. Se o alvo morrer '
+              'nesse tempo, a alma do alvo explode. '
+              'A explosão tem raio de 3m, causa 2d6 de dano '
+              'radiante e afeta apenas mortos vivos e '
+              'metamorfos.',
+          'A força do ataque sobrecarregou a alma do '
+              'alvo, deixando-o desorientado. O alvo está '
+              'atordoado até o início de seu próximo turno.'
+        ];
+        break;
+      case 'Trovejante':
+        effects = [
+          'O estrondo do ataque foi tão alto '
+              'que o alvo perdeu a audição. '
+              'o alvo está surdo.',
+          'A força do ataque foi tamanha que '
+              'o alvo se sentiu perto da morte. '
+              'O alvo está amedrontado por você até '
+              'o início de seu próximo turno.',
+          'O dano trovejante foi o suficiente '
+              'para mexer com a cabeça do alvo. '
+              'O alvo está atordoado até o início '
+              'de seu próximo turno.',
+          'A força do ataque foi o suficiente '
+              'para derrubar o alvo. O alvo está '
+              'caído.'
+        ];
+        break;
+      case 'Veneno':
+        effects = [
+          'O veneno penetrou no sistema do alvo. '
+              'O alvo está envenenado até o fim de seu '
+              'próximo turno.',
+          'O veneno do ataque respingou nos '
+              'olhos do alvo. O alvo está cego até '
+              'o início de seu próximo turno. ',
+          'O ataque de veneno foi excepcionalmente '
+              'potente. O alvo recebe 1d6 extra de dano de veneno.',
+          'O ataque de veneno foi inexplicavelmente potente. '
+              'O alvo recebe 2d6 extra de dano de veneno.'
         ];
         break;
       default:
