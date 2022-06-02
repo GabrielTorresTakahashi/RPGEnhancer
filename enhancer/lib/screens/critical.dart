@@ -234,7 +234,7 @@ class Critical extends StatelessWidget {
           'O frio reduziu drasticamente a capacidade de '
               'movimento do alvo. O alvo está impedido até o início '
               'de seu próximo turno.',
-          'O frio afetou o corpo do alvo. O alvo está'
+          'O frio afetou o corpo do alvo. O alvo está '
               'paralisado até o início de seu próximo turno.',
           'A baixa temperatura afetou o alvo de forma '
               'inexplicável. O alvo está vulnerável a frio por '
@@ -243,7 +243,7 @@ class Critical extends StatelessWidget {
         break;
       case 'Necrótico':
         effects = [
-          'O alvo viu sua vida passando em um flash.'
+          'O alvo viu sua vida passando em um flash. '
               'O alvo está amedrontado por você até o início '
               'de seu próximo turno.',
           'O dano necrótico secou a mente do alvo, '
