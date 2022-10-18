@@ -26,12 +26,7 @@ class Currency extends StatelessWidget {
         magicItem = ['', 'A', 'B', 'C', 'F', 'G'];
         final List<String> objects = ['N', 'Gem10', 'Gem50', 'ArtObj25'];
         String lootObj = objects[random.nextInt(objects.length)];
-        totalCoins = ((random.nextInt(31) + 6) * 100).toString() +
-            ' PC, ' +
-            ((random.nextInt(16) + 3) * 100).toString() +
-            ' PP, ' +
-            ((random.nextInt(11) + 2) * 10).toString() +
-            ' PO';
+        totalCoins = '${(random.nextInt(31) + 6) * 100} PC, ${(random.nextInt(16) + 3) * 100} PP, ${(random.nextInt(11) + 2) * 10} PO';
 
         switch (lootObj) {
           case 'N':
@@ -55,7 +50,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = gem10[random.nextInt(gem10.length)];
             totalObjects =
-                (random.nextInt(11) + 2).toString() + ' x $lootObj de 10 PO';
+                '${random.nextInt(11) + 2} x $lootObj de 10 PO';
             break;
           case 'Gem50':
             final List<String> gem50 = [
@@ -74,7 +69,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = gem50[random.nextInt(gem50.length)];
             totalObjects =
-                (random.nextInt(11) + 2).toString() + ' x $lootObj de 50 PO';
+                '${random.nextInt(11) + 2} x $lootObj de 50 PO';
             break;
           case 'ArtObj25':
             final List<String> artObj25 = [
@@ -91,7 +86,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = artObj25[random.nextInt(artObj25.length)];
             totalObjects =
-                (random.nextInt(11) + 2).toString() + ' x $lootObj de 25 PO';
+                '${random.nextInt(11) + 2} x $lootObj de 25 PO';
             break;
         }
       }
@@ -106,14 +101,7 @@ class Currency extends StatelessWidget {
           'Gem100'
         ];
         String lootObj = objects[random.nextInt(objects.length)];
-        totalCoins = ((random.nextInt(11) + 2) * 100).toString() +
-            ' PC, ' +
-            ((random.nextInt(11) + 2) * 1000).toString() +
-            ' PP, ' +
-            ((random.nextInt(31) + 6) * 100).toString() +
-            ' PO, ' +
-            ((random.nextInt(16) + 3) * 10).toString() +
-            ' PL';
+        totalCoins = '${(random.nextInt(11) + 2) * 100} PC, ${(random.nextInt(11) + 2) * 1000} PP, ${(random.nextInt(31) + 6) * 100} PO, ${(random.nextInt(16) + 3) * 10} PL';
 
         switch (lootObj) {
           case 'N':
@@ -135,7 +123,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = artObj25[random.nextInt(artObj25.length)];
             totalObjects =
-                (random.nextInt(7) + 2).toString() + ' x $lootObj de 25 PO';
+                '${random.nextInt(7) + 2} x $lootObj de 25 PO';
 
             break;
           case 'ArtObj250':
@@ -153,7 +141,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = artObj250[random.nextInt(artObj250.length)];
             totalObjects =
-                (random.nextInt(7) + 2).toString() + ' x $lootObj de 250 PO';
+                '${random.nextInt(7) + 2} x $lootObj de 250 PO';
             break;
           case 'Gem50':
             final List<String> gem50 = [
@@ -172,7 +160,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = gem50[random.nextInt(gem50.length)];
             totalObjects =
-                (random.nextInt(16) + 3).toString() + ' x $lootObj de 50 PO';
+                '${random.nextInt(16) + 3} x $lootObj de 50 PO';
             break;
           case 'Gem100':
             final List<String> gem100 = [
@@ -189,7 +177,7 @@ class Currency extends StatelessWidget {
             ];
             lootObj = gem100[random.nextInt(gem100.length)];
             totalObjects =
-                (random.nextInt(16) + 3).toString() + ' x $lootObj de 100 PO';
+                '${random.nextInt(16) + 3} x $lootObj de 100 PO';
             break;
         }
       }
@@ -204,10 +192,7 @@ class Currency extends StatelessWidget {
           'Gem1000'
         ];
         String lootObj = objects[random.nextInt(objects.length)];
-        totalCoins = ((random.nextInt(21) + 4) * 1000).toString() +
-            ' PO, ' +
-            ((random.nextInt(26) + 5) * 100).toString() +
-            ' PL';
+        totalCoins = '${(random.nextInt(21) + 4) * 1000} PO, ${(random.nextInt(26) + 5) * 100} PL';
 
         switch (lootObj) {
           case 'N':
@@ -229,7 +214,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = artObj250[random.nextInt(artObj250.length)];
             totalObjects =
-                (random.nextInt(7) + 2).toString() + ' x $lootObj de 250 PO';
+                '${random.nextInt(7) + 2} x $lootObj de 250 PO';
             break;
           case 'ArtObj750':
             List<String> artObj750 = [
@@ -246,7 +231,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = artObj750[random.nextInt(artObj750.length)];
             totalObjects =
-                (random.nextInt(7) + 2).toString() + ' x $lootObj de 750 PO';
+                '${random.nextInt(7) + 2} x $lootObj de 750 PO';
             break;
           case 'Gem500':
             List<String> gem500 = [
@@ -259,7 +244,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = gem500[random.nextInt(gem500.length)];
             totalObjects =
-                (random.nextInt(16) + 3).toString() + ' x $lootObj de 500 PO';
+                '${random.nextInt(16) + 3} x $lootObj de 500 PO';
 
             break;
           case 'Gem1000':
@@ -275,7 +260,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = gem1000[random.nextInt(gem1000.length)];
             totalObjects =
-                (random.nextInt(16) + 3).toString() + ' x $lootObj de 1.000 PO';
+                '${random.nextInt(16) + 3} x $lootObj de 1.000 PO';
             break;
         }
       }
@@ -290,10 +275,7 @@ class Currency extends StatelessWidget {
           'Gem5000', // 1d8
         ];
         String lootObj = objects[random.nextInt(objects.length)];
-        totalCoins = ((random.nextInt(61) + 12) * 1000).toString() +
-            ' PO, ' +
-            ((random.nextInt(41) + 8) * 100).toString() +
-            ' PL';
+        totalCoins = '${(random.nextInt(61) + 12) * 1000} PO, ${(random.nextInt(41) + 8) * 100} PL';
         switch (lootObj) {
           case 'N':
             totalObjects = totalCoins;
@@ -314,7 +296,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = artObj2500[random.nextInt(artObj2500.length)];
             totalObjects =
-                (random.nextInt(10) + 1).toString() + ' x $lootObj de 2.500 PO';
+                '${random.nextInt(10) + 1} x $lootObj de 2.500 PO';
             break;
           case 'ArtObj7500':
             List<String> artObj7500 = [
@@ -329,7 +311,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = artObj7500[random.nextInt(artObj7500.length)];
             totalObjects =
-                (random.nextInt(4) + 1).toString() + ' x $lootObj de 7.500 PO';
+                '${random.nextInt(4) + 1} x $lootObj de 7.500 PO';
             break;
           case 'Gem1000':
             List<String> gem1000 = [
@@ -344,7 +326,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = gem1000[random.nextInt(gem1000.length)];
             totalObjects =
-                (random.nextInt(16) + 3).toString() + ' x $lootObj de 1000 PO';
+                '${random.nextInt(16) + 3} x $lootObj de 1000 PO';
             break;
           case 'Gem5000':
             List<String> gem5000 = [
@@ -355,7 +337,7 @@ class Currency extends StatelessWidget {
             ];
             String lootObj = gem5000[random.nextInt(gem5000.length)];
             totalObjects =
-                (random.nextInt(8) + 1).toString() + ' x $lootObj de 5.000 PO';
+                '${random.nextInt(8) + 1} x $lootObj de 5.000 PO';
             break;
         }
       }
@@ -377,13 +359,13 @@ class Currency extends StatelessWidget {
           ),
           MagicItem(
               rarity:
-                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+                  "Raridade ${magicItem[random.nextInt(magicItem.length)]}"),
           MagicItem(
               rarity:
-                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+                  "Raridade ${magicItem[random.nextInt(magicItem.length)]}"),
           MagicItem(
               rarity:
-                  "Raridade " + magicItem[random.nextInt(magicItem.length)]),
+                  "Raridade ${magicItem[random.nextInt(magicItem.length)]}"),
         ],
       );
     }
@@ -412,23 +394,23 @@ class Currency extends StatelessWidget {
         switch (rolled) {
           case '01-30':
             coins = random.nextInt(30 - 4) + 5;
-            totalCoins = coins.toString() + ' PC';
+            totalCoins = '$coins PC';
             break;
           case '31-60':
             coins = random.nextInt(24 - 4) + 4;
-            totalCoins = coins.toString() + ' PP';
+            totalCoins = '$coins PP';
             break;
           case '61-70':
             coins = random.nextInt(18 - 4) + 3;
-            totalCoins = coins.toString() + ' PE';
+            totalCoins = '$coins PE';
             break;
           case '71-95':
             coins = random.nextInt(18 - 4) + 3;
-            totalCoins = coins.toString() + ' PO';
+            totalCoins = '$coins PO';
             break;
           case '96-100':
             coins = random.nextInt(6) + 1;
-            totalCoins = coins.toString() + ' PL';
+            totalCoins = '$coins PL';
             break;
         }
       }
@@ -450,35 +432,35 @@ class Currency extends StatelessWidget {
         switch (rolled) {
           case '01-30':
             coins = (random.nextInt(24 - 5) + 6) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PC, ';
+            totalCoins = '$totalCoins$coins PC, ';
 
             coins = (random.nextInt(6) + 1) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PE';
+            totalCoins = '$totalCoins$coins PE';
             break;
           case '31-60':
             coins = (random.nextInt(31) + 6) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PP, ';
+            totalCoins = '$totalCoins$coins PP, ';
 
             coins = (random.nextInt(11) + 2) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '61-70':
             coins = (random.nextInt(16) + 3) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PE, ';
+            totalCoins = '$totalCoins$coins PE, ';
 
             coins = (random.nextInt(11) + 2) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '71-95':
             coins = (random.nextInt(21) + 4) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '96-100':
             coins = (random.nextInt(11) + 2) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PO, ';
+            totalCoins = '$totalCoins$coins PO, ';
 
             coins = (random.nextInt(11) + 2) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PL';
+            totalCoins = '$totalCoins$coins PL';
             break;
         }
       }
@@ -493,31 +475,31 @@ class Currency extends StatelessWidget {
         switch (rolled) {
           case '01-20':
             coins = (random.nextInt(24 - 3) + 4) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PP, ';
+            totalCoins = '$totalCoins$coins PP, ';
 
             coins = (random.nextInt(6) + 1) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '21-35':
             coins = (random.nextInt(6) + 1) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PE, ';
+            totalCoins = '$totalCoins$coins PE, ';
 
             coins = (random.nextInt(6) + 1) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '36-75':
             coins = (random.nextInt(11) + 2) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PO, ';
+            totalCoins = '$totalCoins$coins PO, ';
 
             coins = (random.nextInt(6) + 1) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PL';
+            totalCoins = '$totalCoins$coins PL';
             break;
           case '76-100':
             coins = (random.nextInt(11) + 2) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PO, ';
+            totalCoins = '$totalCoins$coins PO, ';
 
             coins = (random.nextInt(11) + 2) * 10;
-            totalCoins = totalCoins + coins.toString() + ' PL';
+            totalCoins = '$totalCoins$coins PL';
             break;
         }
       }
@@ -532,24 +514,24 @@ class Currency extends StatelessWidget {
         switch (rolled) {
           case '1-15':
             coins = (random.nextInt(11) + 2) * 1000;
-            totalCoins = totalCoins + coins.toString() + ' PE, ';
+            totalCoins = '$totalCoins$coins PE, ';
 
             coins = (random.nextInt(41) + 8) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PO';
+            totalCoins = '$totalCoins$coins PO';
             break;
           case '16-55':
             coins = (random.nextInt(6) + 1) * 1000;
-            totalCoins = totalCoins + coins.toString() + ' PO, ';
+            totalCoins = '$totalCoins$coins PO, ';
 
             coins = (random.nextInt(6) + 1) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PL';
+            totalCoins = '$totalCoins$coins PL';
             break;
           case '56-100':
             coins = (random.nextInt(6) + 1) * 1000;
-            totalCoins = totalCoins + coins.toString() + ' PO, ';
+            totalCoins = '$totalCoins$coins PO, ';
 
             coins = (random.nextInt(11) + 2) * 100;
-            totalCoins = totalCoins + coins.toString() + ' PL';
+            totalCoins = '$totalCoins$coins PL';
             break;
         }
       }

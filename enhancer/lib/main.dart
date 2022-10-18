@@ -1,4 +1,5 @@
-import 'package:enhancer/splash.dart';
+import 'package:enhancer/screens/home.dart';
+import 'package:enhancer/settings/color_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,21 +24,8 @@ class Enhancer extends StatelessWidget {
     const Color textColor = Colors.white;
 
     return MaterialApp(
-      home: const Splash(),
-      theme: ThemeData(
-        iconTheme: const IconThemeData(color: Colors.black, opacity: 1),
-        textTheme: Theme.of(context).textTheme.apply(
-            bodyColor: textColor,
-            displayColor: textColor,
-            fontFamily: 'Montserrat'),
-        scaffoldBackgroundColor: background,
-        colorScheme: Theme.of(context)
-            .colorScheme
-            .copyWith(primary: primary, onPrimary: textColor, secondary: primary),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: primary,
-        ),
-      ),
+      home: const HomeScreen(),
+      theme: colorSettings,
     );
   }
 }
