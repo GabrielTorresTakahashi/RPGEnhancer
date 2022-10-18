@@ -3,7 +3,6 @@ import 'package:enhancer/screens/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../settings/text_style.dart';
 import 'critical.dart';
 
 class Home2Screen extends StatelessWidget {
@@ -12,8 +11,7 @@ class Home2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(titleTextStyle: appBarText, title: const Text("Diversos")),
+      appBar: AppBar(title: const Text("Diversos")),
       body: const Home2(),
     );
   }

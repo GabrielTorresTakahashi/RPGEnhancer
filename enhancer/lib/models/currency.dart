@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:enhancer/models/magic_item.dart';
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -368,11 +367,11 @@ class Currency extends StatelessWidget {
                 size: 45, color: Colors.amber),
             title: Text(
               totalObjects,
-              style: listTileText,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             subtitle: Text(
               totalCoins,
-              style: lootText3,
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.amber),
             ),
             onTap: null,
           ),
@@ -561,11 +560,11 @@ class Currency extends StatelessWidget {
             const Icon(FontAwesomeIcons.coins, size: 45, color: Colors.amber),
         title: Text(
           totalCoins,
-          style: lootText2,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         subtitle: Text(
           subtitle,
-          style: lootText3,
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.amber),
         ),
       );
     } else {

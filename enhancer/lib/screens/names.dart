@@ -1,6 +1,5 @@
 import 'package:enhancer/models/name_generator.dart';
 import 'package:enhancer/models/refresh_button.dart';
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
 class NameScreen extends StatelessWidget {
@@ -9,8 +8,7 @@ class NameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
-        appBar: AppBar(title: Text("Nomes", style: appBarText,)),
+        appBar: AppBar(title: const Text("Nomes")),
         body: const RaceSelector());
   }
 }
@@ -44,7 +42,7 @@ class _RaceSelectorState extends State<RaceSelector> {
             isExpanded: true,
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
-            style: dropdownText,
+            style: Theme.of(context).textTheme.bodyLarge,
             value: race,
             items: <String>[
               '-Raça-',
@@ -60,7 +58,7 @@ class _RaceSelectorState extends State<RaceSelector> {
               return DropdownMenuItem(
                 value: value,
                 alignment: Alignment.center,
-                child: Text(value),
+                child: Text(value, style: Theme.of(context).textTheme.headlineSmall,),
               );
             }).toList(),
             onChanged: (String? valor) {
@@ -84,13 +82,13 @@ class _RaceSelectorState extends State<RaceSelector> {
             isExpanded: true,
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
-            style: dropdownText,
+            style: Theme.of(context).textTheme.bodyLarge,
             value: gender,
             items: <String>['-Gênero-', 'Masculino', 'Feminino'].map((value2) {
               return DropdownMenuItem(
                 value: value2,
                 alignment: Alignment.center,
-                child: Text(value2),
+                child: Text(value2, style: Theme.of(context).textTheme.headlineSmall,),
               );
             }).toList(),
             onChanged: (String? valor) {

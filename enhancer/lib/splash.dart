@@ -24,7 +24,6 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(
           child: Image.asset('assets/enhancer-logo2.png', scale: 2.3, color: Theme.of(context).colorScheme.primary),
         ),

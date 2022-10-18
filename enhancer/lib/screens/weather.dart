@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:enhancer/models/refresh_button.dart';
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -10,8 +9,7 @@ class WeatherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(titleTextStyle: appBarText, title: const Text("Clima")),
+      appBar: AppBar(title: const Text("Clima")),
       body: const Weather(),
     );
   }
@@ -111,24 +109,31 @@ class _WeatherState extends State<Weather> {
 
         //Umidade
         ListTile(
-            title: Text(weather[rain], style: titleText),
+            title: Text(
+              weather[rain],
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             subtitle: Text(
               weatherEffects[rain],
-              style: listTileText,
+              style: Theme.of(context).textTheme.titleMedium,
             )),
         //Vento
         ListTile(
-            title: Text(weather[wind], style: titleText),
+            title: Text(
+              weather[wind],
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             subtitle: Text(
               weatherEffects[wind],
-              style: listTileText,
+              style: Theme.of(context).textTheme.titleMedium,
             )),
         //Temperatura
         ListTile(
-            title: Text(weather[temp], style: titleText),
+            title: Text(weather[temp],
+                style: Theme.of(context).textTheme.headlineSmall),
             subtitle: Text(
               weatherEffects[temp],
-              style: listTileText,
+              style: Theme.of(context).textTheme.titleMedium,
             )),
       ],
     );

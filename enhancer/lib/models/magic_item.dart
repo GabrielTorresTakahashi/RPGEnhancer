@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -499,7 +498,7 @@ class MagicItem extends StatelessWidget {
       ),
       title: Text(
         item,
-        style: itemText,
+        style: Theme.of(context).textTheme.titleLarge,
       ),
     );
   }

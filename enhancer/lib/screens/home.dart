@@ -1,8 +1,6 @@
 import 'package:enhancer/screens/dice.dart';
 import 'package:enhancer/screens/home2.dart';
 import 'package:enhancer/screens/names.dart';
-import 'package:enhancer/settings/color_settings.dart';
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,28 +12,33 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          Theme.of(context).colorScheme.background, //scaffold color
-
       appBar: AppBar(
-        title: Text(
-          "Home",
-          style: appBarText,
-        ),
+        title: const Text("Home"),
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: const [
             AppTitle(),
-            MenuNavigationButton(icon: FontAwesomeIcons.coins ,path: LootScreen(), buttonTitle: "Tesouros"),
-            MenuNavigationButton(icon: FontAwesomeIcons.person ,path: NameScreen(), buttonTitle: "Nomes"),
-            MenuNavigationButton(icon: FontAwesomeIcons.diceD20 ,path: DiceScreen(), buttonTitle: "Dados"),
-            MenuNavigationButton(icon: FontAwesomeIcons.circleQuestion ,path: Home2Screen(), buttonTitle: "Diversos"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.coins,
+                path: LootScreen(),
+                buttonTitle: "Tesouros"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.person,
+                path: NameScreen(),
+                buttonTitle: "Nomes"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.diceD20,
+                path: DiceScreen(),
+                buttonTitle: "Dados"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.circleQuestion,
+                path: Home2Screen(),
+                buttonTitle: "Diversos"),
             Text(
               "\nCopyright 2022\nGabriel Torres Takahashi\n",
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
             )
           ],
         ),
@@ -54,11 +57,18 @@ class AppTitle extends StatelessWidget {
         children: [
           Container(
               margin: const EdgeInsets.only(top: 10),
-              child: Image.asset('assets/enhancer-logo2.png', scale: 4, color: Theme.of(context).colorScheme.primary,)),
+              child: Image.asset(
+                'assets/enhancer-logo2.png',
+                scale: 4,
+                color: Theme.of(context).colorScheme.primary,
+              )),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 20),
-            child: Text("RPGEnhancer\nv1.0",
-                textAlign: TextAlign.center, style: titleText),
+            child: Text(
+              "RPGEnhancer\nv1.0",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
         ],
       ),
@@ -70,7 +80,8 @@ class MenuNavigationButton extends StatelessWidget {
   final String buttonTitle;
   final Widget? path;
   final IconData? icon;
-  const MenuNavigationButton({this.icon, this.path, this.buttonTitle = '',Key? key})
+  const MenuNavigationButton(
+      {this.icon, this.path, this.buttonTitle = '', Key? key})
       : super(key: key);
 
   @override
@@ -84,14 +95,13 @@ class MenuNavigationButton extends StatelessWidget {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => path!));
         }),
-        style: menuNavigationButton,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon),
+            Icon(icon, color: Theme.of(context).colorScheme.onPrimary),
             Text(
               buttonTitle,
-              style: homeButtonText,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

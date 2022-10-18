@@ -1,6 +1,5 @@
 import 'package:enhancer/models/currency.dart';
 import 'package:enhancer/models/refresh_button.dart';
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
 class LootScreen extends StatelessWidget {
@@ -9,8 +8,7 @@ class LootScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(titleTextStyle: appBarText, title: const Text("Tesouros")),
+      appBar: AppBar(title: const Text("Tesouros")),
       body: const TreasureLevel(),
     );
   }
@@ -48,14 +46,14 @@ class _TreasureLevelState extends State<TreasureLevel> {
             isExpanded: true,
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
-            style: dropdownText,
+            style: Theme.of(context).textTheme.bodyLarge,
             value: currentValue,
             items:
                 <String>['-Nível-', '0-4', '5-10', '11-16', '17+'].map((value) {
               return DropdownMenuItem(
                 value: value,
                 alignment: Alignment.center,
-                child: Text(value),
+                child: Text(value, style: Theme.of(context).textTheme.headlineSmall,),
               );
             }).toList(),
             onChanged: (String? valor) {
@@ -79,13 +77,13 @@ class _TreasureLevelState extends State<TreasureLevel> {
             isExpanded: true,
             dropdownColor: Theme.of(context).colorScheme.primary,
             underline: Container(),
-            style: dropdownText,
+            style: Theme.of(context).textTheme.bodyLarge,
             value: currentValue2,
             items: <String>['-Tipo-', 'Individual', 'Pilha'].map((value) {
               return DropdownMenuItem(
                 value: value,
                 alignment: Alignment.center,
-                child: Text(value),
+                child: Text(value, style: Theme.of(context).textTheme.headlineSmall,),
               );
             }).toList(),
             onChanged: (String? valor) {
@@ -136,7 +134,7 @@ class _TextCheckboxState extends State<TextCheckbox> {
         ),
         Text(
           widget.text,
-          style: checkboxText,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
       ],
     );

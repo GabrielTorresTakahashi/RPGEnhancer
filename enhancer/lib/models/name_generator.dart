@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../settings/text_style.dart';
-
 class NameGenerator extends StatelessWidget {
   final String race;
   final String gender;
@@ -28,10 +26,20 @@ class NameGenerator extends StatelessWidget {
     }
     late List<String> nicknames = [' '];
     if (gender == '-Gênero-') {
-      return ListTile(leading: const Icon(null),title: Text(fullName, style: nameText));
+      return ListTile(
+          leading: const Icon(null),
+          title: Text(
+            fullName,
+            style: Theme.of(context).textTheme.titleLarge,
+          ));
     }
     if (race == '-Raça-') {
-      return ListTile(leading: const Icon(null),title: Text(fullName, style: nameText));
+      return ListTile(
+          leading: const Icon(null),
+          title: Text(
+            fullName,
+            style: Theme.of(context).textTheme.titleLarge,
+          ));
     } else {
       iconColor = Colors.primaries;
       switch (race) {
@@ -1094,7 +1102,7 @@ class NameGenerator extends StatelessWidget {
       return ListTile(
           leading: Icon(FontAwesomeIcons.person,
               size: 35, color: iconColor[random.nextInt(iconColor.length)]),
-          title: Text(fullName, style: nameText));
+          title: Text(fullName, style: Theme.of(context).textTheme.titleLarge,));
     }
   }
 }

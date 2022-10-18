@@ -1,4 +1,3 @@
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -16,12 +15,8 @@ class _DiceScreenState extends State<DiceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(
-          "Dados",
-          style: appBarText,
-        ),
+        title: const Text("Dados"),
       ),
       body: Column(
         children: [
@@ -35,33 +30,32 @@ class _DiceScreenState extends State<DiceScreen> {
           const Expanded(child: SizedBox()),
           Text(
             ammount.toString() + "d",
-            style: listTileText.copyWith(fontSize: 32),
+            style: Theme.of(context).textTheme.headlineMedium,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 50,
-                margin: const EdgeInsets.only(
-                    bottom: 50, top: 10, left: 10, right: 10),
-                child: ElevatedButton(
-                    child: const Icon(
-                      Icons.remove,
-                      size: 25,
-                    ),
-                    onLongPress: () {
-                      setState(() {
-                        ammount = 1;
-                      });
-                    },
-                    onPressed: () {
-                      setState(() {
-                        if (ammount > 1) {
-                          ammount--;
-                        }
-                      });
-                    })
-              ),
+                  height: 50,
+                  margin: const EdgeInsets.only(
+                      bottom: 50, top: 10, left: 10, right: 10),
+                  child: ElevatedButton(
+                      child: const Icon(
+                        Icons.remove,
+                        size: 25,
+                      ),
+                      onLongPress: () {
+                        setState(() {
+                          ammount = 1;
+                        });
+                      },
+                      onPressed: () {
+                        setState(() {
+                          if (ammount > 1) {
+                            ammount--;
+                          }
+                        });
+                      })),
               Container(
                 height: 50,
                 margin: const EdgeInsets.only(
@@ -101,7 +95,10 @@ class Dice extends StatelessWidget {
     return ListTile(
       leading:
           const Icon(FontAwesomeIcons.diceD20, color: Colors.white, size: 40),
-      title: Text(title, style: listTileText),
+      title: Text(
+        title,
+        style: Theme.of(context).textTheme.headlineSmall,
+      ),
       onTap: () {
         showDialog(
             context: context,
@@ -140,13 +137,16 @@ class DiceRoll extends StatelessWidget {
         heightFactor: 1,
         child: Text(
           total.toString(),
-          style: diceRollText.copyWith(fontWeight: FontWeight.bold),
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge!
+              .copyWith(fontWeight: FontWeight.bold),
         ),
       ),
       //Valores individuais
       content: Center(
         heightFactor: 1,
-        child: Text(rolledDie, style: diceRollText.copyWith(fontSize: 20)),
+        child: Text(rolledDie, style: Theme.of(context).textTheme.titleLarge),
       ),
     );
   }

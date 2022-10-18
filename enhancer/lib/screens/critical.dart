@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,12 +9,11 @@ class CriticalScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(title: Text("Críticos", style: appBarText)),
+      appBar: AppBar(title: const Text("Críticos")),
       body: ListView(
         children: [
           Text("Escolha o Tipo de Dano",
-              style: titleText, textAlign: TextAlign.center),
+              style: Theme.of(context).textTheme.displaySmall, textAlign: TextAlign.center),
           const CriticalEffect(
             title: "Ácido",
             icon: FontAwesomeIcons.flaskVial,
@@ -110,7 +108,7 @@ class CriticalEffect extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: listTileText,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
       subtitle: subtitle,
       onTap: () {
@@ -342,7 +340,7 @@ class Critical extends StatelessWidget {
     description = effects[Random().nextInt(effects.length)];
     return AlertDialog(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      content: Text(description, style: lootText2),
+      content: Text(description, style: Theme.of(context).textTheme.bodyLarge,),
     );
   }
 }
