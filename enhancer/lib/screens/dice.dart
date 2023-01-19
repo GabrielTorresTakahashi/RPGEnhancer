@@ -34,7 +34,7 @@ class _DiceScreenState extends State<DiceScreen> {
           Dice(sides: 100, title: "D100", ammount: ammount),
           const Expanded(child: SizedBox()),
           Text(
-            ammount.toString() + "d",
+            "${ammount}d",
             style: listTileText.copyWith(fontSize: 32),
           ),
           Row(
@@ -128,7 +128,7 @@ class DiceRoll extends StatelessWidget {
     for (int i = 0; i < diceAmmount; i++) {
       int roll = (random.nextInt(dice) + 1);
       total += roll;
-      rolledDie = rolledDie + ' ' + roll.toString();
+      rolledDie = '$rolledDie $roll';
     }
     return AlertDialog(
       shape: const RoundedRectangleBorder(
