@@ -1,4 +1,5 @@
 import 'package:enhancer/screens/home.dart';
+import 'package:enhancer/screens/weapons.dart';
 import 'package:enhancer/screens/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -32,6 +33,7 @@ class Home2 extends StatelessWidget {
       children: const [
         MenuNavigationButton(icon: Icons.cloudy_snowing,path: WeatherScreen(), buttonTitle: 'Clima'),
         MenuNavigationButton(icon: FontAwesomeIcons.heartPulse,path: CriticalScreen(), buttonTitle: 'Críticos'),
+        MenuNavigationButton(icon: FontAwesomeIcons.hammer,path: WeaponsScreen(), buttonTitle: 'Armas'),
         
       ],
     );

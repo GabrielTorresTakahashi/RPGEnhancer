@@ -3,9 +3,13 @@ import 'package:enhancer/settings/color_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
+import 'dart:async';
+
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Set preferred orientation for screen as Portrait
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((value) => runApp(const Enhancer()));
 }
