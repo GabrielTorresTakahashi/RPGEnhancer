@@ -34,6 +34,12 @@ class _DiceScreenState extends State<DiceScreen> {
           Dice(sides: 100, title: "D100", ammount: ammount),
           const Expanded(child: SizedBox()),
           Text(
+            "Pressione e segure o botão \"+\" para aumentar 10. " +
+                "Pressione e segure o botão\"-\" para diminuir para 1.",
+            style: listTileText.copyWith(color: Colors.grey),
+            textAlign: TextAlign.left,
+          ),
+          Text(
             "${ammount}d",
             style: listTileText.copyWith(fontSize: 32),
           ),
@@ -41,27 +47,26 @@ class _DiceScreenState extends State<DiceScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: 50,
-                margin: const EdgeInsets.only(
-                    bottom: 50, top: 10, left: 10, right: 10),
-                child: ElevatedButton(
-                    child: const Icon(
-                      Icons.remove,
-                      size: 25,
-                    ),
-                    onLongPress: () {
-                      setState(() {
-                        ammount = 1;
-                      });
-                    },
-                    onPressed: () {
-                      setState(() {
-                        if (ammount > 1) {
-                          ammount--;
-                        }
-                      });
-                    })
-              ),
+                  height: 50,
+                  margin: const EdgeInsets.only(
+                      bottom: 50, top: 10, left: 10, right: 10),
+                  child: ElevatedButton(
+                      child: const Icon(
+                        Icons.remove,
+                        size: 25,
+                      ),
+                      onLongPress: () {
+                        setState(() {
+                          ammount = 1;
+                        });
+                      },
+                      onPressed: () {
+                        setState(() {
+                          if (ammount > 1) {
+                            ammount--;
+                          }
+                        });
+                      })),
               Container(
                 height: 50,
                 margin: const EdgeInsets.only(
