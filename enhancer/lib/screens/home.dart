@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                 path: Home2Screen(),
                 buttonTitle: "Diversos"),
             Text(
-              "\nCopyright 2022\nGabriel Torres Takahashi\n",
+              "\nCopyright 2022-2023\nGabriel \"Tri\" Torres Takahashi\n",
               textAlign: TextAlign.center,
             )
           ],

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+
 //primaria Color(0xFF74121D)
 //fundo Color(0xFF303030)
 const Brightness brightness = Brightness.light;
-const Color primary = Color(0xFF99121D);
+const Color primary = Color.fromARGB(255, 0, 89, 255);
 const Color onPrimary = Colors.white;
 const Color error = Colors.lightGreen;
 const Color background = Color(0xFF303030);
-
 
 ThemeData colorSettings = ThemeData().copyWith(
   colorScheme: const ColorScheme(
@@ -26,4 +26,5 @@ ThemeData colorSettings = ThemeData().copyWith(
   ),
 );
 
-ButtonStyle menuNavigationButton = ElevatedButton.styleFrom(backgroundColor: primary);
+ButtonStyle menuNavigationButton =
+    ElevatedButton.styleFrom(backgroundColor: primary);

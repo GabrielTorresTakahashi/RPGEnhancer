@@ -29,6 +29,12 @@ class _DiceScreenState extends State<DiceScreen> {
           Dice(sides: 100, title: "D100", ammount: ammount),
           const Expanded(child: SizedBox()),
           Text(
+            "Pressione e segure o botão \"+\" para aumentar 10. " +
+                "Pressione e segure o botão\"-\" para diminuir para 1.",
+            style: listTileText.copyWith(color: Colors.grey),
+            textAlign: TextAlign.left,
+          ),
+          Text(
             "${ammount}d",
             style: listTileText.copyWith(fontSize: 32),
           ),
