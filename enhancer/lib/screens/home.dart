@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
             MenuNavigationButton(icon: FontAwesomeIcons.diceD20 ,path: DiceScreen(), buttonTitle: "Dados"),
             MenuNavigationButton(icon: FontAwesomeIcons.circleQuestion ,path: Home2Screen(), buttonTitle: "Diversos"),
             Text(
-              "\nCopyright 2022\nGabriel Torres Takahashi\n",
+              "\nCopyright 2022-2023\nGabriel \"Tri\" Torres Takahashi\n",
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontFamily: 'Montserrat'),
             )
