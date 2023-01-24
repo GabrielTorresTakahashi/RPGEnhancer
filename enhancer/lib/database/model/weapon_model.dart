@@ -5,6 +5,8 @@ class Weapon {
   final String damage;
   final String weight;
   final String properties;
+  final String range;
+  final String type;
 
   const Weapon(
       {required this.name,
@@ -12,6 +14,8 @@ class Weapon {
       required this.damage,
       required this.weight,
       required this.properties,
+      required this.range,
+      required this.type,
       this.id});
 
   factory Weapon.fromJson(Map<String, dynamic> json) => Weapon(
@@ -21,6 +25,8 @@ class Weapon {
         price: json['price'],
         weight: json['weight'],
         properties: json['properties'],
+        range: json['range'],
+        type: json['type'],
       );
 
   Map<String, dynamic> toJson() => {
