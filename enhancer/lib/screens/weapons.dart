@@ -1,32 +1,42 @@
-import 'package:enhancer/database/weapon_repository.dart';
+import 'dart:developer';
+
+import 'package:enhancer/database/services/database_helper.dart';
+import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class WeaponsScreen extends StatefulWidget {
-  const WeaponsScreen({Key? key}) : super(key: key);
+import '../database/model/weapon_model.dart';
 
-  @override
-  State<WeaponsScreen> createState() => _WeaponsScreenState();
-}
+class WeaponsScreen extends StatelessWidget {
+  final Weapon? weapon;
+  const WeaponsScreen({Key? key, this.weapon}) : super(key: key);
 
-class _WeaponsScreenState extends State<WeaponsScreen> {
   @override
   Widget build(BuildContext context) {
-    final weapon = context.watch<WeaponRepository>();
+    Future<List<Weapon>?> armas = DatabaseHelper.getAllWeapons();
+    armas.then((value) => log(value.toString()));
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Armas"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text('Nome'),
-              subtitle: Text(weapon.),
-            )
-          ],
-        ),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(titleTextStyle: appBarText, title: const Text("Armas")),
+      body: FutureBuilder<List<Weapon>?>(
+        future: DatabaseHelper.getAllWeapons(),
+        builder: (context, AsyncSnapshot<List<Weapon>?> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data != null) {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) => ListTile(
+                  title: Text(snapshot.data![index].name, style: listTileText),
+                  leading: Text(
+                    snapshot.data![index].properties,
+                    style: listTileText,
+                  ),
+                ),
+              );
+            }
+          }
+          return const Text("Sem registros");
+        },
       ),
     );
   }

@@ -1,5 +1,5 @@
 name: enhancer
-description: A new Flutter project.
+description: RPGEnhancer - An app for playing TableTop games in an easy way. It allows the Dungeon Master or even the players to generate character names, generate loot items and even randomize magic items!
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -33,6 +33,7 @@ dependencies:
   provider: ^6.0.2
   sqflite: ^2.2.3
   path: ^1.8.2
+  sqlite_viewer: ^1.0.5
 
   cupertino_icons: ^1.0.2
   flutter_native_splash: ^2.2.16
