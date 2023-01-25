@@ -1,12 +1,13 @@
 import 'package:enhancer/screens/dice.dart';
 import 'package:enhancer/screens/home2.dart';
 import 'package:enhancer/screens/names.dart';
+import 'package:enhancer/screens/weapons.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'loot.dart';
+import 'equipments.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,10 +29,26 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: const [
             AppTitle(),
-            MenuNavigationButton(icon: FontAwesomeIcons.coins ,path: LootScreen(), buttonTitle: "Tesouros"),
-            MenuNavigationButton(icon: FontAwesomeIcons.person ,path: NameScreen(), buttonTitle: "Nomes"),
-            MenuNavigationButton(icon: FontAwesomeIcons.diceD20 ,path: DiceScreen(), buttonTitle: "Dados"),
-            MenuNavigationButton(icon: FontAwesomeIcons.circleQuestion ,path: Home2Screen(), buttonTitle: "Diversos"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.person,
+                path: NameScreen(),
+                buttonTitle: "Nomes"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.diceD20,
+                path: DiceScreen(),
+                buttonTitle: "Dados"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.hammer,
+                path: WeaponsScreen(),
+                buttonTitle: 'Armas'),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.sackDollar,
+                path: EquipmentsScreen(),
+                buttonTitle: "Equipamento"),
+            MenuNavigationButton(
+                icon: FontAwesomeIcons.circleQuestion,
+                path: Home2Screen(),
+                buttonTitle: "Diversos"),
             Text(
               "\nCopyright 2022-2023\nGabriel \"Tri\" Torres Takahashi\n",
               textAlign: TextAlign.center,
@@ -54,7 +71,11 @@ class AppTitle extends StatelessWidget {
         children: [
           Container(
               margin: const EdgeInsets.only(top: 10),
-              child: Image.asset('assets/enhancer-logo2.png', scale: 4, color: Theme.of(context).colorScheme.primary,)),
+              child: Image.asset(
+                'assets/enhancer-logo2.png',
+                scale: 4,
+                color: Theme.of(context).colorScheme.primary,
+              )),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 20),
             child: Text("RPGEnhancer\nv1.0",
@@ -70,7 +91,8 @@ class MenuNavigationButton extends StatelessWidget {
   final String buttonTitle;
   final Widget? path;
   final IconData? icon;
-  const MenuNavigationButton({this.icon, this.path, this.buttonTitle = '',Key? key})
+  const MenuNavigationButton(
+      {this.icon, this.path, this.buttonTitle = '', Key? key})
       : super(key: key);
 
   @override

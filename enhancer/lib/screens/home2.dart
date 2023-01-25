@@ -1,5 +1,5 @@
 import 'package:enhancer/screens/home.dart';
-import 'package:enhancer/screens/weapons.dart';
+import 'package:enhancer/screens/loot.dart';
 import 'package:enhancer/screens/weather.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -25,16 +25,21 @@ class Home2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      padding: const EdgeInsets.all(10),
-      crossAxisSpacing: 20,
-      mainAxisSpacing: 20,
-      crossAxisCount: 2,
+    return ListView(
+      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
       children: const [
-        MenuNavigationButton(icon: Icons.cloudy_snowing,path: WeatherScreen(), buttonTitle: 'Clima'),
-        MenuNavigationButton(icon: FontAwesomeIcons.heartPulse,path: CriticalScreen(), buttonTitle: 'Críticos'),
-        MenuNavigationButton(icon: FontAwesomeIcons.hammer,path: WeaponsScreen(), buttonTitle: 'Armas'),
-        
+        MenuNavigationButton(
+            icon: Icons.cloudy_snowing,
+            path: WeatherScreen(),
+            buttonTitle: 'Clima'),
+        MenuNavigationButton(
+            icon: FontAwesomeIcons.heartPulse,
+            path: CriticalScreen(),
+            buttonTitle: 'Críticos'),
+        MenuNavigationButton(
+            icon: FontAwesomeIcons.coins,
+            path: LootScreen(),
+            buttonTitle: "Tesouros"),
       ],
     );
   }

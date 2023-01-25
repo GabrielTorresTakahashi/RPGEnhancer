@@ -1,3 +1,4 @@
+import 'package:enhancer/database/model/equipment_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -25,10 +26,12 @@ class DatabaseHelper {
     }), version: _version);
   }
 
+  // DO NOT USE THIS. unless in development phase.
   static Future<void> purgeDatabase() async {
     deleteDatabase(join(await getDatabasesPath(), _dbName));
   }
 
+  // Weapons section
   static Future<List<Weapon>?> getAllWeapons() async {
     final db = await _getDB();
 
@@ -84,5 +87,20 @@ class DatabaseHelper {
     ('Zarabatana', '10 po', '1 perfurante', '0,5 kg', 'Munição (distância 7,5/30), recarga', 'À Distância', 'Marcial');
 ''';
     return await db.rawInsert(sql);
+  }
+
+  // Equipments section
+  static Future<List<Equipment>?> getAllEquipments() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Equipments", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(
+        maps.length, (index) => Equipment.fromJson(maps[index]));
   }
 }
