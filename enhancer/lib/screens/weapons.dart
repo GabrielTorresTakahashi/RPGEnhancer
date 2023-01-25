@@ -7,8 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../database/model/weapon_model.dart';
 
 class WeaponsScreen extends StatelessWidget {
-  final Weapon? weapon;
-  const WeaponsScreen({Key? key, this.weapon}) : super(key: key);
+  const WeaponsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

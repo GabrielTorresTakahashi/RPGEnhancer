@@ -3,14 +3,14 @@ class Equipment {
   final String name;
   final String price;
   final String weight;
-  final String? group;
+  final String? category;
   final String? description;
 
   const Equipment(
       {required this.name,
       required this.price,
       required this.weight,
-      this.group,
+      this.category,
       this.description,
       this.id});
 
@@ -19,7 +19,7 @@ class Equipment {
       name: json['name'],
       price: json['price'],
       weight: json['weight'],
-      group: json['group'],
+      category: json['category'],
       description: json['description']);
 
   Map<String, dynamic> toJson() => {
@@ -27,7 +27,7 @@ class Equipment {
         'name': name,
         'price': price,
         'weight': weight,
-        'group': group,
+        'category': category,
         'description': description
       };
 }
