@@ -59,15 +59,35 @@ TextStyle diceRollText = const TextStyle().copyWith(
     fontSize: 40,
     fontFamily: 'Montserrat');
 
-TextStyle weaponInfo = const TextStyle().copyWith(
+TextStyle weaponTypeRangeText = const TextStyle().copyWith(
     color: colorSettings.colorScheme.onPrimary,
     fontSize: 16,
     fontFamily: 'Montserrat');
 
-TextStyle weaponHeader = const TextStyle().copyWith(
+TextStyle weaponNameText = const TextStyle().copyWith(
     color: colorSettings.colorScheme.onPrimary,
     fontSize: 18,
     fontFamily: 'Montserrat');
 
-TextStyle weaponPrice = const TextStyle()
-    .copyWith(color: Colors.amber, fontSize: 16, fontFamily: 'Montserrat');
+TextStyle weaponTitleText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 32,
+    fontFamily: 'Montserrat');
+
+TextStyle weaponInfoPropertiesText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 22,
+    fontFamily: 'Montserrat');
+
+TextStyle weaponInfoWeightText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 18,
+    fontFamily: 'Montserrat');
+
+TextStyle weaponInfoDamageText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 20,
+    fontFamily: 'Montserrat');
+
+TextStyle weaponInfoPriceText = const TextStyle()
+    .copyWith(color: Colors.amber, fontSize: 18, fontFamily: 'Montserrat');

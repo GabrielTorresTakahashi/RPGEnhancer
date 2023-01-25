@@ -2,7 +2,6 @@ import 'package:enhancer/screens/home.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

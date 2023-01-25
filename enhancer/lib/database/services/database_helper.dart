@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -23,6 +21,7 @@ class DatabaseHelper {
                 type TEXT NOT NULL
                 );
                 ''');
+      addAllWeapons();
     }), version: _version);
   }
 
@@ -30,30 +29,11 @@ class DatabaseHelper {
     deleteDatabase(join(await getDatabasesPath(), _dbName));
   }
 
-  static Future<int> addWeapon(Weapon weapon) async {
-    final db = await _getDB();
-    return await db.insert('Weapons', weapon.toJson(),
-        conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-
-  static Future<int> updateWeapon(Weapon weapon) async {
-    final db = await _getDB();
-    return await db.update("Weapons", weapon.toJson(),
-        where: "id = ?",
-        whereArgs: [weapon.id],
-        conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-
-  static Future<int> deleteWeapon(Weapon weapon) async {
-    final db = await _getDB();
-    return await db.delete("Weapons", where: "id = ?", whereArgs: [weapon.id]);
-  }
-
   static Future<List<Weapon>?> getAllWeapons() async {
     final db = await _getDB();
 
     final List<Map<String, dynamic>> maps =
-        await db.query("Weapons", orderBy: 'range ASC, type DESC, name ASC');
+        await db.query("Weapons", orderBy: 'type DESC, range ASC, name ASC');
 
     if (maps.isEmpty) {
       return null;

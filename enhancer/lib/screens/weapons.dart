@@ -1,4 +1,5 @@
 import 'package:enhancer/database/services/database_helper.dart';
+import 'package:enhancer/screens/weapon_info.dart';
 import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,76 +20,46 @@ class WeaponsScreen extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Weapon>?> snapshot) {
           if (snapshot.hasData) {
             if (snapshot.data != null) {
-              List<DataRow> rows = [];
-              for (int index = 0; index < snapshot.data!.length; ++index) {
-                rows.add(
-                  DataRow(cells: <DataCell>[
-                    DataCell(Text(
+              List<Widget> weaponList = [];
+              for (int index = 0; index < snapshot.data!.length; index++) {
+                weaponList.add(
+                  ListTile(
+                    isThreeLine: true,
+                    leading: Icon(
+                      snapshot.data![index].type == "Simples"
+                          ? FontAwesomeIcons.person
+                          : FontAwesomeIcons.personBurst,
+                      color: snapshot.data![index].type == "Simples"
+                          ? Colors.white
+                          : Colors.amber,
+                      size: 30,
+                    ),
+                    title: Text(
                       snapshot.data![index].name,
-                      style: weaponInfo,
-                    )),
-                    DataCell(Text(
-                      snapshot.data![index].damage,
-                      style: weaponInfo,
-                    )),
-                    DataCell(Text(
-                      snapshot.data![index].properties,
-                      style: weaponInfo,
-                    )),
-                    DataCell(Text(
-                      snapshot.data![index].price,
-                      style: weaponPrice,
-                    )),
-                    DataCell(Text(
+                      style: weaponNameText,
+                    ),
+                    subtitle: Text(
                       "${snapshot.data![index].type} ${snapshot.data![index].range}",
-                      style: weaponInfo,
-                    )),
-                    DataCell(Text(
-                      snapshot.data![index].weight,
-                      style: weaponInfo,
-                    )),
-                  ]),
+                      style: weaponTypeRangeText,
+                    ),
+                    trailing: Icon(
+                      snapshot.data![index].range == "Corpo-a-corpo"
+                          ? FontAwesomeIcons.shield
+                          : FontAwesomeIcons.bullseye,
+                      color: Colors.white,
+                      size: 35,
+                    ),
+                    onTap: () async => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WeaponInfoScreen(
+                                weapon: snapshot.data![index]))),
+                  ),
                 );
               }
 
-              return SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(columns: [
-                      DataColumn(
-                          label: Text(
-                        'Nome',
-                        style: weaponHeader,
-                      )),
-                      DataColumn(
-                        label: Text(
-                          'Dano',
-                          style: weaponHeader,
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Propriedades',
-                          style: weaponHeader,
-                        ),
-                      ),
-                      DataColumn(
-                          label: Text(
-                        'Preço',
-                        style: weaponHeader,
-                      )),
-                      DataColumn(
-                          label: Text(
-                        'Tipo',
-                        style: weaponHeader,
-                      )),
-                      DataColumn(
-                          label: Text(
-                        'Peso',
-                        style: weaponHeader,
-                      )),
-                    ], rows: rows)),
+              return ListView(
+                children: weaponList,
               );
             }
           }
