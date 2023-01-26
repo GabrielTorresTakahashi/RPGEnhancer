@@ -1,3 +1,4 @@
+import 'package:enhancer/database/model/armor_model.dart';
 import 'package:enhancer/database/model/equipment_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -33,8 +34,20 @@ class DatabaseHelper {
           description TEXT
         )''');
 
+      await db.execute('''
+        CREATE TABLE IF NOT EXISTS Armor(
+          id INTEGER PRIMARY KEY,
+          category TEXT NOT NULL,
+          name TEXT NOT NULL,
+          price TEXT NOT NULL,
+          armorClass TEXT NOT NULL,
+          weight TEXT NOT NULL,
+          strength TEXT,
+          stealth TEXT
+        )''');
       addAllWeapons();
       addAllEquipments();
+      addAllArmor();
     }), version: _version);
   }
 
@@ -222,6 +235,45 @@ class DatabaseHelper {
       ('Vara (3 metros)', '5 pc', '3,5 kg', NULL, NULL),
       ('Vela', '1 pc', '3,5 kg', NULL, 'Por uma hora, a vela emana luz plena em um raio de 1,5 metro e penumbra por mais 1,5 metro.'),
       ('Veneno básico (frasco)', '100 po', '-', NULL, 'Você pode usar o veneno contido nesse vidro para cobrir uma lâmina cortante ou perfurante de uma arma ou até três peças de munição. Aplicar o veneno leva uma ação. Uma criatura atingida pela arma ou munição envenenada deve obter sucesso em um teste de resistência de Constituição CD 10 ou sofrerá 1d4 de dano de veneno. Uma vez aplicado, o veneno retém sua potência durante 1 minuto antes de secar.');
+    ''';
+
+    return await db.rawInsert(sql);
+  }
+
+  // Armor section
+  static Future<List<Armor>?> getAllArmor() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Armor", orderBy: 'category ASC, name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(
+        maps.length, (index) => Armor.fromJson(maps[index]));
+  }
+
+  static Future<int> addAllArmor() async {
+    final db = await _getDB();
+
+    String sql = '''
+      INSERT INTO Armor (category, name, price, armorClass, weight, strength, stealth)
+      VALUES
+      ('Leve', 'Acolchoada', '5 po', '11 + Des.', '4 kg', NULL, 'Desvantagem'),
+      ('Leve', 'Couro', '10 po', '11 + Des.', '5 kg', NULL, NULL),
+      ('Leve', 'Couro Batido', '45 po', '12 + Des.', '6,5 kg', NULL, NULL),
+      ('Média', 'Gibão de Peles', '10 po', '12 + Des. (Máximo +2)', '6 kg', NULL, NULL),
+      ('Média', 'Camisão de Malha', '30 po', '13 + Des. (Máximo +2)', '10 kg', NULL, NULL),
+      ('Média', 'Brunea', '50 po', '14 + Des. (Máximo +2)', '22,5 kg', NULL, 'Desvantagem'),
+      ('Média', 'Peitoral', '400 po', '14 + Des. (Máximo +2)', '10 kg', NULL, NULL),
+      ('Média', 'Meia-Armadura', '750 po', '15 + Des. (Máximo +2)', '20 kg', NULL, 'Desvantagem'),
+      ('Pesada', 'Cota de anéis', '30 po', '15', '20 kg', NULL, 'Desvantagem'),
+      ('Pesada', 'Cota de malha', '75 po', '16', '27,5 kg', 'For 13', 'Desvantagem'),
+      ('Pesada', 'Cota de talas', '200 po', '17', '30 kg', 'For 15', 'Desvantagem'),
+      ('Pesada', 'Placas', '1.500 po', '18', '32,5 kg', 'For 15', 'Desvantagem'),
+      ('Escudo', 'Escudo', '10 po', '+2', '3 kg', NULL, NULL);
     ''';
 
     return await db.rawInsert(sql);

@@ -1,10 +1,10 @@
+import 'package:enhancer/screens/armor.dart';
 import 'package:enhancer/screens/dice.dart';
 import 'package:enhancer/screens/home2.dart';
 import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/screens/weapons.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -42,6 +42,8 @@ class HomeScreen extends StatelessWidget {
                 icon: FontAwesomeIcons.hammer,
                 path: WeaponsScreen(),
                 buttonTitle: 'Armas'),
+            MenuNavigationButton(
+                icon: Icons.shield, path: ArmorScreen(), buttonTitle: 'Armaduras'),
             MenuNavigationButton(
                 icon: FontAwesomeIcons.sackDollar,
                 path: EquipmentsScreen(),
