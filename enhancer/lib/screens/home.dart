@@ -4,6 +4,7 @@ import 'package:enhancer/screens/names.dart';
 import 'package:enhancer/screens/weapons.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -46,9 +47,9 @@ class HomeScreen extends StatelessWidget {
                 path: EquipmentsScreen(),
                 buttonTitle: "Equipamento"),
             MenuNavigationButton(
-                icon: FontAwesomeIcons.circleQuestion,
+                icon: FontAwesomeIcons.dungeon,
                 path: Home2Screen(),
-                buttonTitle: "Diversos"),
+                buttonTitle: "Para o Mestre"),
             Text(
               "\nCopyright 2022-2023\nGabriel \"Tri\" Torres Takahashi\n",
               textAlign: TextAlign.center,
@@ -78,9 +79,9 @@ class AppTitle extends StatelessWidget {
               )),
           Container(
             margin: const EdgeInsets.only(top: 20, bottom: 20),
-            child: Text("RPGEnhancer\nv1.0",
+            child: Text("RPGEnhancer\nv1.1",
                 textAlign: TextAlign.center, style: titleText),
-          ),
+          )
         ],
       ),
     );
