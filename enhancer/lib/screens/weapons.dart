@@ -29,7 +29,7 @@ class WeaponsScreen extends StatelessWidget {
                           ? FontAwesomeIcons.person
                           : FontAwesomeIcons.personBurst,
                       color: snapshot.data![index].type == "Simples"
-                          ? Colors.white
+                          ? Theme.of(context).colorScheme.primary
                           : Colors.amber,
                       size: 30,
                     ),
@@ -38,14 +38,15 @@ class WeaponsScreen extends StatelessWidget {
                       style: weaponNameText,
                     ),
                     subtitle: Text(
-                      "${snapshot.data![index].type} ${snapshot.data![index].range}",
+                      "${snapshot.data![index].type} ${snapshot.data![index].range}\n"
+                      "${snapshot.data![index].damage}",
                       style: weaponTypeRangeText,
                     ),
                     trailing: Icon(
                       snapshot.data![index].range == "Corpo-a-corpo"
                           ? FontAwesomeIcons.shield
                           : FontAwesomeIcons.bullseye,
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                       size: 35,
                     ),
                     onTap: () async => Navigator.push(

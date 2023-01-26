@@ -28,16 +28,15 @@ class ArmorScreen extends StatelessWidget {
                     leading: Icon(
                         snapshot.data![index].stealth != null
                             ? FontAwesomeIcons.volumeHigh
-                            : FontAwesomeIcons.shield,
+                            : FontAwesomeIcons.volumeXmark,
                         color: Theme.of(context).colorScheme.primary,
                         size: 30),
                     title:
                         Text(snapshot.data![index].name, style: weaponNameText),
                     subtitle: Text(
-                        "${snapshot.data![index].category}\n"
-                        "CA: ${snapshot.data![index].armorClass}",
+                        "${snapshot.data![index].category}. ${snapshot.data![index].strength ?? ""}\n CA: ${snapshot.data![index].armorClass}",
                         style: weaponTypeRangeText),
-                    trailing: Text(snapshot.data![index].price,
+                    trailing: Text("${snapshot.data![index].price}\n${snapshot.data![index].weight}",
                         style: weaponInfoPriceText),
                   ),
                 );
