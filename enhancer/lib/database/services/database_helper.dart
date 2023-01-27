@@ -8,33 +8,7 @@ import '../model/weapon_model.dart';
 class DatabaseHelper {
   static const int _version = 1;
   static const String _dbName = "enhancer.db";
-
-  static Future<Database> _getDB() async {
-    return openDatabase(join(await getDatabasesPath(), _dbName),
-        onCreate: ((db, version) async {
-      await db.execute(''' 
-        CREATE TABLE IF NOT EXISTS Weapons(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          damage TEXT NOT NULL,
-          price TEXT NOT NULL,
-          weight TEXT NOT NULL,
-          properties TEXT NOT NULL,
-          range TEXT NOT NULL,
-          type TEXT NOT NULL
-        )''');
-
-      await db.execute('''
-        CREATE TABLE IF NOT EXISTS Equipments(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          price TEXT NOT NULL,
-          weight TEXT NOT NULL,
-          category TEXT,
-          description TEXT
-        )''');
-
-      await db.execute('''
+  static const String _createArmorTable = '''
         CREATE TABLE IF NOT EXISTS Armor(
           id INTEGER PRIMARY KEY,
           category TEXT NOT NULL,
@@ -44,15 +18,150 @@ class DatabaseHelper {
           weight TEXT NOT NULL,
           strength TEXT,
           stealth TEXT
-        )''');
-      addAllWeapons();
-      addAllEquipments();
-      addAllArmor();
+        )''';
+  static const String _createEquipmentsTable = '''
+        CREATE TABLE IF NOT EXISTS Equipments(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          price TEXT NOT NULL,
+          weight TEXT NOT NULL,
+          category TEXT,
+          description TEXT
+        )''';
+  static const String _createWeaponsTable = ''' 
+        CREATE TABLE IF NOT EXISTS Weapons(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          damage TEXT NOT NULL,
+          price TEXT NOT NULL,
+          weight TEXT NOT NULL,
+          properties TEXT NOT NULL,
+          range TEXT NOT NULL,
+          type TEXT NOT NULL
+        )''';
+
+  static const String _createSkillsTable = '''
+        CREATE TABLE IF NOT EXISTS Skills(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          ability TEXT NOT NULL
+        )''';
+
+  static const String _createBackgroundTable = '''
+        CREATE TABLE IF NOT EXISTS Backgrounds(
+          id INTEGER PRIMARY KEY,
+          name TEXT,
+          description
+        )''';
+  static const String _createRacesTable = '''
+        CREATE TABLE IF NOT EXISTS Races(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          abilityScore TEXT,
+          speed TEXT,
+          languages TEXT,
+          traits TEXT,
+          subraceId INTEGER,
+
+          FOREIGN KEY(subraceId) REFERENCES Subraces(id)
+        )''';
+
+  static const String _createSubracesTable = '''
+        CREATE TABLE IF NOT EXISTS Subraces(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          abilityScore TEXT,
+          traits TEXT
+        )''';
+  static const String _createAlignmentsTable = '''
+        CREATE TABLE IF NOT EXISTS Alignments(
+          id INTEGER PRIMARY KEY,
+          name TEXT,
+          alias TEXT
+        )''';
+
+  static const String _createCharacterTable = '''
+        CREATE TABLE IF NOT EXISTS Character(
+          id INTEGER PRIMARY KEY,
+          name TEXT NOT NULL,
+          level INTEGER NOT NULL,
+          backgroundId INTEGER,
+          raceId INTEGER,
+          subraceId INTEGER,
+          alignmentId INTEGER,
+          xp INTEGER,
+          strength INTEGER,
+          dexterity INTEGER,
+          constitution INTEGER,
+          intelligence INTEGER,
+          wisdom INTEGER,
+          charisma INTEGER,
+          otherProficiencies TEXT,
+          languages TEXT,
+          speed TEXT,
+          hp INTEGER NOT NULL,
+          tempHp INTEGER,
+          equipment TEXT,
+          pl INTEGER,
+          gp INTEGER,
+          ep INTEGER,
+          sp INTEGER,
+          cp INTEGER,
+          personality TEXT,
+          ideals TEXT,
+          bonds TEXT,
+          flaws TEXT,
+          traits TEXT,
+          age INTEGER,
+          height TEXT,
+          weight TEXT,
+          eyes TEXT,
+          skin TEXT,
+          hair TEXT,
+          alliesOrganizations TEXT,
+          characterHistory TEXT,
+          additionalTraits TEXT,
+          treasure TEXT,
+
+          FOREIGN KEY(backgroundId) REFERENCES Backgrounds(id),
+          FOREIGN KEY(raceId) REFERENCES Races(id),
+          FOREIGN KEY(subraceId) REFERENCES Subraces(id),
+          FOREIGN KEY(alignmentId) REFERENCES Alignments(id)
+    )''';
+
+  static Future<Database> _getDB() async {
+    return openDatabase(join(await getDatabasesPath(), _dbName),
+        onCreate: ((db, version) async {
+      await db.execute(_createWeaponsTable);
+
+      await db.execute(_createEquipmentsTable);
+
+      await db.execute(_createArmorTable);
+
+      await db.execute(_createSubracesTable);
+
+      await db.execute(_createSkillsTable);
+
+      await db.execute(_createBackgroundTable);
+
+      await db.execute(_createRacesTable);
+
+      await db.execute(_createAlignmentsTable);
+
+      await db.execute(_createCharacterTable);
+
+      insertDefaultData();
     }), version: _version);
   }
 
+  static void insertDefaultData() async {
+    addAllWeapons();
+    addAllEquipments();
+    addAllArmor();
+  }
+
   // DO NOT USE THIS. unless in development phase.
-  static Future<void> purgeDatabase() async {
+  static void purgeDatabase() async {
     deleteDatabase(join(await getDatabasesPath(), _dbName));
   }
 
@@ -251,8 +360,7 @@ class DatabaseHelper {
       return null;
     }
 
-    return List.generate(
-        maps.length, (index) => Armor.fromJson(maps[index]));
+    return List.generate(maps.length, (index) => Armor.fromJson(maps[index]));
   }
 
   static Future<int> addAllArmor() async {
