@@ -218,6 +218,7 @@ class DatabaseHelper {
     addAllAlignments();
     addAllSkills();
     addAllRaces();
+    addAllSubraces();
   }
 
   // DO NOT USE THIS. unless in development phase.
@@ -513,7 +514,14 @@ class DatabaseHelper {
         .rawInsert('''INSERT INTO Subraces (name, abilityScore, speed, raceId)
         VALUES
         ('Anão da Colina', '+1 de Sabedoria', NULL, (SELECT id FROM Races WHERE name = 'Anão')),
-        ('Anão da Montanha', '+2 de Força', NULL, (SELECT id FROM Races WHERE name = 'Anão'));''');
+        ('Anão da Montanha', '+2 de Força', NULL, (SELECT id FROM Races WHERE name = 'Anão')),
+        ('Alto Elfo', '+1 de Inteligência', NULL, (SELECT id FROM Races WHERE name = 'Elfo')),
+        ('Elfo da Floresta', '+1 de Sabedoria', '10,5 metros', (SELECT id FROM Races WHERE name = 'Elfo')),
+        ('Drow', '+1 de Carisma', NULL, (SELECT id FROM Races WHERE name = 'Elfo')),
+        ('Halfling Pés Leves', '+1 de Carisma', NULL, (SELECT id FROM Races WHERE name = 'Halfling')),
+        ('Halfling Robusto', '+1 de Constituição', NULL, (SELECT id FROM Races WHERE name = 'Halfling')),
+        ('Gnomo da Floresta', '+1 de Destreza', NULL, (SELECT id FROM Races WHERE name = 'Gnomo')),
+        ('Gnomo das Rochas', '+1 de Constituição', NULL, (SELECT id FROM Races WHERE name = 'Gnomo'));''');
   }
 
   // Alignments section
