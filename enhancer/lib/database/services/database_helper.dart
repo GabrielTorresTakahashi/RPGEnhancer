@@ -47,14 +47,14 @@ class DatabaseHelper {
         )''';
 
   static const String _skillsTable = '''CREATE TABLE IF NOT EXISTS `Skills` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `name` TEXT NOT NULL,
         `ability` TEXT NOT NULL
       )''';
 
   static const String _backgroundsTable =
       '''CREATE TABLE IF NOT EXISTS `Backgrounds` (
-      `id` INT PRIMARY KEY,
+      `id` INTEGER PRIMARY KEY AUTOINCREMENT,
       `name` TEXT NOT NULL,
       `trait` TEXT NOT NULL,
       `description` TEXT NOT NULL,
@@ -65,7 +65,7 @@ class DatabaseHelper {
     )''';
 
   static const String _racesTable = '''CREATE TABLE IF NOT EXISTS `Races` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `name` TEXT NOT NULL,
         `abilityScore` TEXT NOT NULL,
         `darkVision` TEXT,
@@ -77,32 +77,31 @@ class DatabaseHelper {
       )''';
 
   static const String _traitsTable = '''CREATE TABLE IF NOT EXISTS `Traits`(
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `title` TEXT NOT NULL,
         `description` TEXT NOT NULL
       )''';
 
   static const String _subracesTable =
       '''CREATE TABLE IF NOT EXISTS `Subraces` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `name` TEXT NULL,
         `abilityScore` TEXT NULL,
-        `traits` TEXT NULL,
-        `raceId` INT NOT NULL,
         `speed` TEXT NULL,
+        `raceId` INT NOT NULL,
         FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`)
       )''';
 
   static const String _alignmentsTable =
       '''CREATE TABLE IF NOT EXISTS `Alignments` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `name` TEXT NOT NULL,
         `alias` TEXT NOT NULL
       )''';
 
   static const String _characterTable =
       '''CREATE TABLE IF NOT EXISTS `Characters` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `name` TEXT NOT NULL,
         `level` INT NOT NULL,
         `xp` INT NULL,
@@ -147,7 +146,7 @@ class DatabaseHelper {
 
   static const String _skillBackgroundTable =
       '''CREATE TABLE IF NOT EXISTS `SkillBackground` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `skillId` INT NOT NULL,
         `backgroundId` INT NOT NULL,
         FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
@@ -156,7 +155,7 @@ class DatabaseHelper {
 
   static const String _weaponCharacterTable =
       '''CREATE TABLE IF NOT EXISTS `weaponCharacter` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `characterId` INT NOT NULL,
         `weaponId` INT NOT NULL,
         FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
@@ -165,7 +164,7 @@ class DatabaseHelper {
 
   static const String _skillCharacterTable =
       '''CREATE TABLE IF NOT EXISTS `SkillCharacter` (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `skillId` INT NOT NULL,
         `characterId` INT NOT NULL,
         FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
@@ -174,7 +173,7 @@ class DatabaseHelper {
 
   static const String _equipmentCharacterTable =
       '''CREATE TABLE IF NOT EXISTS EquipmentCharacter (
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `characterId` INT NOT NULL,
         `equipmentId` INT NOT NULL,
         FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
@@ -183,7 +182,7 @@ class DatabaseHelper {
 
   static const String _raceTraitsTable =
       ''' CREATE TABLE IF NOT EXISTS raceTraits(
-        `id` INT PRIMARY KEY,
+        `id` INTEGER PRIMARY KEY AUTOINCREMENT,
         `raceId` INT NOT NULL,
         `traitId` INT NOT NULL,
         FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`),
@@ -505,6 +504,16 @@ class DatabaseHelper {
     }
 
     return List.generate(maps.length, (index) => Subrace.fromJson(maps[index]));
+  }
+
+  static Future<int> addAllSubraces() async {
+    final db = await _getDB();
+
+    return db
+        .rawInsert('''INSERT INTO Subraces (name, abilityScore, speed, raceId)
+        VALUES
+        ('Anão da Colina', '+1 de Sabedoria', NULL, (SELECT id FROM Races WHERE name = 'Anão')),
+        ('Anão da Montanha', '+2 de Força', NULL, (SELECT id FROM Races WHERE name = 'Anão'));''');
   }
 
   // Alignments section

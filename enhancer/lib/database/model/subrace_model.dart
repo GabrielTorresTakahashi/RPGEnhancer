@@ -2,25 +2,28 @@ class Subrace {
   final int? id;
   final String name;
   final String abilityScore;
-  final String? traits;
-
+  final String speed;
+  final int raceId;
   const Subrace(
       {required this.name,
       required this.abilityScore,
-      this.traits = "",
+      required this.speed,
+      required this.raceId,
       this.id});
 
   factory Subrace.fromJson(Map<String, dynamic> json) => Subrace(
         id: json['id'],
         name: json['name'],
         abilityScore: json['abilityScore'],
-        traits: json['traits'],
+        speed: json['speed'] ?? '',
+        raceId: json['raceId'],
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'abilityScore': abilityScore,
-        'traits': traits,
+        'speed': speed,
+        'raceId': raceId,
       };
 }
