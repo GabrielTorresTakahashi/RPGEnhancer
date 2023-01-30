@@ -1,5 +1,11 @@
+import 'package:enhancer/database/model/alignment_model.dart';
 import 'package:enhancer/database/model/armor_model.dart';
+import 'package:enhancer/database/model/background_model.dart';
+import 'package:enhancer/database/model/character_model.dart';
 import 'package:enhancer/database/model/equipment_model.dart';
+import 'package:enhancer/database/model/race_model.dart';
+import 'package:enhancer/database/model/skill_model.dart';
+import 'package:enhancer/database/model/subrace_model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -8,7 +14,7 @@ import '../model/weapon_model.dart';
 class DatabaseHelper {
   static const int _version = 1;
   static const String _dbName = "enhancer.db";
-  static const String _createArmorTable = '''
+  static const String _armorTable = '''
         CREATE TABLE IF NOT EXISTS Armor(
           id INTEGER PRIMARY KEY,
           category TEXT NOT NULL,
@@ -19,7 +25,7 @@ class DatabaseHelper {
           strength TEXT,
           stealth TEXT
         )''';
-  static const String _createEquipmentsTable = '''
+  static const String _equipmentsTable = '''
         CREATE TABLE IF NOT EXISTS Equipments(
           id INTEGER PRIMARY KEY,
           name TEXT NOT NULL,
@@ -28,7 +34,7 @@ class DatabaseHelper {
           category TEXT,
           description TEXT
         )''';
-  static const String _createWeaponsTable = ''' 
+  static const String _weaponsTable = ''' 
         CREATE TABLE IF NOT EXISTS Weapons(
           id INTEGER PRIMARY KEY,
           name TEXT NOT NULL,
@@ -40,115 +46,177 @@ class DatabaseHelper {
           type TEXT NOT NULL
         )''';
 
-  static const String _createSkillsTable = '''
-        CREATE TABLE IF NOT EXISTS Skills(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          ability TEXT NOT NULL
-        )''';
+  static const String _skillsTable = '''CREATE TABLE IF NOT EXISTS `Skills` (
+        `id` INT NOT NULL,
+        `name` TEXT NOT NULL,
+        `ability` TEXT NOT NULL,
+        PRIMARY KEY (`id`)
+      )''';
 
-  static const String _createBackgroundTable = '''
-        CREATE TABLE IF NOT EXISTS Backgrounds(
-          id INTEGER PRIMARY KEY,
-          name TEXT,
-          description
-        )''';
-  static const String _createRacesTable = '''
-        CREATE TABLE IF NOT EXISTS Races(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          abilityScore TEXT,
-          speed TEXT,
-          languages TEXT,
-          traits TEXT,
-          subraceId INTEGER,
-
-          FOREIGN KEY(subraceId) REFERENCES Subraces(id)
-        )''';
-
-  static const String _createSubracesTable = '''
-        CREATE TABLE IF NOT EXISTS Subraces(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          abilityScore TEXT,
-          traits TEXT
-        )''';
-  static const String _createAlignmentsTable = '''
-        CREATE TABLE IF NOT EXISTS Alignments(
-          id INTEGER PRIMARY KEY,
-          name TEXT,
-          alias TEXT
-        )''';
-
-  static const String _createCharacterTable = '''
-        CREATE TABLE IF NOT EXISTS Character(
-          id INTEGER PRIMARY KEY,
-          name TEXT NOT NULL,
-          level INTEGER NOT NULL,
-          backgroundId INTEGER,
-          raceId INTEGER,
-          subraceId INTEGER,
-          alignmentId INTEGER,
-          xp INTEGER,
-          strength INTEGER,
-          dexterity INTEGER,
-          constitution INTEGER,
-          intelligence INTEGER,
-          wisdom INTEGER,
-          charisma INTEGER,
-          otherProficiencies TEXT,
-          languages TEXT,
-          speed TEXT,
-          hp INTEGER NOT NULL,
-          tempHp INTEGER,
-          equipment TEXT,
-          pl INTEGER,
-          gp INTEGER,
-          ep INTEGER,
-          sp INTEGER,
-          cp INTEGER,
-          personality TEXT,
-          ideals TEXT,
-          bonds TEXT,
-          flaws TEXT,
-          traits TEXT,
-          age INTEGER,
-          height TEXT,
-          weight TEXT,
-          eyes TEXT,
-          skin TEXT,
-          hair TEXT,
-          alliesOrganizations TEXT,
-          characterHistory TEXT,
-          additionalTraits TEXT,
-          treasure TEXT,
-
-          FOREIGN KEY(backgroundId) REFERENCES Backgrounds(id),
-          FOREIGN KEY(raceId) REFERENCES Races(id),
-          FOREIGN KEY(subraceId) REFERENCES Subraces(id),
-          FOREIGN KEY(alignmentId) REFERENCES Alignments(id)
+  static const String _backgroundsTable =
+      '''CREATE TABLE IF NOT EXISTS `Backgrounds` (
+      `id` INT NOT NULL,
+      `name` TEXT NOT NULL,
+      `trait` TEXT NOT NULL,
+      `description` TEXT NOT NULL,
+      `skills` TEXT NULL,
+      `tools` TEXT NULL,
+      `languages` TEXT NULL,
+      `equipment` TEXT NULL,
+      PRIMARY KEY (`id`)
     )''';
+
+  static const String _racesTable = '''CREATE TABLE IF NOT EXISTS `Races` (
+        `id` INT NOT NULL,
+        `name` TEXT NOT NULL,
+        `abilityScore` TEXT NOT NULL,
+        `speed` TEXT NULL,
+        `languages` TEXT NOT NULL,
+        `traits` TEXT NULL,
+        PRIMARY KEY (`id`)
+      )''';
+
+  static const String _subracesTable =
+      '''CREATE TABLE IF NOT EXISTS `Subraces` (
+        `id` INT NOT NULL,
+        `name` TEXT NULL,
+        `abilityScore` TEXT NULL,
+        `traits` TEXT NULL,
+        `raceId` INT NOT NULL,
+        `speed` TEXT NULL,
+        PRIMARY KEY (`id`, `raceId`),
+        FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`)
+      )''';
+
+  static const String _alignmentsTable =
+      '''CREATE TABLE IF NOT EXISTS `Alignments` (
+        `id` INT NOT NULL,
+        `name` TEXT NOT NULL,
+        `alias` TEXT NOT NULL,
+        PRIMARY KEY (`id`)
+      )''';
+
+  static const String _characterTable =
+      '''CREATE TABLE IF NOT EXISTS `Characters` (
+        `id` INT NOT NULL,
+        `name` TEXT NOT NULL,
+        `level` INT NOT NULL,
+        `background` TEXT NOT NULL,
+        `xp` INT NULL,
+        `strength` INT NULL,
+        `dexterity` INT NULL,
+        `constitution` INT NULL,
+        `intelligence` INT NULL,
+        `wisdom` INT NULL,
+        `charisma` INT NULL,
+        `otherProficiencies` TEXT NULL,
+        `languages` TEXT NULL,
+        `speed` TEXT NULL,
+        `hp` INT NULL,
+        `tempHp` INT NULL,
+        `equipment` TEXT NULL,
+        `pl` INT NULL,
+        `gp` INT NULL,
+        `personality` TEXT NULL,
+        `ideals` TEXT NULL,
+        `bonds` TEXT NULL,
+        `flaws` TEXT NULL,
+        `traits` TEXT NULL,
+        `age` INT NULL,
+        `height` TEXT NULL,
+        `weight` TEXT NULL,
+        `eyes` TEXT NULL,
+        `skin` TEXT NULL,
+        `hair` TEXT NULL,
+        `alliesOrganizations` TEXT NULL,
+        `characterHistory` TEXT NULL,
+        `additionalTraits` TEXT NULL,
+        `treasure` TEXT NULL,
+        `alignmentId` INT NOT NULL,
+        `raceId` INT NOT NULL,
+        `backgroundsId` INT NOT NULL,
+        `armorId` INT NOT NULL,
+        PRIMARY KEY (
+          `id`,
+          `raceId`,
+          `alignmentId`,
+          `backgroundsId`,
+          `armorId`
+        ),
+        FOREIGN KEY (`alignmentId`) REFERENCES `Alignments` (`id`),
+        FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`),
+        FOREIGN KEY (`backgroundsId`) REFERENCES `Backgrounds` (`id`),
+        FOREIGN KEY (`armorId`) REFERENCES `Armor` (`id`)
+      )''';
+
+  static const String _skillBackgroundTable =
+      '''CREATE TABLE IF NOT EXISTS `SkillBackground` (
+        `id` INT NOT NULL,
+        `skillId` INT NOT NULL,
+        `backgroundId` INT NOT NULL,
+        PRIMARY KEY (`id`, `skillId`, `backgroundId`),
+        FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
+        FOREIGN KEY (`backgroundId`) REFERENCES `Backgrounds` (`id`)
+      )''';
+
+  static const String _weaponCharacterTable =
+      '''CREATE TABLE IF NOT EXISTS `weaponCharacter` (
+        `id` INT NOT NULL,
+        `characterId` INT NOT NULL,
+        `weaponId` INT NOT NULL,
+        PRIMARY KEY (`id`, `characterId`, `weaponId`),
+        FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
+        FOREIGN KEY (`weaponId`) REFERENCES `Weapons` (`id`)
+      )''';
+
+  static const String _skillCharacterTable =
+      '''CREATE TABLE IF NOT EXISTS `SkillCharacter` (
+        `id` INT NOT NULL,
+        `skillId` INT NOT NULL,
+        `characterId` INT NOT NULL,
+        PRIMARY KEY (`id`, `skillId`, `characterId`),
+        FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
+        FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`)
+      )''';
+
+  static const String _equipmentCharacterTable =
+      '''CREATE TABLE IF NOT EXISTS EquipmentCharacter (
+        `id` INT NOT NULL,
+        `characterId` INT NOT NULL,
+        `equipmentId` INT NOT NULL,
+        PRIMARY KEY (`id`, `characterId`, `equipmentId`),
+        FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
+        FOREIGN KEY (`equipmentId`) REFERENCES `Equipments` (`id`)
+      )''';
 
   static Future<Database> _getDB() async {
     return openDatabase(join(await getDatabasesPath(), _dbName),
         onCreate: ((db, version) async {
-      await db.execute(_createWeaponsTable);
+      await db.execute(_weaponsTable);
 
-      await db.execute(_createEquipmentsTable);
+      await db.execute(_equipmentsTable);
 
-      await db.execute(_createArmorTable);
+      await db.execute(_armorTable);
 
-      await db.execute(_createSubracesTable);
+      await db.execute(_skillsTable);
 
-      await db.execute(_createSkillsTable);
+      await db.execute(_backgroundsTable);
 
-      await db.execute(_createBackgroundTable);
+      await db.execute(_racesTable);
 
-      await db.execute(_createRacesTable);
+      await db.execute(_subracesTable);
 
-      await db.execute(_createAlignmentsTable);
+      await db.execute(_alignmentsTable);
 
-      await db.execute(_createCharacterTable);
+      await db.execute(_characterTable);
+
+      await db.execute(_skillBackgroundTable);
+
+      await db.execute(_weaponCharacterTable);
+
+      await db.execute(_skillCharacterTable);
+
+      await db.execute(_equipmentCharacterTable);
 
       insertDefaultData();
     }), version: _version);
@@ -385,5 +453,112 @@ class DatabaseHelper {
     ''';
 
     return await db.rawInsert(sql);
+  }
+
+  // Backgrounds section
+  static Future<List<Background>?> getAllBackgrounds() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Backgrounds", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(
+        maps.length, (index) => Background.fromJson(maps[index]));
+  }
+
+  // Races section
+  static Future<List<Race>?> getAllRaces() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Races", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(maps.length, (index) => Race.fromJson(maps[index]));
+  }
+
+  // Subraces section
+  static Future<List<Subrace>?> getAllSubraces() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Subraces", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(maps.length, (index) => Subrace.fromJson(maps[index]));
+  }
+
+  // Alignments section
+  static Future<List<Alignment>?> getAllAlignments() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Alignments", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(
+        maps.length, (index) => Alignment.fromJson(maps[index]));
+  }
+
+  // Skills section
+  static Future<List<Skill>?> getAllSkills() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Skills", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(maps.length, (index) => Skill.fromJson(maps[index]));
+  }
+
+  // Character section
+  static Future<List<Character>?> getAllCharacters() async {
+    final db = await _getDB();
+
+    final List<Map<String, dynamic>> maps =
+        await db.query("Characters", orderBy: 'name ASC');
+
+    if (maps.isEmpty) {
+      return null;
+    }
+
+    return List.generate(
+        maps.length, (index) => Character.fromJson(maps[index]));
+  }
+
+  static Future<int> insertCharacter(Character character) async {
+    final db = await _getDB();
+    return await db.insert('Characters', character.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  static Future<int> updateCharacter(Character character) async {
+    final db = await _getDB();
+    return await db.update('Character', character.toJson(),
+        where: 'id = ?',
+        whereArgs: [character.id],
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  static Future<int> deleteCharacter(Character character) async {
+    final db = await _getDB();
+    return await db
+        .delete('Character', where: 'id = ?', whereArgs: [character.id]);
   }
 }

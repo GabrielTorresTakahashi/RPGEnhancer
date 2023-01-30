@@ -25,4 +25,14 @@ class Race {
         traits: json['traits'],
         subraceId: json['subraceId'],
       );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'abilityScore': abilityScore,
+        'speed': speed,
+        'languages': languages,
+        'traits': traits,
+        'subraceId': subraceId,
+      };
 }

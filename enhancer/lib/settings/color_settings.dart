@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //primaria Color(0xFF74121D)
 //fundo Color(0xFF303030)
 const Brightness brightness = Brightness.light;
-const Color primary = Color.fromARGB(255, 111, 0, 255);
+const Color primary = Colors.blue;
 const Color onPrimary = Colors.white;
 const Color error = Colors.lightGreen;
 const Color background = Color(0xFF303030);
