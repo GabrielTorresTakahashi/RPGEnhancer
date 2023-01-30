@@ -1,15 +1,16 @@
-class Alignment {
+class CharacterAlignment {
   final int? id;
   final String name;
   final String alias;
 
-  const Alignment({
+  const CharacterAlignment({
     this.id,
     required this.alias,
     required this.name,
   });
 
-  factory Alignment.fromJson(Map<String, dynamic> json) => Alignment(
+  factory CharacterAlignment.fromJson(Map<String, dynamic> json) =>
+      CharacterAlignment(
         id: json['id'],
         name: json['name'],
         alias: json['alias'],

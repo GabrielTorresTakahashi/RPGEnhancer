@@ -4,17 +4,22 @@ class Race {
   final String abilityScore;
   final String speed;
   final String languages;
-  final String traits;
-  final int? subraceId;
+  final String? darkVision;
+  final String? alignment;
+  final String? age;
+  final String? size;
 
-  const Race(
-      {this.id,
-      required this.name,
-      required this.abilityScore,
-      required this.speed,
-      required this.languages,
-      required this.traits,
-      this.subraceId});
+  const Race({
+    this.id,
+    required this.name,
+    required this.abilityScore,
+    required this.speed,
+    required this.languages,
+    this.darkVision,
+    this.alignment,
+    this.age,
+    this.size,
+  });
 
   factory Race.fromJson(Map<String, dynamic> json) => Race(
         id: json['id'],
@@ -22,8 +27,10 @@ class Race {
         abilityScore: json['abilityScore'],
         speed: json['speed'],
         languages: json['languages'],
-        traits: json['traits'],
-        subraceId: json['subraceId'],
+        darkVision: json['darkVision'],
+        alignment: json['alignment'],
+        age: json['age'],
+        size: json['size'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,7 +39,9 @@ class Race {
         'abilityScore': abilityScore,
         'speed': speed,
         'languages': languages,
-        'traits': traits,
-        'subraceId': subraceId,
+        'darkVision': darkVision,
+        'alignment': alignment,
+        'age': age,
+        'size': size,
       };
 }

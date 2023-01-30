@@ -47,61 +47,64 @@ class DatabaseHelper {
         )''';
 
   static const String _skillsTable = '''CREATE TABLE IF NOT EXISTS `Skills` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `name` TEXT NOT NULL,
-        `ability` TEXT NOT NULL,
-        PRIMARY KEY (`id`)
+        `ability` TEXT NOT NULL
       )''';
 
   static const String _backgroundsTable =
       '''CREATE TABLE IF NOT EXISTS `Backgrounds` (
-      `id` INT NOT NULL,
+      `id` INT PRIMARY KEY,
       `name` TEXT NOT NULL,
       `trait` TEXT NOT NULL,
       `description` TEXT NOT NULL,
       `skills` TEXT NULL,
       `tools` TEXT NULL,
       `languages` TEXT NULL,
-      `equipment` TEXT NULL,
-      PRIMARY KEY (`id`)
+      `equipment` TEXT NULL
     )''';
 
   static const String _racesTable = '''CREATE TABLE IF NOT EXISTS `Races` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `name` TEXT NOT NULL,
         `abilityScore` TEXT NOT NULL,
+        `darkVision` TEXT,
+        `alignment` TEXT,
+        `age` TEXT,
+        `size` TEXT,
         `speed` TEXT NULL,
-        `languages` TEXT NOT NULL,
-        `traits` TEXT NULL,
-        PRIMARY KEY (`id`)
+        `languages` TEXT NOT NULL
+      )''';
+
+  static const String _traitsTable = '''CREATE TABLE IF NOT EXISTS `Traits`(
+        `id` INT PRIMARY KEY,
+        `title` TEXT NOT NULL,
+        `description` TEXT NOT NULL
       )''';
 
   static const String _subracesTable =
       '''CREATE TABLE IF NOT EXISTS `Subraces` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `name` TEXT NULL,
         `abilityScore` TEXT NULL,
         `traits` TEXT NULL,
         `raceId` INT NOT NULL,
         `speed` TEXT NULL,
-        PRIMARY KEY (`id`, `raceId`),
         FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`)
       )''';
 
   static const String _alignmentsTable =
       '''CREATE TABLE IF NOT EXISTS `Alignments` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `name` TEXT NOT NULL,
-        `alias` TEXT NOT NULL,
-        PRIMARY KEY (`id`)
+        `alias` TEXT NOT NULL
       )''';
 
   static const String _characterTable =
       '''CREATE TABLE IF NOT EXISTS `Characters` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `name` TEXT NOT NULL,
         `level` INT NOT NULL,
-        `background` TEXT NOT NULL,
         `xp` INT NULL,
         `strength` INT NULL,
         `dexterity` INT NULL,
@@ -134,90 +137,77 @@ class DatabaseHelper {
         `treasure` TEXT NULL,
         `alignmentId` INT NOT NULL,
         `raceId` INT NOT NULL,
-        `backgroundsId` INT NOT NULL,
-        `armorId` INT NOT NULL,
-        PRIMARY KEY (
-          `id`,
-          `raceId`,
-          `alignmentId`,
-          `backgroundsId`,
-          `armorId`
-        ),
+        `backgroundId` INT NOT NULL,
+        `armorId` INT,
         FOREIGN KEY (`alignmentId`) REFERENCES `Alignments` (`id`),
         FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`),
-        FOREIGN KEY (`backgroundsId`) REFERENCES `Backgrounds` (`id`),
+        FOREIGN KEY (`backgroundId`) REFERENCES `Backgrounds` (`id`),
         FOREIGN KEY (`armorId`) REFERENCES `Armor` (`id`)
       )''';
 
   static const String _skillBackgroundTable =
       '''CREATE TABLE IF NOT EXISTS `SkillBackground` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `skillId` INT NOT NULL,
         `backgroundId` INT NOT NULL,
-        PRIMARY KEY (`id`, `skillId`, `backgroundId`),
         FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
         FOREIGN KEY (`backgroundId`) REFERENCES `Backgrounds` (`id`)
       )''';
 
   static const String _weaponCharacterTable =
       '''CREATE TABLE IF NOT EXISTS `weaponCharacter` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `characterId` INT NOT NULL,
         `weaponId` INT NOT NULL,
-        PRIMARY KEY (`id`, `characterId`, `weaponId`),
         FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
         FOREIGN KEY (`weaponId`) REFERENCES `Weapons` (`id`)
       )''';
 
   static const String _skillCharacterTable =
       '''CREATE TABLE IF NOT EXISTS `SkillCharacter` (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `skillId` INT NOT NULL,
         `characterId` INT NOT NULL,
-        PRIMARY KEY (`id`, `skillId`, `characterId`),
         FOREIGN KEY (`skillId`) REFERENCES `Skills` (`id`),
         FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`)
       )''';
 
   static const String _equipmentCharacterTable =
       '''CREATE TABLE IF NOT EXISTS EquipmentCharacter (
-        `id` INT NOT NULL,
+        `id` INT PRIMARY KEY,
         `characterId` INT NOT NULL,
         `equipmentId` INT NOT NULL,
-        PRIMARY KEY (`id`, `characterId`, `equipmentId`),
         FOREIGN KEY (`characterId`) REFERENCES `Character` (`id`),
         FOREIGN KEY (`equipmentId`) REFERENCES `Equipments` (`id`)
       )''';
+
+  static const String _raceTraitsTable =
+      ''' CREATE TABLE IF NOT EXISTS raceTraits(
+        `id` INT PRIMARY KEY,
+        `raceId` INT NOT NULL,
+        `traitId` INT NOT NULL,
+        FOREIGN KEY (`raceId`) REFERENCES `Races` (`id`),
+        FOREIGN KEY (`traitId`) REFERENCES `Traits` (`id`))
+      ''';
 
   static Future<Database> _getDB() async {
     return openDatabase(join(await getDatabasesPath(), _dbName),
         onCreate: ((db, version) async {
       await db.execute(_weaponsTable);
-
       await db.execute(_equipmentsTable);
-
       await db.execute(_armorTable);
-
       await db.execute(_skillsTable);
-
       await db.execute(_backgroundsTable);
-
       await db.execute(_racesTable);
-
       await db.execute(_subracesTable);
-
       await db.execute(_alignmentsTable);
-
       await db.execute(_characterTable);
-
       await db.execute(_skillBackgroundTable);
-
       await db.execute(_weaponCharacterTable);
-
       await db.execute(_skillCharacterTable);
-
       await db.execute(_equipmentCharacterTable);
-
+      await db.execute(_traitsTable);
+      await db.execute(_raceTraitsTable);
       insertDefaultData();
     }), version: _version);
   }
@@ -226,6 +216,9 @@ class DatabaseHelper {
     addAllWeapons();
     addAllEquipments();
     addAllArmor();
+    addAllAlignments();
+    addAllSkills();
+    addAllRaces();
   }
 
   // DO NOT USE THIS. unless in development phase.
@@ -484,6 +477,22 @@ class DatabaseHelper {
     return List.generate(maps.length, (index) => Race.fromJson(maps[index]));
   }
 
+  static Future<int> addAllRaces() async {
+    final db = await _getDB();
+    return db.rawInsert('''INSERT INTO Races 
+      (name, abilityScore, speed, languages, darkVision, alignment, age, size)
+    VALUES
+      ('Anão','+2 de Constituição', '7,5 metros. Seu deslocamento não é reduzido quando utilizando armaduras pesadas.','Comum, Anão','Você enxerga na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra.', 'A maioria dos anões é leal, pois acreditam firmemente nos benefícios de uma sociedade bem organizada. Eles tendem para o bem, como um forte senso de honestidade e uma crença de que todos merecem compartilhar os benefícios de uma ordem social justa.', 'Anões tornam-se maduros na mesma proporção que os humanos, mas não são considerados jovens até atingirem a idade de 50 anos. Em média, eles vivem até 350 anos.', 'Anões estão entre 1,20 e 1,50 metro de altura e pesam cerca de 75 kg. Seu tamanho é médio.'),
+      ('Elfo','+2 de Destreza', '9 metros.','Comum, Élfico', 'Você pode enxergar na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra. Você não pode discernir cores no escuro, apenas tons de cinza.', 'Elfos amam a liberdade, a diversidade e a expressão pessoal, então eles inclinam-se forte e suavemente para aspectos do caos. Eles valorizam e protegem a liberdade dos outros como a sua própria e são geralmente mais bondosos. Os drow são exceção. Seu exílio no Subterrâneo fez deles perversos e perigosos.', 'Embora os elfos atinjam a maturidade física com praticamente a mesma idade dos humanos, a compreensão élfica da idade adulta vai além da maturidade física, abrangendo a sua expediência sobre o mundo. Um elfo tipicamente assume a idade adulta e um nome adulto com cerca de 100 anos de idade e pode viver 750 anos.', 'Elfos medem entre 1,50 a 1,80 metro de altura e possuem constituição delgada. Seu tamanho é Médio.'),
+      ('Halfling', '+2 de Destreza', '7,5 metros.', 'Comum e Halfling', NULL, 'A maioria dos halflings é leal e boa.', 'Um halfling atinge a idade adulta aos 20 anos e pode chegar a 150 anos.', 'Halflings medem cerca de 0,90 metro de altura e pesam aproximadamente 20 kg. Seu tamanho é pequeno.'),
+      ('Humano', 'Todos seus valores de habilidade aumentam em 1', '9 metros.', 'Comum e outro idioma adicional.', NULL, NULL, NULL, 'Humanos variam muito em altura e peso, podem ter quase 1,50 metro ou mais de 1,80 metro. Seu tamanho é Médio.'),
+      ('Draconato', '+2 de Força, +1 de Carisma', '9 metros.', 'Comum, Dracônico', NULL, 'Os draconatos tendem aos extremos, realizando uma escolha consciente de um lado ou do outro da guerra cósmica entre o bem e o mal.', 'Draconatos jovens crescem rapidamente. Eles caminham horas após nascerem, adquirindo o tamanho e desenvolvimento semelhante a de uma criança de 10 anos com 3 anos de idade e alcançam a maturidade aos 15. Eles costumam viver até os 80.', 'Draconatos são mais altos e mais pesados que os humanos, geralmente possuindo mais de 1,50 metro e normalmente pesndo mais de 125 kg. Seu tamanho é médio.'),
+      ('Gnomo', '+2 de Inteligência', '7,5 metros.', 'Comum, Gnômico', 'Você enxerga na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra. Você não pode discernir cores no escuro, apenas tons de cinza.', 'Os gnomos são geralmente bons. Os que tendem para a ordem são sábios, engenheiros e escolásticos. Os que tendem para o caos são engenhoqueiros, andarilhos ou joalheiros caprichosos.', 'Gnomos amadurecem na mesma proporção dos humanos e, a maioria, atinge a idade adulta por volta dos 40 anos. Eles podem viver entre 350 e 500 anos.', 'Os gnomos tem entre 0,90 e 1,20 metro e seu peso médio é de 20 kg. Seu tamanho é Pequeno.'),
+      ('Meio-Elfo', '+1 de Carisma, +1 em outros dois valores de habilidade.', '9 metros.', 'Comum, Élfico e um idioma adicional.', 'Você enxerga na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra. Você não pode discernir cores no escuro, apenas tons de cinza.', 'Meio-elfos compartilham a veia caótica da sua herança élfica.', 'Meio-elfos atingem a maturidade ao mesmo tempo que os humanos atingem a idade adulta, por volta dos 20 anos. Eles vivem muito mais que os humanos, mas raramente utrapassam os 180 anos.', 'Meio-elfos tem aproximadamente a mesma altura de humanos, variando entre 1,50 e 1,80 metro. Seu tamanho é Médio.'),
+      ('Meio-Orc', '+2 de Força, +1 de Constituição.', '9 metros.', 'Comum, Orc', 'Você enxerga na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra. Você não pode discernir cores no escuro, apenas tons de cinza.', 'Meio-orcs têm uma tendência inata ao caos devido aos seus parentes orcs e não são fortemente inclinados ao bem.', 'Os meio orcs amadurecem um pouco antes dos humanos, atingindo a idade adulta aos 14 anos. Eles envelhecem notavelmente mais rápido e raramente passam dos 75 anos.', 'Meio-orcs são de certa forma maiores e mais largos do que os humanos, medindo entre 1,80 metro e 2,10 metros. Seu tamanho é Médio.'),
+      ('Tiefling', '+1 de Inteligência, +2 de Carisma.', '9 metros', 'Comum, Infernal', 'Você enxerga na penumbra a até 18 metros como se fosse luz plena, e no escuro como se fosse na penumbra. Você não pode discernir cores no escuro, apenas tons de cinza.', 'Tieflings não possuem uma tendência inata ao mal, mas acabam por abraçá-lo. Maligno ou não, uma natureza independente inclina a maioria dos tieflings ao alinhamento caótico.', 'Os tieflings amadurecem ao mesmo tempo que os humanos, mas vivem alguns anos a mais.', 'Os tieflings possuem o mesmo tamanho e compleição dos humanos. Seu tamanho é Médio.');''');
+  }
+
   // Subraces section
   static Future<List<Subrace>?> getAllSubraces() async {
     final db = await _getDB();
@@ -499,7 +508,7 @@ class DatabaseHelper {
   }
 
   // Alignments section
-  static Future<List<Alignment>?> getAllAlignments() async {
+  static Future<List<CharacterAlignment>?> getAllAlignments() async {
     final db = await _getDB();
 
     final List<Map<String, dynamic>> maps =
@@ -510,7 +519,22 @@ class DatabaseHelper {
     }
 
     return List.generate(
-        maps.length, (index) => Alignment.fromJson(maps[index]));
+        maps.length, (index) => CharacterAlignment.fromJson(maps[index]));
+  }
+
+  static Future<int> addAllAlignments() async {
+    final db = await _getDB();
+    return db.rawInsert('''INSERT INTO Alignments (name, alias)
+        VALUES
+        ('Leal e Bom','LB'),
+        ('Leal e Neutro','LN'),
+        ('Leal e Mal','LM'),
+        ('Neutro e Bom','NB'),
+        ('Neutro','N'),
+        ('Neutro e Mal','NM'),
+        ('Caótico e Bom','CB'),
+        ('Caótico e Neutro','CN'),
+        ('Caótico e Mal','CM');''');
   }
 
   // Skills section
@@ -525,6 +549,31 @@ class DatabaseHelper {
     }
 
     return List.generate(maps.length, (index) => Skill.fromJson(maps[index]));
+  }
+
+  static Future<int> addAllSkills() async {
+    final db = await _getDB();
+    return db.rawInsert('''INSERT INTO Skills (name, ability)
+        VALUES
+        ('Arcanismo','Inteligência'),
+        ('História','Inteligência'),
+        ('Investigação','Inteligência'),
+        ('Natureza','Inteligência'),
+        ('Religião','Inteligência'),
+        ('Atletismo','Força'),
+        ('Acrobacia','Destreza'),
+        ('Furtividade','Destreza'),
+        ('Prestidigitação','Destreza'),
+        ('Adestrar Animais','Sabedoria'),
+        ('Intuição','Sabedoria'),
+        ('Medicina','Sabedoria'),
+        ('Percepção','Sabedoria'),
+        ('Sobrevivência','Sabedoria'),
+        ('Atuação','Carisma'),
+        ('Enganação','Carisma'),
+        ('Persuasão','Carisma'),
+        ('Intimidação','Carisma');
+        ;''');
   }
 
   // Character section

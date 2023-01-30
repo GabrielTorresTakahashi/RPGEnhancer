@@ -2,6 +2,7 @@ import 'package:enhancer/screens/armor.dart';
 import 'package:enhancer/screens/dice.dart';
 import 'package:enhancer/screens/home2.dart';
 import 'package:enhancer/screens/names.dart';
+import 'package:enhancer/screens/towers_debug.dart';
 import 'package:enhancer/screens/weapons.dart';
 import 'package:enhancer/settings/color_settings.dart';
 import 'package:enhancer/settings/text_style.dart';
@@ -43,7 +44,9 @@ class HomeScreen extends StatelessWidget {
                 path: WeaponsScreen(),
                 buttonTitle: 'Armas'),
             MenuNavigationButton(
-                icon: Icons.shield, path: ArmorScreen(), buttonTitle: 'Armaduras'),
+                icon: Icons.shield,
+                path: ArmorScreen(),
+                buttonTitle: 'Armaduras'),
             MenuNavigationButton(
                 icon: FontAwesomeIcons.sackDollar,
                 path: EquipmentsScreen(),
@@ -52,6 +55,11 @@ class HomeScreen extends StatelessWidget {
                 icon: FontAwesomeIcons.dungeon,
                 path: Home2Screen(),
                 buttonTitle: "Para o Mestre"),
+            MenuNavigationButton(
+              icon: Icons.abc,
+              buttonTitle: 'Alinhamentos',
+              path: TowersDebug(),
+            ),
             Text(
               "\nCopyright 2022-2023\nGabriel \"Tri\" Torres Takahashi\n",
               textAlign: TextAlign.center,
