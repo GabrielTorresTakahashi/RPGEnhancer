@@ -242,7 +242,7 @@ class DatabaseHelper {
 
   static Future<int> addAllWeapons() async {
     final db = await _getDB();
-    String sql = '''
+    return await db.rawInsert('''
   INSERT INTO
     weapons (name, price, damage, weight, properties, range, type)
   VALUES
@@ -280,8 +280,7 @@ class DatabaseHelper {
     ('Besta Pesada', '50 po', '1d10 perfurante', '4,5 kg', 'Munição (distância 30/120), pesada, recarga, duas mãos', 'À Distância', 'Marcial'),
     ('Rede', '1 po', '-', '1,5 kg', 'Especial, arremesso (distância 1,5/4,5)', 'À Distância', 'Marcial'),
     ('Zarabatana', '10 po', '1 perfurante', '0,5 kg', 'Munição (distância 7,5/30), recarga', 'À Distância', 'Marcial');
-''';
-    return await db.rawInsert(sql);
+''');
   }
 
   // Equipments section
@@ -302,7 +301,7 @@ class DatabaseHelper {
   static Future<int> addAllEquipments() async {
     final db = await _getDB();
 
-    String sql = '''
+    return await db.rawInsert('''
       INSERT INTO Equipments (name, price, weight, category, description)
       VALUES
       ('Ábaco', '2 po', '1 kg', NULL, 'O ábaco é um instrumento de cálculo, formado por uma moldura com bastões ou arames paralelos, dispostos no sentido vertical, correspondentes cada um a uma posição digital (unidades, dezenas, etc.) e nos quais estão os elementos de contagem (fichas, bolas ou contas) que podem fazer-se deslizar livremente.'),
@@ -405,9 +404,7 @@ class DatabaseHelper {
       ('Vara (3 metros)', '5 pc', '3,5 kg', NULL, NULL),
       ('Vela', '1 pc', '3,5 kg', NULL, 'Por uma hora, a vela emana luz plena em um raio de 1,5 metro e penumbra por mais 1,5 metro.'),
       ('Veneno básico (frasco)', '100 po', '-', NULL, 'Você pode usar o veneno contido nesse vidro para cobrir uma lâmina cortante ou perfurante de uma arma ou até três peças de munição. Aplicar o veneno leva uma ação. Uma criatura atingida pela arma ou munição envenenada deve obter sucesso em um teste de resistência de Constituição CD 10 ou sofrerá 1d4 de dano de veneno. Uma vez aplicado, o veneno retém sua potência durante 1 minuto antes de secar.');
-    ''';
-
-    return await db.rawInsert(sql);
+    ''');
   }
 
   // Armor section
@@ -427,7 +424,7 @@ class DatabaseHelper {
   static Future<int> addAllArmor() async {
     final db = await _getDB();
 
-    String sql = '''
+    return await db.rawInsert('''
       INSERT INTO Armor (category, name, price, armorClass, weight, strength, stealth)
       VALUES
       ('Leve', 'Acolchoada', '5 po', '11 + Des.', '4 kg', NULL, 'Desvantagem'),
@@ -443,9 +440,7 @@ class DatabaseHelper {
       ('Pesada', 'Cota de talas', '200 po', '17', '30 kg', 'For 15', 'Desvantagem'),
       ('Pesada', 'Placas', '1.500 po', '18', '32,5 kg', 'For 15', 'Desvantagem'),
       ('Escudo', 'Escudo', '10 po', '+2', '3 kg', NULL, NULL);
-    ''';
-
-    return await db.rawInsert(sql);
+    ''');
   }
 
   // Backgrounds section

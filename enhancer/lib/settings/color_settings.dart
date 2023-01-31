@@ -1,3 +1,4 @@
+import 'package:enhancer/settings/text_style.dart';
 import 'package:flutter/material.dart';
 
 //primaria Color(0xFF74121D)
@@ -28,3 +29,14 @@ ThemeData colorSettings = ThemeData().copyWith(
 
 ButtonStyle menuNavigationButton =
     ElevatedButton.styleFrom(backgroundColor: primary);
+
+InputDecoration textInputDecoration = InputDecoration(
+  hintStyle: listTileText,
+  contentPadding: const EdgeInsets.all(2),
+  
+  border: const OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10),
+    ),
+  ),
+);
