@@ -31,12 +31,21 @@ ButtonStyle menuNavigationButton =
     ElevatedButton.styleFrom(backgroundColor: primary);
 
 InputDecoration textInputDecoration = InputDecoration(
-  hintStyle: listTileText,
+  hintStyle: characterCreationInputText,
   contentPadding: const EdgeInsets.all(2),
-  
+  labelStyle: characterCreationInputText,
   border: const OutlineInputBorder(
     borderRadius: BorderRadius.all(
       Radius.circular(10),
     ),
   ),
+);
+
+InputDecoration dropdownSmallDecoration = InputDecoration(
+  filled: true,
+  fillColor: colorSettings.colorScheme.primary,
+  iconColor: colorSettings.colorScheme.onPrimary,
+  hintStyle: dropdownSmallText,
+  hintText: 'HINT',
+  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
 );

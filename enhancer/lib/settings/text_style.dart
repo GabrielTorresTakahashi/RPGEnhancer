@@ -21,6 +21,11 @@ TextStyle dropdownText = const TextStyle().copyWith(
     fontSize: 24,
     fontFamily: 'Montserrat');
 
+TextStyle dropdownSmallText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 18,
+    fontFamily: 'Montserrat');
+
 TextStyle checkboxText = const TextStyle().copyWith(
     color: colorSettings.colorScheme.onPrimary,
     fontSize: 18,
@@ -91,3 +96,8 @@ TextStyle weaponInfoDamageText = const TextStyle().copyWith(
 
 TextStyle weaponInfoPriceText = const TextStyle()
     .copyWith(color: Colors.amber, fontSize: 18, fontFamily: 'Montserrat');
+
+TextStyle characterCreationInputText = const TextStyle().copyWith(
+    color: colorSettings.colorScheme.onPrimary,
+    fontSize: 18,
+    fontFamily: 'Montserrat');
